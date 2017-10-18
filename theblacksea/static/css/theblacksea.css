@@ -1,0 +1,11 @@
+@import '/static/css/aos.min.css';
+@import '/static/css/site.css';
+
+img.home_image {
+  width: 100%;
+  height: auto;
+  display: block;
+  padding-bottom: 10px;
+  background-color: #f4f4f4;
+  position: relative;
+}

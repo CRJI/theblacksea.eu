@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+  {{ page.intro|richtext }}
+  Here be authors
+  {{ page.body|richtext }}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+
+  <div class='block overflow'>
+    <div class='textColumnBig right '>
+
+      <div class='SING archiveDesc' id='archiveDesc_archive_en'>
+        <div class='EDtxa textDesc desc'>
+          We present in-depth investigations into stories relevant to the greater Black Sea region.
+          Narrow down by:
+    {% for tag in page.tags.all %}
+        <a href="{% pageurl page.stories_index %}?tag={{ tag }}">{{ tag }}</a>
+        {{ tag }}
+    {% endfor %}
+        </div>
+      </div>
+    </div> 
+    <div class='LeftColumnSmall blogsHead space'>{{ page.title }}</div>
+    <div class='clearfix'></div>
+  </div>
+
+  <div class='allENTS block space overflow allrecords' id='allrecords_en'>
+    {% for post in stories %}
+      {% with post=post.specific %}
+        {% image post.image original as img %}
+        <div class='notENT  archivePrevRec record' id='record_1332_en'>
+          <div class='mainFeaturedImg' id='Main1332'>
+            <a href='{{ post.url }}'>
+              {% image post.image fill-225x149 %}
+            </a>
+            <div class='fullwidth iconsThumb' id='Main1332_Thumb'>
+              <div class='storyIconThumb'></div>
+            </div>
+          </div>
+          <div class='imageColumnMeta'>
+            <div class='imageColumnHead fullwidth'>
+              <a href='{{ post.url }}'>
+                {{ post.title }}
+              </a>
+            </div>
+            {{ post.intro }}
+            <div class='imageColumnLocation blue'>
+              {{ post.location }}
+            </div>
+          </div>
+        </div>
+      {% endwith %}
+    {% endfor %}
+  </div>
+
+{% endblock %}

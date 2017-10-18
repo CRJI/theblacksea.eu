@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+  {% image page.image original class="home_image" %}
+
+  <div class='allENTS block space overflow allrecords' id='allrecords_en'>
+    {% for post in all_posts %}
+      {% with post=post.specific %}
+        {% image post.image original as img %}
+        <div class='notENT  archivePrevRec record' id='record_1332_en'>
+          <div class='mainFeaturedImg' id='Main1332'>
+            <a href='{{ post.url }}'>
+              {% image post.image fill-225x149 %}
+            </a>
+            <div class='fullwidth iconsThumb' id='Main1332_Thumb'>
+              <div class='storyIconThumb'></div>
+            </div>
+          </div>
+          <div class='imageColumnMeta'>
+            <div class='imageColumnHead fullwidth'>
+              <a href='{{ post.url }}'>
+                {{ post.title }}
+              </a>
+            </div>
+            {{ post.intro }}
+            <div class='imageColumnLocation blue'>
+              {{ post.location }}
+            </div>
+          </div>
+        </div>
+      {% endwith %}
+    {% endfor %}
+  </div>
+
+  <footer>
+    The Black Sea by crji.org is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License if not otherwise stated. Based on a work at theblacksea.eu. This web application is Free Software (AGPLv3+), the source code is available on GitHub and waiting for contributions.
+  </footer>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+# beautifulsoup4==4.6.0
+# bleach==1.4.3
+# certifi==2017.7.27.1
+# chardet==3.0.4
+# Django==1.11.6
+# django-debug-toolbar==1.8
+# django-modelcluster==3.1
+# django-overextends==0.4.3
+# django-taggit==0.22.1
+# django-template-debug==0.3.5
+# django-treebeard==4.1.2
+# djangorestframework==3.7.1
+# elasticsearch==5.0.0
+# gunicorn==19.7.1
+# html5lib==0.999999999
+# idna==2.6
+# olefile==0.44
+# Pillow==4.3.0
+# pytz==2017.2
+# requests==2.18.4
+# six==1.11.0
+# sqlparse==0.2.4
+# Unidecode==0.4.21
+# urllib3==1.22
+# wagtail==1.12.2
+# wagtailmodeladmin==2.5.7
+# Wand==0.4.5
+# webencodings==0.5.1
+# whitenoise==3.3.1
+# Willow==0.4
+
+Django>=1.10,<1.11
+psycopg2==2.6
+django-compressor>=1.4
+django-modelcluster>=0.6
+wagtail>=1.12,<1.13
+django-taggit>=0.14.0
+django-libsass>=0.2
+libsass==0.8.2
+Pillow==3.2.0
+html5lib==0.999999
+
+# Dependencies for hosting
+django-redis==3.8.2
+elasticsearch==1.2.0
+
+# Dependencies for Heroku deployment
+dj-database-url==0.3.0
+whitenoise>=3.1,<4.0
+uwsgi>=2.0,<2.1

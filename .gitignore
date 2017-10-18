@@ -1,0 +1,4 @@
+.ropeproject
+media
+db.sqlite3
+theblacksea/settings/production.py

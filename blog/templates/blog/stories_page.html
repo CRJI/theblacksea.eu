@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block content %}
+
+  {% image page.image original as img %}
+
+  <header style="background-image: url('{{ img.url }}')">
+      <div class="main-info">
+          <h1 data-aos="fade"><span>{{ page.title }}</span></h1>
+          <h2 data-aos="fade"><span>{{ page.intro | striptags }}</span></h2>
+          <h3 data-aos="fade"><span>by {{ page.authors }}</span></h3>
+          <h4 data-aos="fade"><span>{{ page.date }}</span></h4>
+          <p data-aos="fade">
+              <a href="#">
+                  <img src="/static/img/icons/icons/arrow-down.svg" alt="Read" class="arrow" />
+              </a>
+          </p>
+      </div>
+  </header>
+
+  <section class="content-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          {% include "blog/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
+
+          {% if self.body %}
+              <div class="body-content">
+                  {% include "blog/includes/streamfield.html" with content=self.body %}
+              </div>
+          {% endif %}
+
+          {% include "blog/includes/related_links.html" with related_links=self.related_links.all only %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p style="text-align: center;"><a href="{{ page.get_parent.url }}">Return to stories</a></p>
+  <hr>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="/static/js/aos.min.js"></script>
+  <script>
+      AOS.init({
+          duration: 800,
+          once: true
+      });
+  </script>
+
+{% endblock %}
