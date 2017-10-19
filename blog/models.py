@@ -61,7 +61,7 @@ class AlignedHTMLBlock(StructBlock):
     class Meta:
         icon = "code"
 
-class StreamBlock(StreamBlock):
+class BlogStreamBlock(StreamBlock):
     h2 = CharBlock(icon="title", classname="title")
     h3 = CharBlock(icon="title", classname="title")
     h4 = CharBlock(icon="title", classname="title")
@@ -268,7 +268,7 @@ class StoriesPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=255, blank=True)
     body_richtext = RichTextField(blank=True)
-    body_blocks = StreamField(StreamBlock(), blank=True)
+    body_blocks = StreamField(BlogStreamBlock(), blank=True)
     location = models.CharField(max_length=255, blank=True)
     authors = models.CharField(max_length=255, blank=True)
     dossier = models.CharField(max_length=50, blank=True)

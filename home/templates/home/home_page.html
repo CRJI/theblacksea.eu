@@ -12,8 +12,8 @@
     {% for post in all_posts %}
       {% with post=post.specific %}
         {% image post.image original as img %}
-        <div class='notENT  archivePrevRec record' id='record_1332_en'>
-          <div class='mainFeaturedImg' id='Main1332'>
+        <div class='notENT archivePrevRec record'>
+          <div class='mainFeaturedImg'>
             <a href='{{ post.url }}'>
               {% image post.image fill-225x149 %}
             </a>

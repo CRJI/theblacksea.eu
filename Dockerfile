@@ -1,9 +1,9 @@
-FROM python:3.4
+FROM python:3.6
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /app
+WORKDIR /app
 
-COPY requirements.txt /usr/src/app/
+COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 ENV PYTHONUNBUFFERED 1

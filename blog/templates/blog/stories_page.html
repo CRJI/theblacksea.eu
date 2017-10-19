@@ -28,9 +28,11 @@
         <div class="col-xs-12">
           {% include "blog/includes/carousel.html" with carousel_items=self.carousel_items.all only %}
 
-          {% if self.body %}
+          {{ self.body_richtext | richtext  }}
+          <br>
+          {% if self.body_blocks %}
               <div class="body-content">
-                  {% include "blog/includes/streamfield.html" with content=self.body %}
+                  {% include "blog/includes/streamfield.html" with content=self.body_blocks %}
               </div>
           {% endif %}
 

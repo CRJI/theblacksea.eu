@@ -1,9 +1,9 @@
 web:
   build: .
-  dockerfile: .dockerfile
+  dockerfile: Dockerfile
   command: python manage.py runserver 0.0.0.0:80
   volumes:
-    - ./:/usr/src/app
+    - ./:/app
   links:
    - postgres
    - elasticsearch
@@ -20,6 +20,6 @@ postgres:
   ports:
    - "5432:5432"
 elasticsearch:
-  image: orchardup/elasticsearch
+  image: elasticsearch
   ports:
     - "9200:9200"
