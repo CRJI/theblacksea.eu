@@ -1,0 +1,25 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{# Individual story item in a list - used on stories index #}
+{% image post.image original as img %}
+<div class='notENT  archivePrevRec record' id='record_1332_en'>
+  <div class='mainFeaturedImg' id='Main1332'>
+    <a href='{{ post.url }}'>
+      {% image post.image fill-225x149 %}
+    </a>
+    <div class='fullwidth iconsThumb' id='Main1332_Thumb'>
+      <div class='storyIconThumb'></div>
+    </div>
+  </div>
+  <div class='imageColumnMeta'>
+    <div class='imageColumnHead fullwidth'>
+      <a href='{{ post.url }}'>
+        {{ post.title }}
+      </a>
+    </div>
+    {{ post.intro }}
+    <div class='imageColumnLocation blue'>
+      {{ post.location }}
+    </div>
+  </div>
+</div>

@@ -10,10 +10,9 @@
   <div class="intro">{{ page.intro|richtext }}</div>
 
   {% for post in posts %}
+
     {% with post=post.specific %}
-      <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-      {{ post.intro|richtext }}
-      {{ post.body|richtext }}
+      {% include "blog/includes/blog_list_item.html" %}
     {% endwith %}
   {% endfor %}
 
