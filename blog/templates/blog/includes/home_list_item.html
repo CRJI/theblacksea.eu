@@ -1,20 +1,25 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {# Individual blog item in a list - used on blog index #}
-<a class="list-group-item" href="{% pageurl post %}">
-  <div class="media">
-    {% if post.image %}
-      <div class="media-left">
-        {% image post.image width-200 as img %}
-        <img class="media-object" src="{{ img.url }}" />
-      </div>
-    {% endif %}
-    <div class="media-body">
-      <h4 class="media-heading">{{ post.title }}</h4>
-      <p><strong>{{ post.date }}</strong></p>
-      {% if post.search_description %}
-        <p>{{ post.search_description }}</p>
-      {% endif %}
+{% image post.image original as img %}
+<div class='notENT archivePrevRec record'>
+  <div class='mainFeaturedImg'>
+    <a href='{{ post.url }}'>
+      {% image post.image fill-225x149 %}
+    </a>
+    <div class='fullwidth iconsThumb' id='Main1332_Thumb'>
+      <div class='storyIconThumb'></div>
     </div>
   </div>
-</a>
+  <div class='imageColumnMeta'>
+    <div class='imageColumnHead fullwidth'>
+      <a href='{{ post.url }}'>
+        {{ post.title }}
+      </a>
+    </div>
+    {{ post.intro }}
+    <div class='imageColumnLocation blue'>
+      {{ post.location }}
+    </div>
+  </div>
+</div>

@@ -133,31 +133,6 @@ class ContactFields(models.Model):
         abstract = True
 
 
-# Carousel items
-class CarouselItem(LinkFields):
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    embed_url = models.URLField("Embed URL", blank=True)
-    caption = models.CharField(max_length=255, blank=True)
-
-    panels = [
-        ImageChooserPanel('image'),
-        FieldPanel('embed_url'),
-        FieldPanel('caption'),
-        MultiFieldPanel(LinkFields.panels, "Link"),
-    ]
-
-    api_fields = ['image', 'embed_url', 'caption'] + LinkFields.api_fields
-
-    class Meta:
-        abstract = True
-
-
 # Related links
 class RelatedLink(LinkFields):
     title = models.CharField(max_length=255, help_text="Link title")
@@ -171,37 +146,6 @@ class RelatedLink(LinkFields):
 
     class Meta:
         abstract = True
-
-
-# Advert Snippet
-class AdvertPlacement(models.Model):
-    page = ParentalKey('wagtailcore.Page', related_name='advert_placements')
-    advert = models.ForeignKey('blog.Advert', related_name='+')
-
-    api_fields = ['advert']
-
-@python_2_unicode_compatible
-class Advert(models.Model):
-    page = models.ForeignKey(
-        'wagtailcore.Page',
-        related_name='adverts',
-        null=True,
-        blank=True
-    )
-    url = models.URLField(null=True, blank=True)
-    text = models.CharField(max_length=255)
-
-    panels = [
-        PageChooserPanel('page'),
-        FieldPanel('url'),
-        FieldPanel('text'),
-    ]
-
-    api_fields = ['page', 'url', 'text']
-
-    def __str__(self):
-        return self.text
-
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
