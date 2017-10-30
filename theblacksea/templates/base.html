@@ -21,16 +21,18 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/theblacksea.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/site_light.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/blogSite.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/blogBsea.css' %}">
+        {% load compress %}
+        {% compress css %}
+          {# Global stylesheets #}
+          <link href="{% static 'css/aos.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+          <link href="{% static 'css/site.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+          <link href="{% static 'css/theblacksea.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
 
-        {% block extra_css %}
-            {# Override this in templates to add extra stylesheets #}
-        {% endblock %}
+          {% block extra_css %}
+              {# Override this in templates to add extra stylesheets #}
+          {% endblock %}
+        {% endcompress %}
+
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
@@ -43,31 +45,10 @@
           js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=166042473905889";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
-        <nav class="theblacksea">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 who">
-                        <a href="/" class="name">The Black Sea</a>
-                        <span class="tagline">Diving deep into stories</span>
-                    </div>
-                    <div class="col-sm-6 links">
-                        <a href="/blog">Blogs</a>
-                        <a href="/stories">Stories</a>
-                        <a href="/about">About</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
 
-        <section class="share-links">
-            <a href="https://www.facebook.com/sharer/sharer.php?u={{page.url}}">
-                <img src="//theblacksea.eu/malta-files/public/img/icons/icon-fb.svg" alt="Share on Facebook" />
-            </a>
-            <a href="mailto:?subject=&body={{page.url}}">
-                <img src="//theblacksea.eu/malta-files/public/img/icons/icon-email.svg" alt="Share via E-mail" />
-            </a>
-        </section>
+        {% include "includes/nav_bar.html" %}
 
+        {% include "includes/social_widget.html" %}
 
         {% block content %}{% endblock %}
 

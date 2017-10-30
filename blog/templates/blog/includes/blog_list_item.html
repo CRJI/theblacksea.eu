@@ -1,20 +1,15 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {# Individual post in a list - used on home page #}
-<a class="list-group-item" href="{% pageurl post %}">
-  <div class="media">
-    {% if post.image %}
-      <div class="media-left">
-        {% image post.image width-200 as img %}
-        <img class="media-object" src="{{ img.url }}" />
-      </div>
-    {% endif %}
-    <div class="media-body">
-      <h4 class="media-heading">{{ post.title }}</h4>
-      <p><strong>{{ post.date }}</strong></p>
-      {% if post.search_description %}
-        <p>{{ post.search_description }}</p>
-      {% endif %}
+{% image post.image original as img %}
+<article class='blog_item_preview container'>
+  <div class='row'>
+    <div class='col-xs-12 col-sm-12 col-md-3 col-lg-3'>
+      <a class='post_title' href='{{ post.url }}'> {{ post.title }} </a>
+      {{ post.location }}
+    </div>
+    <div class='col-xs-12 col-sm-12 col-md-9 col-lg-9'>
+      <h5 class='post_intro'> {{ post.intro }} </h5>
     </div>
   </div>
-</a>
+</article>

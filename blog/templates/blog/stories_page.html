@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block body_class %}template-blogpage{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/aos.scss' %}">
+{% endblock %}
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static 'js/aos.min.js' %}"></script>
+{% endblock %}
 
 {% block content %}
 

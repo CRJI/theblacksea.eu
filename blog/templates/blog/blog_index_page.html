@@ -9,11 +9,14 @@
 
   <div class="intro">{{ page.intro|richtext }}</div>
 
-  {% for post in posts %}
-
-    {% with post=post.specific %}
-      {% include "blog/includes/blog_list_item.html" %}
-    {% endwith %}
-  {% endfor %}
+  <section class="posts_container container">
+    <div class="row">
+      {% for post in posts %}
+        {% with post=post.specific %}
+          {% include "blog/includes/blog_list_item.html" %}
+        {% endwith %}
+      {% endfor %}
+    </div>
+  </section>
 
 {% endblock %}

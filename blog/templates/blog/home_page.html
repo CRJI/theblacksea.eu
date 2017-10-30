@@ -8,34 +8,29 @@
 
   {% image page.image original class="home_image" %}
 
-  <div class='allENTS block space overflow allrecords' id='allrecords_en'>
-    {% for post in all_posts %}
-      {% with post=post.specific %}
-        {% image post.image original as img %}
-        <div class='notENT archivePrevRec record'>
-          <div class='mainFeaturedImg'>
-            <a href='{{ post.url }}'>
-              {% image post.image fill-225x149 %}
-            </a>
-            <div class='fullwidth iconsThumb' id='Main1332_Thumb'>
-              <div class='storyIconThumb'></div>
-            </div>
-          </div>
-          <div class='imageColumnMeta'>
-            <div class='imageColumnHead fullwidth'>
-              <a href='{{ post.url }}'>
-                {{ post.title }}
+  <section class="posts_container container">
+    <div class="row">
+      {% for post in all_posts %}
+        {% with post=post.specific %}
+          {% image post.image original as img %}
+          <article class='post_preview col-xs-12 col-sm-6 col-md-4 col-lg-3'>
+            <div class='post_image'>
+              <a href='{{ post.url }}' class='thumbnail'>
+                {% image post.image fill-225x149 %}
               </a>
             </div>
-            {{ post.intro }}
-            <div class='imageColumnLocation blue'>
-              {{ post.location }}
+            <div class='post_details'>
+              <a class='post_title' href='{{ post.url }}'> {{ post.title }} </a>
+              <h5 class='post_intro'> {{ post.intro }} </h5>
+              <h5 class='post_location'>
+                {{ post.location }}
+              </h5>
             </div>
-          </div>
-        </div>
-      {% endwith %}
-    {% endfor %}
-  </div>
+          </article>
+        {% endwith %}
+      {% endfor %}
+    </div>
+  </section>
 
   <footer>
     The Black Sea by crji.org is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License if not otherwise stated. Based on a work at theblacksea.eu. This web application is Free Software (AGPLv3+), the source code is available on GitHub and waiting for contributions.

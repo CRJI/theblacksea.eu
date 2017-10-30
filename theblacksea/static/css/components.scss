@@ -1,0 +1,46 @@
+
+img.home_image {
+  width: 100%;
+  height: auto;
+  display: block;
+  padding-bottom: 10px;
+  background-color: #f4f4f4;
+  position: relative;
+}
+
+/* posts container */
+
+section.posts_container {
+  text-decoration: none;
+  color: #333;
+
+  article.post_preview {
+    div.post_image {
+      a {
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+    div.post_details {
+      * {
+        padding-top: .5em;
+      }
+      a.post_title {
+        font-size: .8em;
+        text-transform: uppercase;
+      }
+      h5.post_intro {
+        font-size: .8em;
+        color: #666;
+      }
+      h5.post_location {
+        text-transform: uppercase;
+        font-size: .7em;
+        color: rgb(116,192,226);
+        display: block;
+      }
+    }
+  }
+}

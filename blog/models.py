@@ -195,7 +195,14 @@ class BlogPage(Page):
     date = models.DateField("Post date")
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
-    image = models.ImageField(blank=True)
+    tags = ClusterTaggableManager(through=StoriesPageTag, blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -203,7 +210,7 @@ class BlogPage(Page):
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('image'),
+        ImageChooserPanel('image'),
         FieldPanel('date'),
         FieldPanel('intro', classname='full'),
         FieldPanel('body', classname='full'),
