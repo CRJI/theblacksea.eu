@@ -254,14 +254,17 @@ class StoriesPage(Page):
         FieldPanel('tags'),
     ]
 
-    main_content_panels = [
+    text_panels = [
         FieldPanel('body_richtext', classname='full'),
+    ]
+    blocks_panels = [
         StreamFieldPanel('body_blocks', classname='full'),
     ]
 
     edit_handler = TabbedInterface([
-        ObjectList(main_content_panels, heading='Content body'),
         ObjectList(content_panels, heading='Content details'),
+        ObjectList(text_panels, heading='Text'),
+        ObjectList(blocks_panels, heading='Blocks'),
         ObjectList(Page.promote_panels, heading='Promote'),
         ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
     ])
