@@ -10,7 +10,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django import forms
 
 from wagtail.wagtailcore.url_routing import RouteResult
-from wagtail.wagtailcore.models import Page
+from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel, TabbedInterface, ObjectList
@@ -20,15 +20,33 @@ from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailsearch import index
 
 from wagtail.wagtailcore.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, \
-    CharBlock, RichTextBlock, RawHTMLBlock
+    CharBlock, RichTextBlock, RawHTMLBlock, ChooserBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 
 from modelcluster.fields import ParentalKey
-from modelcluster.contrib.taggit import ClusterTaggableManager
+from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+    intro = RichTextField(blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('intro'),
+        ImageChooserPanel('image'),
+    ]
+    def __str__(self):
+        return "%s" % (self.name)
 
 class StoriesPageTag(TaggedItemBase):
     content_object = ParentalKey('blog.StoriesPage', related_name='tagged_items')
@@ -195,7 +213,7 @@ class BlogPage(Page):
     date = models.DateField("Post date")
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
-    tags = ClusterTaggableManager(through=StoriesPageTag, blank=True)
+    # tags = ClusterTaggableManager(through=StoriesPageTag, blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -222,22 +240,42 @@ class StoriesPage(Page):
     body_richtext = RichTextField(blank=True)
     body_blocks = StreamField(BlogStreamBlock(), blank=True)
     location = models.CharField(max_length=255, blank=True)
-    authors = models.CharField(max_length=255, blank=True)
     dossier = models.CharField(max_length=50, blank=True)
     format = models.CharField(max_length=50, blank=True)
     tags = ClusterTaggableManager(through=StoriesPageTag, blank=True)
+    # authors = ChooserBlock(target_model=Author, blank=True)
+    # authors = models.ForeignKey(
+    #     'blog.Author',
+    #     null=True,
+    #     blank=True,
+    #     on_delete=models.SET_NULL,
+    #     related_name='stories'
+    # )
+    authors = models.ManyToManyField(Author)
     image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='stories_related'
+    )
+    feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
     # template = models.ForeignKey('blog.BlogTemplate')
+
+    @property
+    def stories_index(self):
+        # Find closest ancestor which is a blog index
+        return self.get_ancestors().type(StoriesIndexPage).last()
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
-        index.SearchField('authors'),
         index.SearchField('location'),
         index.SearchField('body_richtext'),
         index.SearchField('body_blocks'),
@@ -246,17 +284,21 @@ class StoriesPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname='full'),
         ImageChooserPanel('image'),
-        FieldPanel('date'),
+        # InlinePanel('page_authors'),
         FieldPanel('authors'),
+        FieldPanel('date'),
         FieldPanel('location'),
     ]
+
     promote_panels = Page.promote_panels + [
+        ImageChooserPanel('feed_image'),
         FieldPanel('tags'),
     ]
 
     text_panels = [
         FieldPanel('body_richtext', classname='full'),
     ]
+
     blocks_panels = [
         StreamFieldPanel('body_blocks', classname='full'),
     ]
@@ -265,7 +307,7 @@ class StoriesPage(Page):
         ObjectList(content_panels, heading='Content details'),
         ObjectList(text_panels, heading='Text'),
         ObjectList(blocks_panels, heading='Blocks'),
-        ObjectList(Page.promote_panels, heading='Promote'),
+        ObjectList(promote_panels, heading='Promote'),
         ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
     ])
 
