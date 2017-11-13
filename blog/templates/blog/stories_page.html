@@ -5,7 +5,11 @@
 {% block body_class %}template-blogpage{% endblock %}
 
 {% block extra_css %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/aos.scss' %}">
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'css/aos.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'css/story.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
 {% endblock %}
 
 {% block extra_js %}
@@ -20,7 +24,11 @@
       <div class="main-info">
           <h1 data-aos="fade"><span>{{ page.title }}</span></h1>
           <h2 data-aos="fade"><span>{{ page.intro | striptags }}</span></h2>
-          <h3 data-aos="fade"><span>by {{ page.authors }}</span></h3>
+          <h3 data-aos="fade">
+            <span>by
+              {{ page.authors.all | join:", " }}
+            </span>
+          </h3>
           <h4 data-aos="fade"><span>{{ page.date }}</span></h4>
           <p data-aos="fade">
               <a href="#">

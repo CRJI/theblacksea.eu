@@ -24,7 +24,8 @@ from wagtail.wagtailcore.blocks import TextBlock, StructBlock, StreamBlock, Fiel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 
-from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
@@ -251,7 +252,8 @@ class StoriesPage(Page):
     #     on_delete=models.SET_NULL,
     #     related_name='stories'
     # )
-    authors = models.ManyToManyField(Author)
+    # authors = models.ManyToManyField(Author)
+    authors = ParentalManyToManyField('Author', related_name='stories')
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
