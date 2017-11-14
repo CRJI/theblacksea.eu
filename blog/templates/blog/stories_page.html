@@ -26,7 +26,9 @@
           <h2 data-aos="fade"><span>{{ page.intro | striptags }}</span></h2>
           <h3 data-aos="fade">
             <span>by
-              {{ page.authors.all | join:", " }}
+              {% for author in page.authors.all %}
+                <a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
+              {% endfor %}
             </span>
           </h3>
           <h4 data-aos="fade"><span>{{ page.date }}</span></h4>

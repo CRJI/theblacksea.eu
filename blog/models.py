@@ -32,7 +32,10 @@ from taggit.models import TaggedItemBase
 
 class Author(models.Model):
     name = models.CharField(max_length=100)
-    intro = RichTextField(blank=True)
+    occupation = models.CharField(max_length=100, blank=True)
+    bio = RichTextField(blank=True)
+    url = models.URLField(max_length=254, blank=True)
+    email = models.EmailField(max_length=254, blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -42,8 +45,15 @@ class Author(models.Model):
     )
 
     panels = [
-        FieldPanel('name'),
-        FieldPanel('intro'),
+        MultiFieldPanel([
+            FieldPanel('name'),
+            FieldPanel('occupation'),
+        ]),
+        FieldPanel('bio'),
+        MultiFieldPanel([
+            FieldPanel('url'),
+            FieldPanel('email'),
+        ]),
         ImageChooserPanel('image'),
     ]
     def __str__(self):
@@ -343,16 +353,36 @@ class AuthorPage(Page):
 
     def get_context(self, request):
 
-        # Update context to include only published posts, ordered by reverse-chron
+        # Update context
         context = super(AuthorPage, self).get_context(request)
-        blog_list = BlogPage.objects.live()
-        story_list = StoriesPage.objects.live()
+        author_id = request.path.strip('/').split('/')[-1]
 
-        context['all_posts'] = sorted(
-            chain(blog_list, story_list),
-            key=attrgetter('date'))
+        author_found = Author.objects.get(pk=author_id)
+        context['model'] = author_found
 
         return context
+
+    def route(self, request, path_components):
+        if path_components:
+            # request is for an author
+            author_id = path_components[0]
+
+            # find a matching author or 404
+            try:
+                author_found = Author.objects.get(pk=author_id)
+            except Page.DoesNotExist:
+                raise Http404
+        else:
+            # the page matches the request, but has no author id
+            raise Http404
+
+        if self.live:
+            # Return a RouteResult that will tell Wagtail to call
+            # this page's serve() method
+            return RouteResult(self)
+        else:
+            # the page matches the request, but isn't published, so 404
+            raise Http404
 
 class HomePage(Page):
     body = RichTextField(blank=True)
