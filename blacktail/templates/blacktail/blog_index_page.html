@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+  <h1>{{ page.title }}</h1>
+
+  <div class="intro">{{ page.intro|richtext }}</div>
+
+  <section class="posts_container container">
+    <div class="row">
+      {% for post in posts %}
+        {% with post=post.specific %}
+          {% include "blacktail/includes/blog_list_item.html" %}
+        {% endwith %}
+      {% endfor %}
+    </div>
+  </section>
+
+{% endblock %}
