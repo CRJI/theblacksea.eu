@@ -1,28 +1,43 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block extra_css %}
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/story_index.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+{% endblock %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
 
-  <div class='block overflow'>
-    <div class='textColumnBig right '>
-
-      <div class='SING archiveDesc' id='archiveDesc_archive_en'>
-        <div class='EDtxa textDesc desc'>
-          We present in-depth investigations into stories relevant to the greater Black Sea region.
-          Narrow down by:
-          {% for tag in page.tags.all %}
-            <a href="{% pageurl page.stories_index %}?tag={{ tag }}">{{ tag }}</a>
-            {{ tag }}
-          {% endfor %}
+<div class="container">
+  <div class='row'>
+        <div class='col-xs-4 index_title'>{{ page.title }}</div>
+        <div class='col-xs-8 index_desc'>
+            We present in-depth investigations into stories relevant to the greater Black Sea region.
+            Narrow down by:
         </div>
-      </div>
-    </div>
-    <div class='LeftColumnSmall blogsHead space'>{{ page.title }}</div>
-    <div class='clearfix'></div>
+        <div class="row">
+            <div class="col-sm-3 col-md-3">                
+                {% for tag in page.tags.all %}
+                    <a href="{% pageurl page.stories_index %}?tag={{ tag }}">{{ tag }}</a>
+                    {{ tag }}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <ul class="nav nav-tabs">
+                <li class="active"> <a data-toggle="tab" href="#">Dossier</a></li>
+                <li><a href="#">Media Format</a></li>
+                <li><a href="#">Tag</a></li>
+                <li><a href="#">Region</a></li>
+            </ul>
+        </div>
   </div>
+</div>
 
   <section class="posts_container container">
     <div class="row">
