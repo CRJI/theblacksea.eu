@@ -30,6 +30,19 @@ from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 
+class Location(models.Model):
+    name = models.CharField(max_length=255)
+
+    panels = [
+        FieldPanel('name'),
+    ]
+
+    class Meta:
+        abstract = True
+
+class StoriesPageLocation(Orderable, Location):
+    page = ParentalKey('blacktail.StoriesPage', related_name='locations')
+
 class Author(models.Model):
     name = models.CharField(max_length=100)
     occupation = models.CharField(max_length=100, blank=True)
@@ -56,6 +69,36 @@ class Author(models.Model):
         ]),
         ImageChooserPanel('image'),
     ]
+    def __str__(self):
+        return "%s" % (self.name)
+
+class StoryType(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        MultiFieldPanel([
+            FieldPanel('name'),
+            ImageChooserPanel('image'),
+        ]),
+    ]
+
+    def __str__(self):
+        return "%s" % (self.name)
+
+class StoryDossier(models.Model):
+    name = models.CharField(max_length=100)
+
+    panels = [
+        FieldPanel('name'),
+    ]
+
     def __str__(self):
         return "%s" % (self.name)
 
@@ -250,7 +293,8 @@ class StoriesPage(Page):
     intro = models.CharField(max_length=255, blank=True)
     body_richtext = RichTextField(blank=True)
     body_blocks = StreamField(BlogStreamBlock(), blank=True)
-    location = models.CharField(max_length=255, blank=True)
+    # location = models.CharField(max_length=255, blank=True)
+
     dossier = models.CharField(max_length=50, blank=True)
     format = models.CharField(max_length=50, blank=True)
     tags = ClusterTaggableManager(through=StoriesPageTag, blank=True)
@@ -264,6 +308,8 @@ class StoriesPage(Page):
     # )
     # authors = models.ManyToManyField(Author)
     authors = ParentalManyToManyField('Author', related_name='stories')
+    type = models.ForeignKey(StoryType, on_delete=models.SET_NULL, blank=True, null=True)
+    dossier = models.ForeignKey(StoryDossier, on_delete=models.SET_NULL, blank=True, null=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -288,7 +334,7 @@ class StoriesPage(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
-        index.SearchField('location'),
+        # index.SearchField('location'),
         index.SearchField('body_richtext'),
         index.SearchField('body_blocks'),
     ]
@@ -297,9 +343,14 @@ class StoriesPage(Page):
         FieldPanel('intro', classname='full'),
         ImageChooserPanel('image'),
         # InlinePanel('page_authors'),
-        FieldPanel('authors'),
-        FieldPanel('date'),
-        FieldPanel('location'),
+        MultiFieldPanel([
+            FieldPanel('authors'),
+            FieldPanel('type'),
+            FieldPanel('dossier'),
+            FieldPanel('date'),
+            # FieldPanel('location'),
+        ]),
+        InlinePanel('locations', label="Locations"),
     ]
 
     promote_panels = Page.promote_panels + [

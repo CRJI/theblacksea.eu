@@ -31,6 +31,11 @@
             </span>
           </h3>
           <h4 data-aos="fade"><span>{{ page.date }}</span></h4>
+          <h4 data-aos="fade"><span>
+            {% for location in page.locations.all %}
+              {{ location.name }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+          </span></h4>
           <p data-aos="fade">
               <a href="#">
                   <img src="/static/img/icons/icons/arrow-down.svg" alt="Read" class="arrow" />
