@@ -21,15 +21,11 @@
             Narrow down by:
         </div>
         <div class="row">
-            <div class="col-sm-3 col-md-3">                
+            <ul class="nav nav-tabs">
                 {% for tag in page.tags.all %}
                     <a href="{% pageurl page.stories_index %}?tag={{ tag }}">{{ tag }}</a>
                     {{ tag }}
                 {% endfor %}
-            </div>
-        </div>
-        <div class="row">
-            <ul class="nav nav-tabs">
                 <li class="active"> <a data-toggle="tab" href="#">Dossier</a></li>
                 <li><a href="#">Media Format</a></li>
                 <li><a href="#">Tag</a></li>
