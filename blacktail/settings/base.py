@@ -27,9 +27,19 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 INSTALLED_APPS = [
     'compressor',
-
-    'blacktail',
     'search',
+
+    'wagtail.contrib.modeladmin',
+
+    'modelcluster',
+    'taggit',
+
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -43,17 +53,7 @@ INSTALLED_APPS = [
     'wagtail.wagtailadmin',
     'wagtail.wagtailcore',
 
-    'wagtail.contrib.modeladmin',
-
-    'modelcluster',
-    'taggit',
-
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'blacktail',
 ]
 
 MIDDLEWARE = [
