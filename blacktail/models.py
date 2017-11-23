@@ -40,8 +40,8 @@ class Location(models.Model):
     class Meta:
         abstract = True
 
-class StoryPageLocation(Orderable, Location):
-    page = ParentalKey('blacktail.StoryPage', related_name='locations')
+class StoryLocation(Orderable, Location):
+    page = ParentalKey('blacktail.Story', related_name='locations')
 
 class Author(models.Model):
     name = models.CharField(max_length=100)
@@ -102,8 +102,8 @@ class StoryDossier(models.Model):
     def __str__(self):
         return "%s" % (self.name)
 
-class StoryPageTag(TaggedItemBase):
-    content_object = ParentalKey('blacktail.StoryPage', related_name='tagged_items')
+class StoryTag(TaggedItemBase):
+    content_object = ParentalKey('blacktail.Story', related_name='tagged_items')
 
 class PullQuoteBlock(StructBlock):
     quote = TextBlock("quote title")
@@ -219,7 +219,7 @@ class RelatedLink(LinkFields):
     class Meta:
         abstract = True
 
-class BlogIndexPage(Page):
+class BlogIndex(Page):
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
@@ -228,12 +228,12 @@ class BlogIndexPage(Page):
 
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
-        context = super(BlogIndexPage, self).get_context(request)
+        context = super(BlogIndex, self).get_context(request)
         blogpages = self.get_children().live().order_by('-first_published_at')
         context['posts'] = blogpages
         return context
 
-class StoriesIndexPage(Page):
+class StoriesIndex(Page):
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
@@ -252,7 +252,7 @@ class StoriesIndexPage(Page):
     def get_context(self, request):
 
         # Update context to include only published posts, ordered by reverse-chron
-        context = super(StoriesIndexPage, self).get_context(request)
+        context = super(StoriesIndex, self).get_context(request)
         stories = self.get_children().live().order_by('-first_published_at')
         context['stories'] = stories
 
@@ -263,11 +263,11 @@ class StoriesIndexPage(Page):
 
         return context
 
-class BlogPage(Page):
+class BlogPost(Page):
     date = models.DateField("Post date")
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
-    # tags = ClusterTaggableManager(through=StoryPageTag, blank=True)
+    # tags = ClusterTaggableManager(through=StoryTag, blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -288,7 +288,7 @@ class BlogPage(Page):
         FieldPanel('body', classname='full'),
     ]
 
-class StoryPage(Page):
+class Story(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=255, blank=True)
     body_richtext = RichTextField(blank=True)
@@ -297,7 +297,7 @@ class StoryPage(Page):
 
     dossier = models.CharField(max_length=50, blank=True)
     format = models.CharField(max_length=50, blank=True)
-    tags = ClusterTaggableManager(through=StoryPageTag, blank=True)
+    tags = ClusterTaggableManager(through=StoryTag, blank=True)
     # authors = ChooserBlock(target_model=Author, blank=True)
     # authors = models.ForeignKey(
     #     'blacktail.Author',
@@ -330,7 +330,7 @@ class StoryPage(Page):
     @property
     def stories_index(self):
         # Find closest ancestor which is a blog index
-        return self.get_ancestors().type(StoriesIndexPage).last()
+        return self.get_ancestors().type(StoriesIndex).last()
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -454,7 +454,7 @@ class HomePage(Page):
 
         # Add extra variables and return the updated context
         blog_list = BlogPage.objects.live()
-        story_list = StoryPage.objects.live()
+        story_list = Story.objects.live()
         context['all_posts'] = sorted(
             chain(blog_list, story_list),
             key=attrgetter('date'))
