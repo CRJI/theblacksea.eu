@@ -453,7 +453,7 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
 
         # Add extra variables and return the updated context
-        blog_list = BlogPage.objects.live()
+        blog_list = BlogPost.objects.live()
         story_list = Story.objects.live()
         context['all_posts'] = sorted(
             chain(blog_list, story_list),
