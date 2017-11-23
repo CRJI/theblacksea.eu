@@ -40,8 +40,8 @@ class Location(models.Model):
     class Meta:
         abstract = True
 
-class StoriesPageLocation(Orderable, Location):
-    page = ParentalKey('blacktail.StoriesPage', related_name='locations')
+class StoryPageLocation(Orderable, Location):
+    page = ParentalKey('blacktail.StoryPage', related_name='locations')
 
 class Author(models.Model):
     name = models.CharField(max_length=100)
@@ -102,8 +102,8 @@ class StoryDossier(models.Model):
     def __str__(self):
         return "%s" % (self.name)
 
-class StoriesPageTag(TaggedItemBase):
-    content_object = ParentalKey('blacktail.StoriesPage', related_name='tagged_items')
+class StoryPageTag(TaggedItemBase):
+    content_object = ParentalKey('blacktail.StoryPage', related_name='tagged_items')
 
 class PullQuoteBlock(StructBlock):
     quote = TextBlock("quote title")
@@ -267,7 +267,7 @@ class BlogPage(Page):
     date = models.DateField("Post date")
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
-    # tags = ClusterTaggableManager(through=StoriesPageTag, blank=True)
+    # tags = ClusterTaggableManager(through=StoryPageTag, blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -288,7 +288,7 @@ class BlogPage(Page):
         FieldPanel('body', classname='full'),
     ]
 
-class StoriesPage(Page):
+class StoryPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=255, blank=True)
     body_richtext = RichTextField(blank=True)
@@ -297,7 +297,7 @@ class StoriesPage(Page):
 
     dossier = models.CharField(max_length=50, blank=True)
     format = models.CharField(max_length=50, blank=True)
-    tags = ClusterTaggableManager(through=StoriesPageTag, blank=True)
+    tags = ClusterTaggableManager(through=StoryPageTag, blank=True)
     # authors = ChooserBlock(target_model=Author, blank=True)
     # authors = models.ForeignKey(
     #     'blacktail.Author',
@@ -454,7 +454,7 @@ class HomePage(Page):
 
         # Add extra variables and return the updated context
         blog_list = BlogPage.objects.live()
-        story_list = StoriesPage.objects.live()
+        story_list = StoryPage.objects.live()
         context['all_posts'] = sorted(
             chain(blog_list, story_list),
             key=attrgetter('date'))
