@@ -110,8 +110,7 @@ class StoriesIndex(Page):
 class Story(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=255, blank=True)
-    body_richtext = RichTextField(blank=True)
-    body_blocks = StreamField(BlogStreamBlock(), blank=True)
+    body = StreamField(BlogStreamBlock(), blank=True)
     # location = models.CharField(max_length=255, blank=True)
 
     dossier = models.CharField(max_length=50, blank=True)
@@ -154,8 +153,7 @@ class Story(Page):
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
         # index.SearchField('location'),
-        index.SearchField('body_richtext'),
-        index.SearchField('body_blocks'),
+        index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
@@ -177,18 +175,13 @@ class Story(Page):
         FieldPanel('tags'),
     ]
 
-    text_panels = [
-        FieldPanel('body_richtext', classname='full'),
-    ]
-
     blocks_panels = [
-        StreamFieldPanel('body_blocks', classname='full'),
+        StreamFieldPanel('body', classname='full'),
     ]
 
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content details'),
-        ObjectList(text_panels, heading='Text'),
-        ObjectList(blocks_panels, heading='Blocks'),
+        ObjectList(blocks_panels, heading='Content'),
         ObjectList(promote_panels, heading='Promote'),
         ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
     ])
