@@ -48,13 +48,9 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          {{ self.body_richtext | richtext  }}
-          <br>
-          {% if self.body_blocks %}
-              <div class="body-content">
-                  {% include "blacktail/includes/streamfield.html" with content=self.body_blocks %}
-              </div>
-          {% endif %}
+          <div class="body-content">
+              {% include "blacktail/includes/streamfield.html" with content=self.body %}
+          </div>
         </div>
       </div>
     </div>

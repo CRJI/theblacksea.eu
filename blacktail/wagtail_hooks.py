@@ -9,9 +9,9 @@ from .models import Author
 from .models import StoryType
 from .models import StoryDossier
 
-# @hooks.register('insert_editor_css')
-# def editor_css():
-#     return format_html('<link rel="stylesheet" href="' + settings.STATIC_URL + 'blacktail/css/admin-streamfield-styles.css">')
+@hooks.register('insert_editor_css')
+def editor_css():
+    return format_html('<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/rich-text.css">')
 
 class AuthorModelAdmin(ModelAdmin):
     model = Author
