@@ -6,17 +6,12 @@ from django.http.response import Http404
 from wagtail.wagtailcore.url_routing import RouteResult
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    InlinePanel, PageChooserPanel, StreamFieldPanel, TabbedInterface, ObjectList
+from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
 from wagtail.wagtailsearch import index
 
-from wagtail.wagtailcore.blocks import StructBlock, StreamBlock, FieldBlock, \
-    CharBlock, RichTextBlock, RawHTMLBlock, ChooserBlock
-
-from modelcluster.fields import ParentalManyToManyField
-
 from .author import Author
+
 
 class AboutPage(Page):
     intro = RichTextField(blank=True)
@@ -63,7 +58,7 @@ class AuthorPage(Page):
 
             # find a matching author or 404
             try:
-                author_found = Author.objects.get(pk=author_id)
+                Author.objects.get(pk=author_id)
             except Page.DoesNotExist:
                 raise Http404
         else:

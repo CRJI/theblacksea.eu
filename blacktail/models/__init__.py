@@ -25,3 +25,28 @@ from .streamfield import BlogStreamBlock
 from .streamfield import LinkFields
 from .streamfield import ContactFields
 from .streamfield import RelatedLink
+
+__all__ = [
+    "AboutPage",
+    "AuthorPage",
+    "Author",
+    "BlogIndex",
+    "BlogPost",
+    "HomePage",
+    "StaticPage",
+    "StoryLocation",
+    "StoryType",
+    "StoryDossier",
+    "StoryTag",
+    "Story",
+    "StoriesIndex",
+    "PullQuoteBlock",
+    "ImageFormatChoiceBlock",
+    "HTMLAlignmentChoiceBlock",
+    "ImageBlock",
+    "AlignedHTMLBlock",
+    "BlogStreamBlock",
+    "LinkFields",
+    "ContactFields",
+    "RelatedLink",
+]

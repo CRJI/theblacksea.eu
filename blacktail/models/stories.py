@@ -5,13 +5,10 @@ from django.db import models
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    InlinePanel, PageChooserPanel, StreamFieldPanel, TabbedInterface, ObjectList
+    InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from wagtail.wagtailsearch import index
-
-from wagtail.wagtailcore.blocks import StructBlock, StreamBlock, FieldBlock, \
-    CharBlock, RichTextBlock, RawHTMLBlock, ChooserBlock
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager

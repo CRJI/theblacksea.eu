@@ -3,20 +3,13 @@ from itertools import chain
 from operator import attrgetter
 
 from django.db import models
-from django import forms
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    InlinePanel, PageChooserPanel, StreamFieldPanel, TabbedInterface, ObjectList
+from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from wagtail.wagtailsearch import index
-
-from wagtail.wagtailcore.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, \
-    CharBlock, RichTextBlock, RawHTMLBlock, ChooserBlock
-
-from modelcluster.fields import ParentalManyToManyField
 
 from .stories import Story
 from .blog import BlogPost
