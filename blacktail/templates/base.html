@@ -56,6 +56,9 @@
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap/util.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/bootstrap/collapse.js' %}"></script>
         {% endblock %}
     </body>
 </html>
