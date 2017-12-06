@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block extra_js %}
-  <script type="text/javascript" src="{% static 'js/aos.min.js' %}"></script>
+
 {% endblock %}
 
 {% block content %}
@@ -21,23 +21,23 @@
 
   <header style="background-image: url('{{ img.url }}')">
       <div class="main-info">
-          <h1 data-aos="fade"><span>{{ page.title }}</span></h1>
-          <h2 data-aos="fade"><span>{{ page.intro | striptags }}</span></h2>
-          <h3 data-aos="fade">
+          <h1><span>{{ page.title }}</span></h1>
+          <h2><span>{{ page.intro | striptags }}</span></h2>
+          <h3>
             <span>by
               {% for author in page.authors.all %}
                 <a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
               {% endfor %}
             </span>
           </h3>
-          <h4 data-aos="fade"><span>{{ page.date }}</span></h4>
-          <h4 data-aos="fade"><span>
+          <h4><span>{{ page.date }}</span></h4>
+          <h4><span>
             {% for location in page.locations.all %}
               {{ location.name }}{% if not forloop.last %},{% endif %}
             {% endfor %}
           </span></h4>
-          <p data-aos="fade">
-              <a href="#">
+          <p>
+              <a href="#start-content">
                   <img src="/static/img/icons/icons/arrow-down.svg" alt="Read" class="arrow" />
               </a>
           </p>
@@ -48,7 +48,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
-          <div class="body-content">
+          <div class="body-content" id="start-content">
               {% include "blacktail/includes/streamfield.html" with content=self.body %}
           </div>
         </div>
@@ -58,14 +58,5 @@
 
   <p style="text-align: center;"><a href="{{ page.get_parent.url }}">Return to stories</a></p>
   <hr>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="/static/js/aos.min.js"></script>
-  <script>
-      AOS.init({
-          duration: 800,
-          once: true
-      });
-  </script>
 
 {% endblock %}
