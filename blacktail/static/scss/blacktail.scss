@@ -77,6 +77,8 @@ nav.navbar .links {
   text-align: right;
 }
 nav.navbar .links a {
+  width: 50px;
+  margin-left: 10px;
   font-size: 13px;
   color: #fff;
   text-transform: uppercase;
@@ -89,16 +91,17 @@ header {
   background-image: url("../img/photo/Main Opening Picture Article.jpg");
   background-size: cover;
   background-position: center center;
-  height: calc(100vh - 36px);
+  height: calc(100vh - 15px);
   width: 100%;
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 header .main-info {
   position: absolute;
   left: 10%;
-  bottom: 5vh;
+  bottom: 2vh;
   width: 80%;
+  padding-top: 15px;
 }
 header .main-info h1,
 header .main-info h2,
@@ -118,8 +121,8 @@ header .main-info h4 span {
   box-shadow: 15px 0 0 #ffffff, -15px 0 0 #ffffff;
 }
 header .main-info h1 {
-  font-size: 52px;
-  font-weight: 700;
+  font-size: 42px;
+  font-weight: 600;
   margin-bottom: 10px;
 }
 header .main-info h1 span {
