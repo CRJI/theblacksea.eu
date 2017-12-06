@@ -1,21 +1,24 @@
-<nav class="theblacksea">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6 col-md-4 who">
-        <a href="/" class="name">The Black Sea</a>
-          <span class="tagline">Diving deep into stories</span>
-      </div>
-      <div class="col-sm-6 col-md-5 links">
-        <a href="/blog">Blogs</a>
-        <a href="/stories">Stories</a>
-        <a href="/about">About</a>
-      </div>
-      <div class="col-sm-12 col-md-3 search">
-        <form action="{% url 'search' %}" method="get">
-            <input type="text" name="query" value="{{ search_query }}">
-            <input type="submit" value="Search">
-        </form>
-      </div>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+
+  <a href="/" class="navbar-brand name">The Black Sea</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapseNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="collapseNav">
+
+      <span class="tagline">Diving deep into the stories</span>
+      <ul class="navbar-nav ml-auto px-3 links">
+        <a class="btn btn-link" href="/blog">Blogs</a>
+        <a class="btn btn-link" href="/stories">Stories</a>
+        <a class="btn btn-link" href="/about">About</a>
+      </ul>
+
+      <form action="{% url 'search' %}" method="get">
+          <input type="search" name="query" value="{{ search_query }}">
+          <input type="submit" value="Search">
+      </form>
+
     </div>
-  </div>
 </nav>

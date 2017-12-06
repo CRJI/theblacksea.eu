@@ -59,28 +59,30 @@ nav.theblacksea .name {
   margin-right: 10px;
   letter-spacing: 1px;
 }
-nav.theblacksea .name:hover {
+nav.navbar .name:hover {
   text-decoration: none;
 }
-nav.theblacksea .tagline {
+#tagline{
+  color: #74c0e2;
+}
+
+nav.navbar .tagline {
   color: #74c0e2;
   font-size: 14px;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-nav.theblacksea .links {
+nav.navbar .links {
   text-align: right;
 }
-nav.theblacksea .links a {
-  width: 100px;
-  margin-left: 20px;
+nav.navbar .links a {
   font-size: 13px;
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
 }
-nav.theblacksea .links a:hover {
+nav.navbar .links a:hover {
   color: #74c0e2;
 }
 header {
