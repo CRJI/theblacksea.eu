@@ -33,6 +33,7 @@ body {
   background-repeat: repeat;
   color: #000;
   font-weight: 400;
+  padding-top: 56px;
 }
 h1,
 h2,
@@ -75,11 +76,12 @@ nav.navbar .tagline {
 }
 nav.navbar .links {
   text-align: right;
+  margin: 0 15px 0 15px;
 }
 nav.navbar .links a {
   width: 50px;
-  margin-left: 10px;
-  font-size: 13px;
+  margin-left: 14px;
+  font-size: 14px;
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
@@ -99,9 +101,8 @@ header {
 header .main-info {
   position: absolute;
   left: 10%;
-  bottom: 2vh;
+  bottom: 6vh;
   width: 80%;
-  padding-top: 15px;
 }
 header .main-info h1,
 header .main-info h2,
