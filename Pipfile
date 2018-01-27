@@ -26,7 +26,11 @@ idna = "==2.6"
 libsass = "==0.8.2"
 olefile = "==0.44"
 pillow = "==4.3.0"
+<<<<<<< HEAD
 "psycopg2" = "==2.7"
+=======
+"psycopg2" = "==2.6"
+>>>>>>> master
 pytz = "==2017.3"
 rcssmin = "==1.0.6"
 redis = "==2.10.6"
