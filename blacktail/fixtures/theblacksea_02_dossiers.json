@@ -1,0 +1,10 @@
+[
+{"fields": {"name": "Finance"}, "pk": 5, "model": "blacktail.StoryDossier"},
+{"fields": {"name": "Politics"}, "pk": 6, "model": "blacktail.StoryDossier"},
+{"fields": {"name": "Drugs"}, "pk": 7, "model": "blacktail.StoryDossier"},
+{"fields": {"name": "Environment"}, "pk": 8, "model": "blacktail.StoryDossier"},
+{"fields": {"name": "Shale Gas"}, "pk": 9, "model": "blacktail.StoryDossier"},
+{"fields": {"name": "Off-shore"}, "pk": 10, "model": "blacktail.StoryDossier"},
+{"fields": {"name": "Beasts"}, "pk": 11, "model": "blacktail.StoryDossier"},
+{"fields": {"name": "Energy"}, "pk": 12, "model": "blacktail.StoryDossier"}
+]

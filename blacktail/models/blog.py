@@ -8,6 +8,7 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from wagtail.wagtailsearch import index
+from modelcluster.fields import ParentalManyToManyField
 
 
 class BlogIndex(Page):
@@ -36,6 +37,7 @@ class BlogPost(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    authors = ParentalManyToManyField('Author', related_name='blogs')
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -44,6 +46,7 @@ class BlogPost(Page):
 
     content_panels = Page.content_panels + [
         ImageChooserPanel('image'),
+        FieldPanel('authors'),
         FieldPanel('date'),
         FieldPanel('intro', classname='full'),
         FieldPanel('body', classname='full'),

@@ -29,6 +29,16 @@ class Location(models.Model):
 class StoryLocation(Orderable, Location):
     page = ParentalKey('blacktail.Story', related_name='locations')
 
+class StoryTemplate(models.Model):
+    name = models.CharField(max_length=100)
+
+    panels = [
+        FieldPanel('name'),
+    ]
+
+    def __str__(self):
+        return "%s" % (self.name)
+
 class StoryType(models.Model):
     name = models.CharField(max_length=100)
     image = models.ForeignKey(
@@ -112,6 +122,7 @@ class Story(Page):
     # authors = models.ManyToManyField(Author)
     authors = ParentalManyToManyField('Author', related_name='stories')
     type = models.ForeignKey(StoryType, on_delete=models.SET_NULL, blank=True, null=True)
+    post_template = models.ForeignKey(StoryTemplate, on_delete=models.SET_NULL, blank=True, null=True)
     dossier = models.ForeignKey(StoryDossier, on_delete=models.SET_NULL, blank=True, null=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
