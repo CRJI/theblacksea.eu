@@ -104,7 +104,7 @@ class StoriesIndex(Page):
 
 class Story(Page):
     date = models.DateField("Post date")
-    intro = models.CharField(max_length=255, blank=True)
+    intro = models.CharField(max_length=1000, blank=True)
     body = StreamField(BlogStreamBlock(), blank=True)
     # location = models.CharField(max_length=255, blank=True)
 
