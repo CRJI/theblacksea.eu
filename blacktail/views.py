@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
+
+from . import models
 
 
 def search(request):
@@ -35,3 +38,16 @@ def search(request):
         'search_results': search_results,
         'search_picks': search_picks,
     })
+
+
+def index_php(request):
+    pk = request.GET.get('idRec')
+    story = models.Story.objects.filter(pk=pk).first()
+    blog_post = models.BlogPost.objects.filter(pk=pk).first()
+    page = story or blog_post
+    url = None
+    if page:
+        url = page.get_url(request)
+        return HttpResponseRedirect(url)
+
+    raise Http404
