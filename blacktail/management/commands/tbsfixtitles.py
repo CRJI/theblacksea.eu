@@ -7,19 +7,23 @@ class Command(BaseCommand):
     help = "Fixes html escapes in article titles"
 
     def handle(self, *args, **options):
-        for story in models.Story.objects.all():
+        def iterpages():
+            yield from models.Story.objects.all()
+            yield from models.BlogPost.objects.all()
+
+        for page in iterpages():
             changed = False
 
-            unescaped_title = html.unescape(story.title)
-            if unescaped_title != story.title:
-                print(f'Fixing html entities for {story.slug}')
-                story.title = unescaped_title
+            unescaped_title = html.unescape(page.title)
+            if unescaped_title != page.title:
+                print(f'Fixing html entities for {page.slug}')
+                page.title = unescaped_title
                 changed = True
 
-            if "''" in story.title:
-                print(f'Fixing double quotes for {story.slug}')
-                story.title = story.title.replace("''", "'")
+            if "''" in page.title:
+                print(f'Fixing double quotes for {page.slug}')
+                page.title = page.title.replace("''", "'")
                 changed = True
 
             if changed:
-                story.save()
+                page.save()
