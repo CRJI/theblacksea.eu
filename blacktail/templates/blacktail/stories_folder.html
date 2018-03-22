@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block extra_css %}
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/story.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+{% endblock %}
+
+{% block body_class %}template-storyfolder{% endblock %}
+
+
+{% block content %}
+
+<br/> <br/> <br/> <br/>
+
+<div class="container">
+  <div class="row">
+    <div class="twelve columns" id="pageHeader">
+      <div class="twelve columns" id="pageTitle">
+      {% image page.image original as img %}
+      </div>
+      <h1>{{ page.title }}</h1>
+    </div>
+    <p>
+      {{ page.intro }}
+    </p>
+    <div>
+      {{ page.body|richtext }}
+    </div>
+  </div>
+</div>
+
+  {% for post in self.get_children.specific %}
+      {% with post=post.specific %}
+        {% include "blacktail/includes/stories_list_item.html" %}
+      {% endwith %}
+  {% endfor %}
+
+{% endblock %}

@@ -71,8 +71,8 @@ class StoryDossier(models.Model):
 
 class StoryTag(TaggedItemBase):
     content_object = ParentalKey('blacktail.Story', related_name='tagged_items')
-class StoryFolderTag(TaggedItemBase):
-    content_object = ParentalKey('blacktail.StoryFolder', related_name='tagged_items')
+class StoriesFolderTag(TaggedItemBase):
+    content_object = ParentalKey('blacktail.StoriesFolder', related_name='tagged_items')
 
 class StoriesIndex(Page):
     intro = RichTextField(blank=True)
@@ -185,17 +185,17 @@ class Story(Page):
     ])
 
 
-class StoryFolder(Page):
+class StoriesFolder(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=1000, blank=True)
     body = RichTextField(blank=True)
-    tags = ClusterTaggableManager(through=StoryFolderTag, blank=True)
+    tags = ClusterTaggableManager(through=StoriesFolderTag, blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='story_folder_related'
+        related_name='stories_folder_related'
     )
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -207,7 +207,6 @@ class StoryFolder(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
-        # index.SearchField('location'),
         index.SearchField('body'),
     ]
 
