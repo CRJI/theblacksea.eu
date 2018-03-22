@@ -18,3 +18,6 @@ tests/.coverage
 build/
 tests/report/
 static/compressed
+
+/blacktail/settings/local.py
+/static
