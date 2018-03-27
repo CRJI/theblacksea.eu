@@ -1,7 +1,7 @@
 from django.utils.html import format_html
 from django.conf import settings
 
-from wagtail.wagtailcore import hooks
+from wagtail.core import hooks
 
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, modeladmin_register)
@@ -11,7 +11,7 @@ from .models import StoryDossier
 
 @hooks.register('insert_editor_css')
 def editor_css():
-    return format_html('<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/rich-text.css">')
+    return format_html('<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/editorhacks.css">')
 
 class AuthorModelAdmin(ModelAdmin):
     model = Author

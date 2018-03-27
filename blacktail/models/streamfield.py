@@ -3,13 +3,13 @@ from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django import forms
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, PageChooserPanel
-from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, PageChooserPanel
+from wagtail.documents.edit_handlers import DocumentChooserPanel
 
-from wagtail.wagtailcore.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, \
+from wagtail.core.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, \
     CharBlock, RichTextBlock, RawHTMLBlock
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtaildocs.blocks import DocumentChooserBlock
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.documents.blocks import DocumentChooserBlock
 
 
 class PullQuoteBlock(StructBlock):
