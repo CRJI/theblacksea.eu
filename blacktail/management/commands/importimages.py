@@ -3,7 +3,7 @@ import shutil
 from pathlib import Path
 from willow.image import Image
 from django.core.management.base import BaseCommand
-from django.db import transaction, connection
+from django.db import connection
 
 cursor = connection.cursor()
 
@@ -26,16 +26,21 @@ class Command(BaseCommand):
         parser.add_argument('collection_id', type=int)
         parser.add_argument('images_path', nargs='+', type=str)
 
+        parser.add_argument('-n', '--no-commit', dest='dry', action='store_true')
+        parser.set_defaults(no_commit=False)
+
     def handle(self, *args, **options):
         image_id = options['start_id']
         collection_id = options['collection_id']
+        dry = options['dry']
 
         def copy_image(src, dest):
             destination_path = dest.replace('imported/images/', 'imported/')
             destination_dir = os.path.dirname(destination_path)
             if not os.path.exists(destination_dir):
                 os.makedirs(destination_dir)
-            shutil.copy(src, destination_path)
+            if not dry:
+                shutil.copy(src, destination_path)
             return destination_path
 
         extensions = ['jpg', 'JPG', 'jpeg', 'JPEG', 'png', 'PNG', 'gif']
@@ -65,9 +70,11 @@ class Command(BaseCommand):
                            f"VALUES ('{image_id}', '{title}', '{file_path}', '{width}', '{height}', NOW(), '1', '{file_size}', '{collection_id}');"
                     )
                     print(sql)
-                    cursor.execute(sql)
+                    if not dry:
+                        cursor.execute(sql)
                     image_id += 1
 
-                    print(title, width, height, file_path, file_size)
+                    if dry:
+                        print(title, width, height, file_path, file_size, '\n')
 
             os.unlink('./images')
