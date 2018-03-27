@@ -77,7 +77,7 @@ class Command(BaseCommand):
 
                     print(sql)
                     if not dry:
-                        cursor.execute(sql, (image_id, title, file_path, width, height, , 1, file_size, collection_id))
+                        cursor.execute(sql, (image_id, title, file_path, width, height, 1, file_size, collection_id))
                     else:
                         print(sql % (image_id, title, file_path, width, height, , 1, file_size, collection_id))
                         print(title, width, height, file_path, file_size, '\n')
