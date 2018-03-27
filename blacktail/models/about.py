@@ -3,12 +3,12 @@ from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.http.response import Http404
 
-from wagtail.wagtailcore.url_routing import RouteResult
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel
+from wagtail.core.url_routing import RouteResult
+from wagtail.core.models import Page
+from wagtail.core.fields import RichTextField
+from wagtail.admin.edit_handlers import FieldPanel
 
-from wagtail.wagtailsearch import index
+from wagtail.search import index
 
 from .author import Author
 

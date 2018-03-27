@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch.models import Query
+from wagtail.core.models import Page
+from wagtail.search.models import Query
 
 from . import models
 

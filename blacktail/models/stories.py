@@ -2,13 +2,13 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 
-from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailcore.fields import RichTextField, StreamField
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
+from wagtail.core.models import Orderable, Page
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, \
     InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
 
-from wagtail.wagtailsearch import index
+from wagtail.search import index
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
