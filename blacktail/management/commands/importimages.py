@@ -5,6 +5,7 @@ from willow.image import Image
 from django.core.management.base import BaseCommand
 from django.db import transaction, connection
 
+cursor = connection.cursor()
 
 class WillowImage():
 
@@ -19,14 +20,6 @@ class WillowImage():
 
 class Command(BaseCommand):
     help = "Imports all images from a given path into a collection"
-
-    @transaction.atomic
-    def execute_sql(sql):
-        """
-        Executes the provided SQL command.
-        """
-        cursor = connection.cursor()
-        cursor.execute(sql)
 
     def add_arguments(self, parser):
         parser.add_argument('start_id', type=int)
@@ -72,7 +65,7 @@ class Command(BaseCommand):
                            f"VALUES ('{image_id}', '{title}', '{file_path}', '{width}', '{height}', NOW(), '1', '{file_size}', '{collection_id}');"
                     )
                     print(sql)
-                    execute_sql(sql)
+                    cursor.execute(sql)
                     image_id += 1
 
                     print(title, width, height, file_path, file_size)
