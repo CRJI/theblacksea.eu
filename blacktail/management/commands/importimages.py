@@ -63,22 +63,25 @@ class Command(BaseCommand):
                         img = WillowImage(path_str)
 
                     title = (' '.join(path_str.split('/')[1:])).replace(f'.{extension}', '')
-                    title = title[-100::1] # Cannot insert strings longer than 100
                     width = img.width
                     height = img.height
                     file_path = destination_path.replace('./media/', '')
                     file_size = path.stat().st_size
 
-                    sql = ('INSERT INTO wagtailimages_image '
-                           '("id", "title", "file", "width", "height", "created_at", "uploaded_by_user_id", "file_size", "collection_id") '
-                           f"VALUES ('{image_id}', '{title}', '{file_path}', '{width}', '{height}', NOW(), '1', '{file_size}', '{collection_id}');"
-                    )
+                    sql = """
+                        INSERT INTO wagtailimages_image
+                        ("id", "title", "file", "width", "height", "created_at", "uploaded_by_user_id", "file_size", "collection_id")
+                        VALUES (%s, right(%s, 255), right(%s, 100), %s, %s, NOW(), %s, %s, %s)
+                        """
+
                     print(sql)
                     if not dry:
-                        cursor.execute(sql)
+                        cursor.execute(sql, (image_id, title, file_path, width, height, , 1, file_size, collection_id))
+                    else:
+                        print(sql % (image_id, title, file_path, width, height, , 1, file_size, collection_id))
+                        print(title, width, height, file_path, file_size, '\n')
+
                     image_id += 1
 
-                    if dry:
-                        print(title, width, height, file_path, file_size, '\n')
 
             os.unlink('./images')
