@@ -57,9 +57,13 @@ class Command(BaseCommand):
                         path_str,
                         os.path.join('./media/original_images/imported/', path)
                     )
-                    img = WillowImage(destination_path)
+                    if not dry:
+                        img = WillowImage(destination_path)
+                    else:
+                        img = WillowImage(path_str)
 
                     title = (' '.join(path_str.split('/')[1:])).replace(f'.{extension}', '')
+                    title = title[-100::1] # Cannot insert strings longer than 100
                     width = img.width
                     height = img.height
                     file_path = destination_path.replace('./media/', '')
