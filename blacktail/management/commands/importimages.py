@@ -75,11 +75,11 @@ class Command(BaseCommand):
                         VALUES (%s, right(%s, 255), right(%s, 100), %s, %s, NOW(), %s, %s, %s)
                         """
 
-                    print(sql)
                     if not dry:
+                        print(sql % (image_id, title, file_path, width, height, 1, file_size, collection_id))
                         cursor.execute(sql, (image_id, title, file_path, width, height, 1, file_size, collection_id))
                     else:
-                        print(sql % (image_id, title, file_path, width, height, , 1, file_size, collection_id))
+                        print(sql % (image_id, title, file_path, width, height, 1, file_size, collection_id))
                         print(title, width, height, file_path, file_size, '\n')
 
                     image_id += 1
