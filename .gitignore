@@ -3,6 +3,13 @@ media
 db.sqlite3*
 theblacksea/settings/production.py
 
+.directory
+/bin
+/include
+/lib
+/lib64
+/share
+
 *.egg-info
 *.pot
 *.py[co]
