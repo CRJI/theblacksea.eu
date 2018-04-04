@@ -1,0 +1,386 @@
+html {
+  font-family: sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+
+body {
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: "Open Sans","HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #606062;
+}
+
+
+code {
+  padding: .2rem .5rem;
+  margin: 0 .2rem;
+  font-size: 90%;
+  white-space: nowrap;
+  background: #f1f1f1;
+  border: 1px solid #e1e1e1;
+  border-radius: 4px;
+}
+
+pre > code {
+  display: block;
+  padding: 1rem 1.5rem;
+  white-space: pre;
+}
+
+.u-full-width {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.u-max-full-width {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.u-pull-right {
+  float: right;
+}
+
+.u-pull-left {
+  float: left;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  border-width: 0;
+  border-top: 1px dotted #e1e1e1;
+}
+
+.container:after, .row:after, .u-cf {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#container {
+  margin: 0 auto;
+  width: 900px;
+  text-align: center;
+  font-family: 'Roboto',sans-serif;
+  font-size: 2em;
+}
+
+.quote {
+  padding: 1em;
+  background: rgba(135, 187, 185, 0.1);
+}
+
+.infoBox {
+  display: block;
+  p {
+    font-size: .6em;
+    margin-top: -1em;
+  }
+}
+
+.black {
+  width: 100%;
+  background: #000;
+  min-height: 41px;
+  color: #FFF;
+  position: fixed;
+  top: 0;
+  z-index: 500;
+}
+
+.logo {
+  font-size: 15px;
+  display: block;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding-top: 8px;
+  a {
+    color: #FFF !important;
+    border-bottom: 0;
+    &:hover {
+      text-decoration: none !important;
+    }
+  }
+}
+
+
+.blue {
+  color: #74c0e2;
+}
+
+#pageTitle {
+  margin: 5% 0;
+  padding-bottom: 1%;
+  border-bottom: 10px solid #067a88;
+}
+
+@media (min-width: 750px) {
+  #pageTitle {
+    margin: 10% 0 5%;
+    padding-bottom: 1%;
+    border-bottom: 10px solid #067a88;
+  }
+}
+
+#pageHeader {
+  margin-bottom: 2%;
+}
+
+#tooltip {
+  color: #fff;
+  opacity: .9;
+  background: #303030;
+  padding: 5px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+  display: block;
+  margin: 0 auto;
+  white-space: nowrap;
+  pointer-events: none;
+  font-size: .7em;
+  p {
+    margin: 0;
+  }
+}
+
+article {
+  -webkit-box-shadow: 0 5px 30px 5px rgba(240, 240, 240, 1);
+  -moz-box-shadow: 0 5px 30px 5px rgba(240, 240, 240, 1);
+  box-shadow: 0 5px 30px 5px rgba(240, 240, 240, 1);
+  padding: 1em 0 .5em;
+  margin-bottom: 2em;
+  > div {
+    padding: .5em .5em .5em .5em;
+  }
+
+  .post_title {
+    border-bottom: 1px solid #e2e2e2;
+  }
+}
+
+@media (min-width: 500px) {
+  article > div {
+    padding: .5em 1.25em .5em 1.25em;
+  }
+}
+
+.chartTitle {
+  font-size: .5em;
+}
+
+@media (min-width: 500px) {
+  .chartTitle {
+    font-size: 1em;
+  }
+}
+
+.removeBelow {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+.removeAbove {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.center {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+.selectDisallow {
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.disablePointer {
+  pointer-events: none;
+}
+
+.hideLow {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .hideLow {
+    display: block;
+  }
+}
+
+.showLow {
+  display: block;
+}
+
+@media (min-width: 900px) {
+  .showLow {
+    display: none;
+  }
+}
+
+.lowRes {
+  color: #c12600;
+  font-size: .6em;
+}
+
+#chordDiagram {
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#circle circle {
+  fill: none;
+  pointer-events: all;
+}
+
+path {
+  &.group {
+    fill-opacity: 1;
+  }
+  &.chord {
+    fill-opacity: .8;
+    stroke: #FFF;
+    stroke-width: .25px;
+  }
+}
+
+#dracula {
+  background: 0;
+}
+
+@media (min-width: 550px) {
+  #dracula {
+    background: url("../img/4-should-europe-be-scared-350px.jpg") no-repeat;
+    background-position: 96% 50%;
+    p {
+      margin-right: 25%;
+    }
+  }
+}
+
+#mapDiagram {
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 1em 0 1em 0;
+}
+
+.nrCountry {
+  text-anchor: middle;
+  font-size: .6em;
+  fill: "#000000";
+}
+
+.country {
+  fill: #e2e2e2;
+  stroke: #ededed;
+}
+
+.countryEU {
+  fill: #217a89;
+  stroke: #ededed;
+}
+
+.countryActive {
+  fill: #e7714a;
+  stroke: #ededed;
+}
+
+.infoBit {
+  img {
+    display: block;
+    margin: auto;
+    padding: .5em;
+  }
+  p {
+    padding: 1em;
+  }
+  h6 {
+    text-align: center;
+  }
+}
+
+.bars p {
+  font-weight: bold;
+  text-align: center !important;
+}
+
+.axis {
+  text {
+    font: 10px sans-serif;
+    fill: #949599;
+  }
+  path, line {
+    fill: none;
+    stroke: #949599;
+    shape-rendering: crispEdges;
+    opacity: .5;
+  }
+}
+
+.barRectTitle {
+  font-weight: 500;
+}
+
+#jailPop {
+  margin-bottom: 1em;
+  background-color: #f2f2f2;
+}
+
+.sqRomanian {
+  fill: #ee2f5a;
+}
+
+.sqOtherEU {
+  fill: #f58634;
+}
+
+.sqNonEU {
+  fill: #8abcb9;
+}
+
+.sqLocal {
+  fill: #97989a;
+}
+
+.moreBit {
+  img {
+    display: block;
+    margin: auto;
+    padding: .5em;
+  }
+  h6 {
+    padding-right: .5em;
+  }
+  p {
+    text-align: center;
+    padding: 1em;
+    font-size: .6em;
+  }
+  h6 {
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+.team {
+  p {
+    font-size: .6em;
+  }
+  img {
+    margin: 0 auto;
+    display: block;
+  }
+}
