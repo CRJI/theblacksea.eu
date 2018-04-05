@@ -4,12 +4,22 @@
 {% image post.image original as img %}
 <article class='blog_item_preview container'>
   <div class='row'>
-    <div class='col-xs-12 col-sm-12 col-md-3 col-lg-3'>
-      <a class='post_title' href='{{ post.url }}'> {{ post.title }} </a>
-      {{ post.location }}
+    <div class='col-xs-12 col-sm-12 col-md-3 col-lg-3' style="border-left: 10px solid {{post.category.color}}">
+      <a class='post_title' href='{{ post.url }}' style="color: {{post.category.color}}"> {{ post.title }} </a>
+      <br/>
+      {% for author in post.authors.all %}
+        <a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
+      {% endfor %} / {{ post.date }}
+      <br/>
+      {% if post.tags.all %}
+        FILED UNDER:
+        {% for tag in post.tags.all %}
+          {{ tag }}{% if not forloop.last %},{% endif %}
+        {% endfor %}
+      {% endif %}
     </div>
     <div class='col-xs-12 col-sm-12 col-md-9 col-lg-9'>
-      <h5 class='post_intro'> {{ post.intro }} </h5>
+      <h5 class='post_intro'> {{ post.intro | richtext }} </h5>
     </div>
   </div>
 </article>

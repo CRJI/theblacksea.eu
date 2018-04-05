@@ -5,6 +5,7 @@ from .author import Author
 
 from .blog import BlogIndex
 from .blog import BlogPost
+from .blog import BlogCategory
 
 from .pages import HomePage
 from .pages import StaticPage

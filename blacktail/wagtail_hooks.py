@@ -8,6 +8,7 @@ from wagtail.contrib.modeladmin.options import (
 from .models import Author
 from .models import StoryType
 from .models import StoryDossier
+from .models import BlogCategory
 
 @hooks.register('insert_editor_css')
 def editor_css():
@@ -44,7 +45,18 @@ class StoryDossierModelAdmin(ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
+class BlogCategoryModelAdmin(ModelAdmin):
+    model = BlogCategory
+    menu_label = 'Blog categories'
+    menu_icon = 'folder-open-1'
+    menu_order = 203  # will put in 3rd place (000 being 1st, 100 2nd)
+    add_to_settings_menu = True  # or True to add your model to the Settings sub-menu
+    exclude_from_explorer = False # or True to exclude pages of this type from Wagtail's explorer view
+    list_display = ('name', 'color')
+    search_fields = ('name', 'color')
+
 # Now you just need to register your customised ModelAdmin class with Wagtail
 modeladmin_register(AuthorModelAdmin)
 modeladmin_register(StoryTypeModelAdmin)
 modeladmin_register(StoryDossierModelAdmin)
+modeladmin_register(BlogCategoryModelAdmin)
