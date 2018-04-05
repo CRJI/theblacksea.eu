@@ -1,0 +1,32 @@
+@import 'components';
+
+.recent-posts {
+  width: 100%;
+  background: #f4f4f4;
+  display: block;
+  padding: .2em 0;
+  margin-bottom: 1em;
+
+  article {
+    a {
+      text-decoration: none;
+      color: #333;
+      font-family: "Open Sans", "futura-pt", Arial, serif;
+      font-size: .8em;
+      font-style: italic;
+      text-transform: none !important;
+      display: inline-block;
+
+      &::after {
+        display: inline-block;
+        content: '\00a0>>';
+        color: #c33;
+        font-size: .8em;
+      }
+    }
+  }
+}
+
+section.recent-stories {
+  @extend .posts_container;
+}
