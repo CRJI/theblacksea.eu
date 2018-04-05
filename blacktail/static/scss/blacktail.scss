@@ -574,3 +574,18 @@ footer .journalismfund {
     width: 100%;
   }
 }
+
+footer {
+  background: #f4f4f4 !important;
+  font-size: .8em;
+  text-align: center;
+  color: #333;
+  .container {
+    width: 100%;
+    border: 0;
+    margin-bottom: 0;
+  }
+  a {
+    text-transform: none;
+  }
+}

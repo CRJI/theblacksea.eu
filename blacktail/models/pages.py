@@ -37,11 +37,14 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
 
         # Add extra variables and return the updated context
-        blog_list = BlogPost.objects.live()
-        story_list = Story.objects.live()
+        blogs = BlogPost.objects.live().reverse()[:8]
+        stories = Story.objects.live().reverse()[:8]
+
         context['all_posts'] = sorted(
-            chain(blog_list, story_list),
+            chain(blogs, stories),
             key=attrgetter('date'))
+        context['blogs'] = blogs
+        context['stories'] = stories
         return context
 
 class StaticPage(Page):
