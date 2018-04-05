@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block extra_css %}
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/home_page.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+{% endblock %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -8,34 +15,51 @@
 
   {% image page.image original class="home_image" %}
 
-  <section class="posts_container container">
-    <div class="row">
-      {% for post in all_posts %}
+<section class="recent-posts">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-3">
+      {% for post in blogs %}
+        {% if forloop.counter|divisibleby:2 %}
+          </div>
+          <div class="col-md-3">
+        {% endif %}
         {% with post=post.specific %}
-          {% image post.image original as img %}
-          <article class='post_preview col-xs-12 col-sm-6 col-md-4 col-lg-3'>
-            <div class='post_image'>
-              <a href='{{ post.url }}' class='thumbnail'>
-                {% image post.image fill-225x149 %}
-              </a>
-            </div>
-            <div class='post_details'>
-              <a class='post_title' href='{{ post.url }}'> {{ post.title }} </a>
-              <h5 class='post_intro'> {{ post.intro }} </h5>
-              <h5 class='post_location'>
-                {% for location in post.locations.all %}
-                  {{ location.name }}{% if not forloop.last %},{% endif %}
-                {% endfor %}
-              </h5>
-            </div>
+          <article>
+            <a href="{{ post.url }}">
+              {{ post.title }}
+            </a>
           </article>
         {% endwith %}
       {% endfor %}
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    The Black Sea by crji.org is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License if not otherwise stated. Based on a work at theblacksea.eu. This web application is Free Software (AGPLv3+), the source code is available on GitHub and waiting for contributions.
-  </footer>
+<section class="recent-stories container">
+  <div class="row">
+    {% for post in stories %}
+      {% with post=post.specific %}
+        {% image post.image original as img %}
+          {% include "blacktail/includes/stories_list_item.html" %}
+      {% endwith %}
+    {% endfor %}
+  </div>
+</section>
+
+<hr/>
+
+<section class="follow">
+  <p class="text-center">
+    Follow us
+  </p>
+  <div class="social-buttons text-center">
+    <a href=""> <i class="fab fa-lg fa-facebook-square"></i> </a>
+    <a href=""> <i class="fab fa-lg fa-twitter-square"></i> </a>
+    <a href=""> <i class="fas fa-lg fa-envelope"></i> </a>
+    <a href=""> <i class="fas fa-lg fa-rss-square"></i> </a>
+  </div>
+</section>
 
 {% endblock %}

@@ -32,6 +32,8 @@
           {% endblock %}
         {% endcompress %}
 
+        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
@@ -50,6 +52,18 @@
         {% include "blacktail/includes/social_widget.html" %}
 
         {% block content %}{% endblock %}
+
+        {% block footer %}
+        <footer>
+          <section class="container">
+            <div class="row">
+              <div class="col-sm">
+                The Black Sea by <a href="http://crji.org">crji.org</a> is licensed under a <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a> if not otherwise stated. Based on a work at <a href="https://theblacksea.eu">theblacksea.eu</a>. This web application is Free Software (AGPLv3+), the source code is <a href="https://github.com/CRJI/theblacksea.eu">available on GitHub</a> and waiting for contributions.
+              </div>
+            </div>
+          </section>
+        </footer>
+        {% endblock %}
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/blacktail.js' %}"></script>
