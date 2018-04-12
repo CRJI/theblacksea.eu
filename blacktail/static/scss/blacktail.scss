@@ -65,7 +65,12 @@ nav.navbar .name:hover {
 #tagline{
   color: #74c0e2;
 }
-
+.name a {
+  font-size: 15px
+  font-weight: 600;
+  font-family: open sans,futura-pt,Helvetica,sans-serif;
+  text-transform: uppercase;
+}
 nav.navbar .tagline {
   color: #74c0e2;
   font-size: 14px;
