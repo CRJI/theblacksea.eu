@@ -18,6 +18,10 @@ section.posts_container {
   text-decoration: none;
   color: #333;
 
+  article.blog_item_preview {
+    margin: 20px auto;
+  }
+
   article.post_preview {
     div.post_image {
       a {
@@ -49,3 +53,4 @@ section.posts_container {
     }
   }
 }
+

@@ -1,13 +1,30 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags static compress %}
+
+{% block extra_css %}
+  {% compress css %}
+    <link href="{% static 'scss/index_pages.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+{% endblock %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-  <h1>{{ page.title }}</h1>
 
-  <div class="intro">{{ page.intro|richtext }}</div>
+  <section class="index-page-header container">
+    <div class="row">
+      <div class='col-xs-12 col-sm-12 col-md-3 col-lg-3'>
+        <h1 class="index-page-title">{{ page.title }}</h1>
+      </div>
+      <div class='col-xs-12 col-sm-12 col-md-9 col-lg-9'>
+        {{ page.intro | richtext }}
+      </div>
+
+    </div>
+  </section>
+
+  <hr/>
 
   <section class="posts_container container">
     <div class="row">
