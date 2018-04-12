@@ -35,7 +35,8 @@ unidecode = "==0.4.21"
 uwsgi = "==2.0.15"
 webencodings = "==0.5.1"
 whitenoise = "==3.3.1"
-wagtail = "==2.*"
+wagtail = "==2.0.1"
+ipdb = "*"
 
 
 [dev-packages]
