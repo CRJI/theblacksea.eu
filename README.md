@@ -1,14 +1,22 @@
-#How to install and run:
+# How to install and run:
 
-##Make the python virtualenv  
-pipenv install --skip-lock  
+## Make the python virtualenv
+```
+pipenv install --skip-lock
 pipenv shell
+```
 
-##Install PostgreSQL, create user and db  
+## Install PostgreSQL, create user and db
+```
 createdb tbs
+```
 
-##Install git-lfs and use it to clone the media&db repo, then copy it  
+## Install git-lfs and use it to clone the media&db repo, then copy it
+```
 cp -a tbs-backups/media ./
+```
 
-##Run it  
-./manage.py runserver 
+## Run it
+```
+./manage.py runserver
+```
