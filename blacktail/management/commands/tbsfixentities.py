@@ -37,5 +37,10 @@ class Command(BaseCommand):
                 page.seo_title = page.seo_title.replace("''", "'")
                 changed = True
 
+            if "''" in page.intro:
+                print(f'Fixing double quotes for {page.slug} (intro)')
+                page.intro = page.intro.replace("''", "'")
+                changed = True
+
             if changed:
                 page.save()
