@@ -15,14 +15,26 @@ class Command(BaseCommand):
             changed = False
 
             unescaped_title = html.unescape(page.title)
+            unescaped_seo_title = html.unescape(page.seo_title)
+
             if unescaped_title != page.title:
-                print(f'Fixing html entities for {page.slug}')
+                print(f'Fixing html entities for {page.slug} (title)')
                 page.title = unescaped_title
                 changed = True
 
+            if unescaped_seo_title != page.seo_title:
+                print(f'Fixing html entities for {page.slug} (seo_title)')
+                page.seo_title = unescaped_seo_title
+                changed = True
+
             if "''" in page.title:
-                print(f'Fixing double quotes for {page.slug}')
+                print(f'Fixing double quotes for {page.slug} (title)')
                 page.title = page.title.replace("''", "'")
+                changed = True
+
+            if "''" in page.seo_title:
+                print(f'Fixing double quotes for {page.slug} (seo_title)')
+                page.seo_title = page.seo_title.replace("''", "'")
                 changed = True
 
             if changed:
