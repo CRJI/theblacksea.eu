@@ -62,11 +62,8 @@ class Command(BaseCommand):
             cursor.close()
             return row[0]
 
-        latest_story = Story.objects.all().order_by("-id")[0]
-        # next_id = latest_story.id + 1
-        next_id = get_next_id(Page)
-
         for url in urls:
+            next_id = get_next_id(Page)
             scraped = self.scrape_story(url)
             body = '[{"type": "aligned_html", "value": {"html": %s, "alignment": "normal"}, "id": "%s"}]'
 
