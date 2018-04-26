@@ -7,6 +7,7 @@ import re
 from django.core.management.base import BaseCommand
 from django.core.exceptions import ValidationError
 from django.contrib.contenttypes.models import ContentType
+from wagtail.core.models import Page
 from ...models import Story
 
 
@@ -53,8 +54,17 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         urls = options['target_url']
 
+        def get_next_id(model_class):
+            from django.db import connection
+            cursor = connection.cursor()
+            cursor.execute( "select nextval('%s_id_seq')" % model_class._meta.db_table)
+            row = cursor.fetchone()
+            cursor.close()
+            return row[0]
+
         latest_story = Story.objects.all().order_by("-id")[0]
-        next_id = latest_story.id + 1
+        # next_id = latest_story.id + 1
+        next_id = get_next_id(Page)
 
         for url in urls:
             scraped = self.scrape_story(url)
@@ -75,6 +85,7 @@ class Command(BaseCommand):
 
                 story.save()
 
-                Story.objects.filter(slug=slugify(scraped['title'])).update(id=next_id)
-            except ValidationError:
-                print(f"Slug already in use, skipping ({slugify(scraped['title'])})")
+                # Story.objects.filter(slug=slugify(scraped['title'])).update(id=next_id)
+            except ValidationError as e:
+                print(f"Validation error, skipping ({next_id} / {slugify(scraped['title'])})")
+                print(f"{e}\n")
