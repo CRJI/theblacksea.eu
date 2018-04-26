@@ -39,7 +39,6 @@ class Command(BaseCommand):
             'seo_title': bs.title.string,
             'title': main_info.h1.span.string,
             'intro': main_info.h2.span.string if main_info.h2 else main_info.h1.span.string,
-            'authors': '1',
             'date': dateparser.parse(main_info.h4.span.string, languages=['en', 'tr', 'ro']),
             'content': content,
         }
@@ -63,26 +62,39 @@ class Command(BaseCommand):
             return row[0]
 
         for url in urls:
-            next_id = get_next_id(Page)
+            print()
             scraped = self.scrape_story(url)
-            body = '[{"type": "aligned_html", "value": {"html": %s, "alignment": "normal"}, "id": "%s"}]'
 
+            body = '[{"type": "aligned_html", "value": {"html": %s, "alignment": "normal"}, "id": "%s"}]'
             scraped['content'] = scraped['content'].replace('\\\\', '\\')
 
+            details = {
+                'title': scraped['title'],
+                'body': body % (str(scraped['content']), str(uuid.uuid4())),
+                'slug': slugify(scraped['title']),
+                'date': scraped['date'].strftime('%Y-%m-%d'),
+                'depth': 4,
+                'seo_title': scraped['title'],
+                'content_type': ContentType.objects.get_by_natural_key('blacktail', 'story'),
+            }
+
             try:
-                story = Story()
-                story.title = scraped['title']
-                story.slug = slugify(scraped['title'])
-                story.seo_title = scraped['title']
-                story.date = scraped['date'].strftime('%Y-%m-%d')
-                story.body = body % (str(scraped['content']), str(uuid.uuid4()))
-                story.path = f'000100010002{next_id}'
-                story.content_type = ContentType.objects.get_by_natural_key('blacktail', 'story')
-                story.depth = 4
-
+                story = Story.objects.get(slug = slugify(scraped['title']))
+                for key in ['title', 'seo_title', 'slug', 'date', 'body']:
+                    setattr(story, key, details[key])
                 story.save()
+                print(f"Updated: {story.id} / {story.slug}")
+            except Story.DoesNotExist:
+                story = Story()
 
-                # Story.objects.filter(slug=slugify(scraped['title'])).update(id=next_id)
+                next_id = get_next_id(Page) + 1         # this is not thread safe, if anyone cares
+                story.path = f'000100010002{next_id}'
+
+                for key, value in details.items():
+                    setattr(story, key, value)
+                story.save()
+                print(f"Created: {next_id} / {slugify(scraped['title'])}")
             except ValidationError as e:
-                print(f"Validation error, skipping ({next_id} / {slugify(scraped['title'])})")
-                print(f"{e}\n")
+                print(f"Validation error, skipping ({slugify(scraped['title'])})")
+                print(f"{e}")
+            print()

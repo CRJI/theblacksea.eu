@@ -39,6 +39,7 @@ wagtail = "==2.0.1"
 ipdb = "*"
 dateparser = "*"
 python-slugify = "*"
+"psycopg2-binary" = "*"
 
 
 [dev-packages]
