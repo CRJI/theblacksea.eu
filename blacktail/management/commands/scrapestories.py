@@ -1,4 +1,5 @@
 import uuid
+import json
 import requests
 from bs4 import BeautifulSoup
 from slugify import slugify
@@ -70,7 +71,7 @@ class Command(BaseCommand):
 
             details = {
                 'title': scraped['title'],
-                'body': body % (str(scraped['content']), str(uuid.uuid4())),
+                'body': body % (json.dumps(scraped['content']), uuid.uuid4()),
                 'slug': slugify(scraped['title']),
                 'date': scraped['date'].strftime('%Y-%m-%d'),
                 'depth': 4,
