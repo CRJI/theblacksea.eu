@@ -9,6 +9,7 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, \
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from wagtail.search import index
+from django.shortcuts import render
 
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
@@ -81,15 +82,6 @@ class StoriesIndex(Page):
         FieldPanel('intro', classname='full'),
     ]
 
-    # def serve(self, request):
-    #     # Get stories
-    #     stories = self.get_children().live().order_by('-first_published_at')
-
-    #     return render(request, self.template, {
-    #         'page': self,
-    #         'stories': stories,
-    #     })
-
     def get_context(self, request):
 
         # Update context to include only published posts, ordered by reverse-chron
@@ -124,7 +116,7 @@ class Story(Page):
     # authors = models.ManyToManyField(Author)
     authors = ParentalManyToManyField('Author', related_name='stories')
     type = models.ForeignKey(StoryType, on_delete=models.SET_NULL, blank=True, null=True)
-    post_template = models.ForeignKey(StoryTemplate, on_delete=models.SET_NULL, blank=True, null=True)
+    template = models.ForeignKey(StoryTemplate, on_delete=models.SET_NULL, blank=True, null=True)
     dossier = models.ForeignKey(StoryDossier, on_delete=models.SET_NULL, blank=True, null=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
@@ -163,7 +155,7 @@ class Story(Page):
             FieldPanel('type'),
             FieldPanel('dossier'),
             FieldPanel('date'),
-            # FieldPanel('location'),
+            FieldPanel('template'),
         ]),
         InlinePanel('locations', label="Locations"),
     ]
@@ -183,6 +175,17 @@ class Story(Page):
         ObjectList(promote_panels, heading='Promote'),
         ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
     ])
+
+    def serve(self, request):
+
+        if self.template is None:
+            template = f'blacktail/story/blacktail.html'
+        else:
+            template = f'blacktail/story/{self.template}.html'
+
+        return render(request, template, {
+            'page': self,
+        })
 
 
 class StoriesFolder(Page):

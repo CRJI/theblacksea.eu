@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+
+{% block extra_css %}
+  <link href="{% static 'css/legacy/core.css' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  <link href="{% static 'css/legacy/site_light.css' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  <link href="{% static 'css/legacy/blogSite.css' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  <link href="{% static 'css/legacy/blogBsea.css' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  <link href="{% static 'css/legacy/jquery.fancybox.css' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  <link href="{% static 'css/legacy/jquery.fancybox-thumbs.css' %}" media="screen" rel="stylesheet" type="text/x-scss">
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/legacy/jquery-1.8.3.min.js' %}"></script>
+  <script src="{% static 'js/legacy/onvisible.js' %}"></script>
+  <script src="{% static 'js/legacy/headjs.js' %}"></script>
+  <script type="text/javascript">
+   document.onload = function() {
+     // head.load(
+     //   "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/jquery-1.8.3.min.js' %}",
+     //   "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/onvisible.js' %}"
+     // );
+     head.ready(
+       [ "jquery-1.8.3.min.js", "jquery.cookie.js", "onvisible.js"],
+       function(){
+         head.load(
+           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/GEN.js' %}",
+           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/blacksea.js' %}",
+           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/article.js' %}",
+           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/blogRecord.js' %}",
+           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/jquery.fancybox.js' %}",
+           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/galleria-1.3.3.min.js' %}"
+           );
+       });
+    head.ready(
+      "GEN.js",
+      function() {
+        ivyMods = { set_iEdit: {} };
+        fmw.idC = 88;
+        fmw.idT = 88;
+        fmw.pubPath = '/var/www/virtual/theblacksea.eu/htdocs/fw/';
+        fmw.urlGet = {"idT":"88","idC":"88","idRec":"1262","recType":"story"};
+      });
+   }
+  </script>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class='SING block space SGrecord-archive SGrecord' id='SGrecord_1157_en' style="margin-top: 100px;">
+      <div class='block-full'>
+
+        <div class='textColumnBig right'>
+          <div class='EDtxt Name blue title'>
+            {{ page.title }}
+          </div>
+          <div class='imageColumnHead orange space authName'>
+            {% for author in page.authors.all %}
+            <a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
+            {% endfor %}
+            <span class='ib'>/ {{ page.date }}</span>
+          </div>
+          <div class='EDeditor lead'>
+            {{ page.intro }}
+          </div>
+        </div>
+
+        <div class='LeftColumnSmall greyleftborder'>
+          <div class='imageColumnHead orange space'>
+            DOSSIER: {{ page.dossier }}
+          </div>
+          <div class='fullwidth thumbRecordPics' id='recordThumbs_1143'>
+          </div>
+          <div class='imageColumnHead'>
+            Related Stories
+          </div>
+          <ul>
+            <li class="relatedContent ATmpl">
+              <span class='ATmpl it'>Editor's pic</span>
+              <a href='#' class='EDtxtauto relatedStory' data-iedit-path="MODELS/blog/ADMIN/getRecords.php" data-iedit-minln="2" data-iedit-select="key">
+              </a>
+            </li>
+            <li class="relatedContent">
+              <a href='index.php?idT=88&idC=88&idRec=1277&recType=story'>Football Leaks: The Dirty Tricks of Doyen Sports</a>
+            </li>
+            <li class="relatedContent">
+              <a href='index.php?idT=88&idC=88&idRec=1142&recType=story'>Krokodil sinks teeth into persecuted Georgian drug community</a>
+            </li>
+            <li class="relatedContent">
+              <a href='index.php?idT=88&idC=88&idRec=1262&recType=story'>Georgia&rsquo;s blitz of reuniting abandoned children with their families comes at a cost</a>
+            </li>
+            <li class="relatedContent">
+              <a href='index.php?idT=88&idC=88&idRec=1145&recType=story'>German Karate teacher recruits Romanian village kids into global child porn ring</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div class='space overflow'>
+      </div>
+      <div class='block-full'>
+
+        <div class='clearfix'></div>
+        <div class='EDeditor pull-left  pulledQuotes'>
+        </div>
+        <div class='EDeditor pull-right content' data-iedit-cketoolbar="embedVideo">
+
+          {% include "blacktail/includes/streamfield.html" with content=page.body %}
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

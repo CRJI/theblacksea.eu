@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+.authName { clear: both;}
+.authName a, .authName a:hover, .authName a:active  {border-bottom: 0px;}
+
+.lead a, .lead a:hover, .lead a:active,
+.content a, .content a:hover, .content a:active
+{ color: rgb(116,192,226); border-bottom: 0px; }
+
+/* blogPrevRecord.html */
+.blogPrev-lead {margin-bottom: 20px;}
+.blogPrev-content {margin-bottom: 20px;}
+
+/*  blogPrevRecord.html, blogRecord.html */
+.fullImage,
+.blogRecords .record .blogPrev-lead img,
+.blogRecords .record .blogPrev-content img,
+.SGrecord .lead img,
+.SGrecord-blog .content img { width: 100% !important; height: initial !important; }
+
+
+.SGrecord .content{ font-family: "Open Sans", "futura-pt", Arial, sans-serif; font-size: 17px; line-height: 20px; color: #333; font-weight: 200; }
+.SGrecord-archive .content  { width: 65%; }
+
+.SGrecord-archive .pulledQuotes { width: 30%; min-height: 500px; /* background: lightblue;*/ }
+
+.SGrecord-archive div[id^="cke_editor_content"]{float: right;}
+.SGrecord-archive div[id^="cke_editor_pulledQuotes"]{float: left;}
+
+
+/*SGrecord-archivePhoto*/
+.SGrecord-archivePhoto .content img{display: none;}
+.SGrecord-archivePhoto .lead img{display: none;}
+form.SGrecord-archivePhoto .ELMcontent .content img{ display: block !important; }
+form.SGrecord-archivePhoto .ELMcontent .lead img{ display: block !important; }
+
+form.SGrecord-archivePhoto .ELMcontent #recordGallery { display: none; }
+.notPublished {text-transform: lowercase !important; color: darkgray; font-style: italic;}
+
+#sharepanel .addthis_toolbox { margin-top: -6px !important; }
+#followpanel   {text-align: center;}
+#followpanel #followpanel-buttons {margin: 0px auto; width: 160px;}
+#followpanel #followpanel-buttons a.rssButton,
+a.rssButton
+{
+    float: left; display:inline-block; width:32px; height: 32px;
+    background: url('img/rss.png');
+    background-size: 22px 22px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-bottom: 0px;
+    opacity: 0.4;
+}
+#followpanel #followpanel-buttons a.rssButton:hover,
+a.rssButton:hover
+{
+    background: url('img/rss_hover.png');
+     background-size: 22px 22px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    opacity: 1;
+}
+#followpanel #followpanel-buttons a.subscribeButton,
+a.subscribeButton { float: left; display:inline-block; width:32px; height: 32px; background: url('img/subscribe1.png'); background-size: 22px 22px; background-repeat: no-repeat; background-position: center; border-bottom: 0px; opacity: 0.4; }
+#followpanel #followpanel-buttons a.subscribeButton:hover,
+a.subscribeButton:hover
+{
+    background: url('img/subscribe1_hover.png');
+     background-size: 22px 22px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    opacity: 1;
+}
+.ivy-closeButton-canvas{
+    background: rgba(255,255,255,0.8);
+    height: 27px;
+    padding: 3px 0px 0px 0px;
+    border-radius: 5px;
+}
+
+div#discovery {
+    display: none;
+}
+
+.fullScreen {
+
+}
+
+.share-links {
+  /*text-align: center;*/
+  /*position: fixed;*/
+  right: 0;
+  top: 10vh;
+  width: auto;
+  background: #fff;
+  /*border-top-left-radius: 10px;*/
+  /*border-bottom-left-radius: 10px;*/
+  padding: 5px;
+  /*border: 1px solid #ccc;*/
+  z-index: 10;
+}
+.share-links a {
+  text-decoration: none;
+  display: inline-block;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  margin-bottom: 5px;
+  -webkit-transition: border-color 0.4s linear;
+  /* Saf3.2+, Chrome */
+  -moz-transition: border-color 0.4s linear;
+  /* FF3.7+ */
+  -o-transition: border-color 0.4s linear;
+  /* Opera 10.5 */
+  transition: border-color 0.4s linear;
+}
+.share-links a:last-of-type {
+  margin-bottom: 0;
+}
+.share-links a:hover {
+  cursor: pointer;
+  text-decoration: none;
+  /*border: 2px solid #74c0e2;*/
+}
+.share-links img {
+  height: 32px;
+}
