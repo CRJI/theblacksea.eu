@@ -37,12 +37,9 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
 
         # Add extra variables and return the updated context
-        blogs = BlogPost.objects.live().order_by('-first_published_at').reverse()[:8]
-        stories = Story.objects.live().order_by('-first_published_at').reverse()[:8]
+        blogs = BlogPost.objects.live().order_by('date').reverse()[:8]
+        stories = Story.objects.live().order_by('date').reverse()[:8]
 
-        context['all_posts'] = sorted(
-            chain(blogs, stories),
-            key=attrgetter('date'))
         context['blogs'] = blogs
         context['stories'] = stories
         return context
