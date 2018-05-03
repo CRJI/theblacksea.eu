@@ -11,7 +11,7 @@ $.extend ( true, ivyMods.blog ,
 	 },
     sel      : {
 	    subscribeBtt: '#subscribeBsea',
-       article:       'div[class$=SGrecord]',
+       article:       'div.SING',
        articlesBlog:  'div[class~=blogPrevRec]',
        getNext_blogRecords: "input[class$=getNext_blogRecords]",
 	    blogSet:       function(blogSet){return '*[class^=blogSet_'+blogSet+'] '; },
@@ -148,7 +148,7 @@ $.extend ( true, ivyMods.blog ,
 
 	 galleries_article: function(jqCont){
 		  // incarca galleria
-        Galleria.loadTheme('/assets/galleria/themes/twelve/galleria.twelve.min.js');
+        Galleria.loadTheme('/static/js/legacy/galleria/themes/twelve/galleria.twelve.min.js');
 
         /**
         * daca imaginile gasite sunt > 3 atunci  le facem thumbnailuri si gallery
@@ -171,7 +171,7 @@ $.extend ( true, ivyMods.blog ,
          }
 
         // manage galleries inside article
-		  jqCont.galleria.article( this.contSize[this.conf.templateFile](jqCont));
+		  // jqCont.galleria.article( this.contSize[this.conf.templateFile](jqCont));
 
 		  // set caption for photos from alt atribute
 		  jqCont.captionContentPics();
@@ -211,7 +211,7 @@ $.extend ( true, ivyMods.blog ,
        if(articlesBlog.length == 0) {
 	       return ;
        }
-       Galleria.loadTheme('/assets/galleria/themes/twelve/galleria.twelve.min.js');
+       Galleria.loadTheme('/static/js/legacy/galleria/themes/twelve/galleria.twelve.min.js');
        //Galleria.loadTheme('/assets/galleria/themes/classic/classic.twelve.min.js');
 
        articlesBlog.map(function()
@@ -298,5 +298,3 @@ $.extend ( true, ivyMods.blog ,
 $(document).ready(function(){
     ivyMods.blog.init();
 });
-
-

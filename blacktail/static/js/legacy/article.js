@@ -224,14 +224,11 @@ ivyMods.blogArticle = function(jqContainer){
 	var jq           =  jqContainer;
 	var containerWidth = jq.width();
 	var containers   =  jqContainer.find(sel.containers).not('.ELMcontent');
-	//alert('containers = ' + containers.length  );
 	// imaginile din interiorul contentului si leadului
-	var imgs       =  containers.find('img');
+	var imgs       =  jq.find('img');
 	var imgsResize = imgs.map(function(){
 		 var imgWidth =  $(this).width();
-	    if(imgWidth > (containerWidth/4)*3){
-		    return this;
-	    }
+      return this;
 	});
 
 

@@ -17,36 +17,12 @@
 {% block extra_js %}
   <script src="{% static 'js/legacy/jquery-1.8.3.min.js' %}"></script>
   <script src="{% static 'js/legacy/onvisible.js' %}"></script>
-  <script src="{% static 'js/legacy/headjs.js' %}"></script>
-  <script type="text/javascript">
-   document.onload = function() {
-     // head.load(
-     //   "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/jquery-1.8.3.min.js' %}",
-     //   "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/onvisible.js' %}"
-     // );
-     head.ready(
-       [ "jquery-1.8.3.min.js", "jquery.cookie.js", "onvisible.js"],
-       function(){
-         head.load(
-           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/GEN.js' %}",
-           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/blacksea.js' %}",
-           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/article.js' %}",
-           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/blogRecord.js' %}",
-           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/jquery.fancybox.js' %}",
-           "{{ request.scheme }}://{{ request.get_host }}{% static 'js/legacy/galleria-1.3.3.min.js' %}"
-           );
-       });
-    head.ready(
-      "GEN.js",
-      function() {
-        ivyMods = { set_iEdit: {} };
-        fmw.idC = 88;
-        fmw.idT = 88;
-        fmw.pubPath = '/var/www/virtual/theblacksea.eu/htdocs/fw/';
-        fmw.urlGet = {"idT":"88","idC":"88","idRec":"1262","recType":"story"};
-      });
-   }
-  </script>
+  <script src="{% static 'js/legacy/jquery.fancybox.js' %}"></script>,
+  <script src="{% static 'js/legacy/galleria-1.3.3.min.js' %}"></script>
+  <script src="{% static 'js/legacy/GEN.js' %}"></script>,
+  <script src="{% static 'js/legacy/blacksea.js' %}"></script>,
+  <script src="{% static 'js/legacy/article.js' %}"></script>,
+  <script src="{% static 'js/legacy/blogRecord.js' %}"></script>,
 {% endblock %}
 
 
@@ -54,7 +30,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class='SING block space SGrecord-archive SGrecord' id='SGrecord_1157_en' style="margin-top: 100px;">
+    <div class='SING block space SGrecord-archive SGrecord' id='SGrecord' style="margin-top: 100px;">
       <div class='block-full'>
 
         <div class='textColumnBig right'>
@@ -119,6 +95,34 @@
     </div>
   </div>
 </div>
+
+<script>
+  var fn = function() {
+    var jqCont = ivyMods.blogArticle($('div.SING'));
+    /* jqCont.galleria.set_containerPics(); */
+    ivyMods.blog.galleries_article(jqCont)
+    /* ivyMods.blogArticle($('div.SING')).galleria.set_thumbPics(); */
+
+    imgs = document.getElementById('SGrecord').getElementsByTagName('img');
+    len = imgs.length;
+    counter = 0;
+
+    function incrementCounter() {
+      counter++;
+      if ( counter === len ) {
+        console.log( 'All images loaded!' );
+        jqCont.resizeContentPics();
+      }
+    };
+
+    [].forEach.call( imgs, function( img ) {
+      img.addEventListener( 'load', incrementCounter, false );
+    } );
+  };
+
+
+  document.addEventListener("DOMContentLoaded", fn, false);
+</script>
 
 
 {% endblock %}

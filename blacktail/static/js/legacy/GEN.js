@@ -259,7 +259,7 @@ fmw.lg = 'ro';
 fmw.urlGet = {};
 fmw.ajaxProxy = 'procesSCRIPT.php';
 fmw.ajaxReqFile = 'ajaxReqFile';
-fmw.sessionId = $.cookie("PHPSESSID");
+fmw.sessionId = undefined;
 //console.log("sessionId " + fmw.sessionId );
 fmw.pubPath = '';
 fmw.liveEdit = false;
@@ -839,8 +839,4 @@ var procesSCRIPT_file = fmw.ajaxProxy;                 // intermediaza requestur
 
 $(document).ready(function () {
 
-	console.log("Tring to parse the Get");
-	for (var getName in fmw.getData) {
-		console.log("$_GET['" + getName + "'] = " + fmw.getData[getName]);
-	}
 });
