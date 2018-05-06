@@ -1,0 +1,358 @@
+@charset "UTF-8";
+/*RESETS */
+/*p{ margin: 0.5em 0em; }*/
+body, textarea{line-height: initial; font-family: sans-serif, Arial, Verdana, "Trebuchet MS"; font-size: 9pt; }
+form{margin: initial;}
+
+.ui-datepicker {font-size: 11px !important;}
+
+.cke_dialog_ui_vbox > table { width: auto !important; }
+/*==================================================== [ATmpl] =============== */
+
+/* divul pentru ADMIN template */
+.ATmpl,
+.ATmpl-inline      {display: none; color: gray;  }
+
+/*  cand ajunge in cadrul unui form se face vizibil  */
+form.addForm .ATmpl,
+form[id^="EDITform"] .ATmpl {display: inherit !important;}
+
+ /*  cand ajunge in cadrul unui form se face vizibil  */
+.addForm  .ATmpl-inline,
+form[id^="EDITform"] .ATmpl-inline { display: inline-block !important;}
+
+/*Ce nu ar trebui sa se vada in cadrul unui formde EDITARE*/
+.addForm .noATmpl,
+form[id^="EDITform"] .noATmpl {display: none;}
+
+form.addForm .ATmpl .hidden,
+form[id^="EDITform"] .ATmpl .hidden {display: none;}
+
+
+/*==================================================[ helpers ]============== */
+/*requierd field use-case: <class='ATmpl req'>FieldName<>*/
+.req {font-style: italic;  font-size: 0.9em; color: gray;}
+.req:before {content: '* '; color: #ff4500;}
+
+
+.clearfix {clear: both;}
+.no-display, .hidden, .hiddeHidden { display: none;}
+.pull-left {float: left;}
+.pull-right {float: right;}
+/*
+.hidden {visibility: visible !important;}
+*/
+
+.ivy-block {display: block;}
+.it {font-style: italic}
+.ib { display: inline-block; vertical-align: text-top;}
+.vt {vertical-align: top;}
+.radio-btn {vertical-align: top;}
+
+.b{font-weight: bold;}
+
+
+
+
+/*==================================================== [elements] =========== */
+
+.hr-shadow {
+    box-shadow: 0px -8px 7px 4px white, 0 5px 30px #bbb;
+    border-top: 1px solid #e9e9e9;
+}
+
+/*============================ [ buttons ] ==============================*/
+input[type="submit"].ivy,
+input[type="reset"].ivy,
+input[type="button"].ivy,
+button.ivy{
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px outset rgba(200,200,200,0.3);
+    background: rgba(150,150,150,0.5);
+
+}
+
+input[type="submit"].ivy:hover,
+input[type="reset"].ivy:hover,
+input[type="button"].ivy:hover,
+button.ivy:hover
+{
+    background: rgba(150,150,150,0.3);
+
+}
+
+input[type="submit"].ivy-hover,
+input[type="reset"].ivy-hover,
+input[type="button"].ivy-hover,
+button.ivy:hover
+{
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px outset rgba(200,200,200,0.3);
+    background: rgba(150,150,150,0.3);
+
+}
+
+input[type="submit"].ivy-light,
+input[type="reset"].ivy-light,
+input[type="button"].ivy-light,
+button.ivy-light{
+    cursor: pointer;
+    border-radius: 4px;
+    background: rgba(200,200,200,0.6);
+    border: 1px solid rgba(250,250,250,0.3);
+}
+
+input[type="submit"].ivy-light:hover,
+input[type="reset"].ivy-light:hover,
+input[type="button"].ivy-light:hover,
+button.ivy-light:hover{
+    background: rgba(200,200,200,0.8);
+
+}
+
+
+/*=========================================================== [ links ] =======*/
+a.inherit:link,
+a.inherit:visited,
+a.inherit:active,
+a.inherit {
+    color: inherit !important;
+    border: inherit !important;
+}
+
+/*=========================================================== [ inputs ] =======*/
+input[type="text"].ivy,
+input[type="password"].ivy,
+textarea.ivy{
+
+    cursor: pointer;
+    border-radius: 3px;
+    background: rgba(150,150,150,0.8);
+    border: 1px solid rgba(200,200,200,0.3);
+}
+
+input[type="text"].ivy-light,
+input[type="password"].ivy-light,
+textarea.ivy-light{
+
+   cursor: pointer;
+   border-radius: 3px;
+   background: rgba(255,255,255,0.6);
+   border: 1px solid rgba(150,150,150,0.5);
+
+}
+
+input[type="text"].ivy-padded,
+input[type="password"].ivy-padded,
+textarea.ivy-padded{
+
+    cursor: text !important;
+    padding: 4px 3px;
+    margin: 3px;
+
+}
+
+input[type="text"].ivy-light:focus,
+input[type="password"].ivy-light:focus,
+textarea.ivy-light:focus{
+
+   outline-color: #ddd;
+   /* outline-offset: 1px; */
+
+}
+/*==============================================[ui-elements]==================*/
+.ui-autocomplete {
+    max-height: 300px;
+    max-width: 300px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+  }
+/*==============================================[ popUp - styling ]============*/
+
+#popUp-canvas{
+    z-index: 9901;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    margin-top: -31px;
+}
+    #popUp{
+        /*padding: 10px 15px;*/
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        border-radius: 7px;
+        z-index: 9000;
+        background: white;
+        min-width:  100px;
+        position: absolute;
+        top: 100px;
+        margin-left: -250px;
+        left: 50%;
+    }
+        #popUp-header{
+            color: #666;
+            font-weight: bold;
+            border-bottom: 1px solid #CCC;
+            height: 30px;
+            margin: 10px 15px 15px 15px;
+
+        }
+
+             #popUp-header .close{
+                 padding-left: 7px;
+                 padding-right: 7px;
+                 text-align: center;
+                 float: right;
+             }
+        #popUp-content{
+            min-height: 100px;
+        }
+        #popUp-content > *{
+            margin: 10px 15px;
+        }
+
+
+/*============================================================================*/
+
+
+.thumb-pic{
+    overflow: hidden;
+    padding: 0px;
+    vertical-align: bottom;
+    display: table-cell;
+    border-radius: 4px;
+}
+   .thumb-pic > .imgH{
+        display: block;
+        height: initial !important;
+        width: initial !important;
+        max-width: none !important;
+        margin: 0px !important;
+   }
+    .thumb-pic > .imgW{
+            display: block;
+            height: initial !important;
+            width: initial !important;
+            max-height: none !important;
+            margin: 0px !important;
+       }
+
+
+
+/*==============================================[general positioning ]=============*/
+.ivy-clearfix {clear: both;}
+.ivy-pull-left {float: left;}
+.ivy-pull-right {float: right;}
+.ivy-center {margin: 0px auto;}
+
+.ivy-hidden{ display: none;}
+.ivy-block {display: block; position: relative;}
+.ivy-it {font-style: italic}
+.ivy-ib { display: inline-block; vertical-align: text-top;}
+.ivy-vt {vertical-align: top;}
+.ivy-btn-radio{vertical-align: top;}
+
+.ivy-b{font-weight: bold;}
+
+
+/*==============================================[general styling ]=============*/
+
+.widthFull{width: 100%;}
+.width75-pr {width: 75%;}
+.width70-pr {width: 70%;}
+.width60-pr {width: 60%;}
+.width65-pr {width: 65%;}
+.width40-pr {width: 40%;}
+.width30-pr {width: 30%;}
+
+.width25 {width: 25px;}
+.width50 {width: 50px;}
+.width100{width: 100px;}
+.width150{width: 150px;}
+.width200{width: 200px;}
+.width300{width: 300px;}
+.width400{width: 400px;}
+.width500{width: 500px;}
+.width600{width: 600px;}
+
+
+
+.height25 {height: 25px;}
+.height50 {height: 50px;}
+.height100{height: 100px;}
+.height200{height: 200px;}
+.height300{height: 300px;}
+.height400{height: 400px;}
+.height500{height: 500px;}
+.height600{height: 600px;}
+
+
+.font-pt8, .pt8{font-size: 8pt;}
+.font-pt9, .pt9{font-size: 9pt;}
+.font-pt7, .pt7{font-size: 7pt;}
+
+.margin-0,.m0 {margin: 0px !important;}
+.margin-5  {margin: 5px; }
+.margin-10 {margin: 10px;}
+.margin-20 {margin: 20px;}
+.margin-35 {margin: 35px;}
+.margin-50 {margin: 50px;}
+
+.margin-l5 , .l5  {margin-left: 5px; }  .margin-r5 , .r5  {margin-right: 5px; }
+.margin-l10, .l10 {margin-left: 10px;}  .margin-r10, .r10 {margin-right: 10px;}
+.margin-l20, .l20 {margin-left: 20px;}  .margin-r20, .r20 {margin-right: 20px;}
+.margin-l35, .l35 {margin-left: 35px;}  .margin-r35, .r35 {margin-right: 35px;}
+.margin-l50, .l50 {margin-left: 50px;}  .margin-r50, .r50 {margin-right: 50px;}
+
+
+.margin-lr5 , .lr5  {margin-left: 5px;  margin-right: 5px;}
+.margin-lr10, .lr10 {margin-left: 10px; margin-right: 10px;}
+.margin-lr20, .lr20 {margin-left: 20px; margin-right: 20px;}
+.margin-lr35, .lr35 {margin-left: 35px; margin-right: 20px;}
+.margin-lr50, .lr50 {margin-left: 50px; margin-right: 50px;}
+
+
+
+.margin-t0 , .t0  {margin-top: 0px; }  .margin-b0 , .b0  {margin-bottom: 0px;}
+.margin-t5 , .t5  {margin-top: 5px; }  .margin-b5 , .b5  {margin-bottom: 5px;}
+.margin-t10, .t10 {margin-top: 10px;}  .margin-b10, .b10 {margin-bottom: 10px;}
+.margin-t20, .t20 {margin-top: 20px;}  .margin-b20, .b20 {margin-bottom: 20px;}
+.margin-t40, .t40 {margin-top: 40px;}  .margin-b40, .b40 {margin-bottom: 40px;}
+.margin-t50, .t50 {margin-top: 50px;}  .margin-b50, .b50 {margin-bottom: 50px;}
+
+
+.tb0  {margin-bottom: 0px;  margin-top: 0px;  }
+.tb5  {margin-bottom: 5px;  margin-top: 5px;  }
+.tb10 {margin-bottom: 10px; margin-top: 10px; }
+.tb20 {margin-bottom: 20px; margin-top: 20px; }
+.tb50 {margin-bottom: 50px; margin-top: 50px; }
+/*===============================================================================*/
+
+.padding-0 , .p0  {padding: 0px;}
+.padding-3 , .p3  {padding: 3px;}
+.padding-5 , .p5  {padding: 5px;}
+.padding-10, .p10 {padding: 10px;}
+.padding-20, .p20 {padding: 20px;}
+.padding-50, .p50 {padding: 50px;}
+
+
+.pb5  {padding-bottom: 5px;}
+.pb10 {padding-bottom: 10px;}
+.pb20 {padding-bottom: 20px;}
+.pb50 {padding-bottom: 50px;}
+
+.pt5  {padding-top: 5px;}
+.pt10 {padding-top: 10px;}
+.pt20 {padding-top: 20px;}
+.pt50 {padding-top: 50px;}
+
+.ptb0  {padding-top: 0px !important; padding-bottom: 0px !important;}
+.ptb5  {padding-top: 5px !important; padding-bottom: 5px !important; }
+
+.lh10 {line-height: 10px;}
+.lh15 {line-height: 15px;}
+.lh25 {line-height: 25px;}
+.lh35 {line-height: 35px;}

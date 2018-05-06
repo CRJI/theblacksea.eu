@@ -23,10 +23,11 @@
 
         {% load compress %}
         {% compress css %}
-          {# Global stylesheets #}
-          <link href="{% static 'scss/bootstrap/bootstrap.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
-          <link href="{% static 'scss/blacktail.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
-
+          {% block css %}
+            {# Global stylesheets #}
+            <link href="{% static 'scss/bootstrap/bootstrap.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+            <link href="{% static 'scss/blacktail.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+          {% endblock %}
           {% block extra_css %}
               {# Override this in templates to add extra stylesheets #}
           {% endblock %}
