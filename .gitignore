@@ -28,3 +28,4 @@ static/compressed
 
 /blacktail/settings/local.py
 /static
+.idea
