@@ -9,6 +9,7 @@ from .models import Author
 from .models import StoryType
 from .models import StoryDossier
 from .models import BlogCategory
+from wagtail.core.models import Orderable, Page
 
 @hooks.register('insert_editor_css')
 def editor_css():
@@ -54,6 +55,14 @@ class BlogCategoryModelAdmin(ModelAdmin):
     exclude_from_explorer = False # or True to exclude pages of this type from Wagtail's explorer view
     list_display = ('name', 'color')
     search_fields = ('name', 'color')
+
+@hooks.register('construct_explorer_page_queryset')
+def show_more_properties(parent_page, pages, request):
+    print(pages[0])
+    # if parent_page.slug == 'user-profiles':
+    #     pages = pages.filter(owner=request.user)
+
+    return pages
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
 modeladmin_register(AuthorModelAdmin)
