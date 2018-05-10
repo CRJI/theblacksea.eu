@@ -39,10 +39,19 @@ ordering: the current sort parameter
     {% if show_parent %}
     <th class="parent">{% trans 'Parent' %}</th>
     {% endif %}
+     <th class="date">
+       {% if sortable %}
+       <a href="{% url 'wagtailadmin_explore' parent_page.id %}?ordering={% if ordering == 'date' %}-{% endif %}date" class="icon icon-arrow-{% if ordering == '-date' %}up-after{% else %}down-after{% endif %} {% if ordering == 'date' or ordering == '-date' %}teal {% endif %}">
+         {% trans 'Date' %}
+       </a>
+       {% else %}
+       {% trans 'Date' %}
+       {% endif %}
+     </th>
      <th class="updated">
         {% if sortable %}
-            <a href="{% url 'wagtailadmin_explore' parent_page.id %}?ordering={% if ordering == 'ord' %}-{% endif %}ord" class="icon icon-arrow-{% if ordering == '-ord' %}up-after{% else %}down-after{% endif %} {% if ordering == 'ord' or ordering == '-ord' %}teal {% endif %}">
-                {% trans 'Date' %}
+            <a href="{% url 'wagtailadmin_explore' parent_page.id %}?ordering={% if ordering == 'latest_revision_created_at' %}-{% endif %}latest_revision_created_at" class="icon icon-arrow-{% if ordering == '-latest_revision_created_at' %}up-after{% else %}down-after{% endif %} {% if ordering == 'latest_revision_created_at' or ordering == '-latest_revision_created_at' %}teal {% endif %}">
+                {% trans 'Updated' %}
             </a>
         {% else %}
             {% trans 'Updated' %}
