@@ -138,6 +138,9 @@ class Story(Page):
     skip_home = models.BooleanField(default=None)
     # location = models.CharField(max_length=255, blank=True)
 
+    translation_language = models.CharField(max_length=2, blank=True)
+    translation_for = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True, related_name='translations')
+
     dossier = models.CharField(max_length=50, blank=True)
     format = models.CharField(max_length=50, blank=True)
     tags = ClusterTaggableManager(through=StoryTag, blank=True)
@@ -212,11 +215,15 @@ class Story(Page):
         StreamFieldPanel('body', classname='full'),
     ]
 
+    settings_panels = Page.settings_panels + [
+        PageChooserPanel('translation_for')
+    ]
+
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content details'),
         ObjectList(blocks_panels, heading='Content'),
         ObjectList(promote_panels, heading='Promote'),
-        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+        ObjectList(settings_panels, heading='Settings', classname="settings"),
     ])
 
     def serve(self, request):
