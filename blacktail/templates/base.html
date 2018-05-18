@@ -10,10 +10,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>
             {% block title %}
-                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+                {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
             {% endblock %}
             {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
+                {% with page.get_site.site_name as site_name %}
                     {% if site_name %}- {{ site_name }}{% endif %}
                 {% endwith %}
             {% endblock %}
@@ -28,10 +28,10 @@
             <link href="{% static 'scss/bootstrap/bootstrap.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
             <link href="{% static 'scss/blacktail.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
           {% endblock %}
-          {% block extra_css %}
-              {# Override this in templates to add extra stylesheets #}
-          {% endblock %}
         {% endcompress %}
+        {% block extra_css %}
+        {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
 
         <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 

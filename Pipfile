@@ -1,12 +1,9 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [packages]
-
 "beautifulsoup4" = "==4.6.0"
 certifi = "==2017.11.5"
 chardet = "==3.0.4"
@@ -41,6 +38,5 @@ dateparser = "*"
 python-slugify = "*"
 "psycopg2-binary" = "*"
 
-
 [dev-packages]
-
+pylint = "*"

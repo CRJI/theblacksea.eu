@@ -13,7 +13,20 @@ from wagtail.core.models import Orderable, Page
 
 @hooks.register('insert_editor_css')
 def editor_css():
-    return format_html('<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/editorhacks.css">')
+    css = format_html('<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/editorhacks.css">')
+    css += format_html('<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css">')
+    return css
+
+@hooks.register('insert_editor_js')
+def editor_js():
+    js = format_html('<script src="' + settings.STATIC_URL + 'js/editorhacks.js"></script>')
+    return js
+
+@hooks.register('insert_global_admin_js')
+def global_admin_js():
+    return format_html(
+        '<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>'
+    )
 
 class AuthorModelAdmin(ModelAdmin):
     model = Author

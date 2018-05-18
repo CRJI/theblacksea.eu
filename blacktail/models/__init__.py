@@ -17,20 +17,22 @@ from .stories import StoryTag
 from .stories import Story
 from .stories import StoriesIndex
 
+from .fields import ContactFields
+from .fields import RelatedLink
+from .fields import LinkFields
+
 from .streamfield import PullQuoteBlock
 from .streamfield import ImageFormatChoiceBlock
 from .streamfield import HTMLAlignmentChoiceBlock
 from .streamfield import ImageBlock
 from .streamfield import AlignedHTMLBlock
-from .streamfield import BlogStreamBlock
-from .streamfield import LinkFields
-from .streamfield import ContactFields
-from .streamfield import RelatedLink
+from .streamfield import StoryStreamBlock
 
 __all__ = [
     "AboutPage",
     "AuthorPage",
     "Author",
+    "BlogCategory",
     "BlogIndex",
     "BlogPost",
     "HomePage",
@@ -46,7 +48,7 @@ __all__ = [
     "HTMLAlignmentChoiceBlock",
     "ImageBlock",
     "AlignedHTMLBlock",
-    "BlogStreamBlock",
+    "StoryStreamBlock",
     "LinkFields",
     "ContactFields",
     "RelatedLink",

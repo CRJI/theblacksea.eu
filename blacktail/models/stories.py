@@ -5,7 +5,7 @@ from django.db import models
 from wagtail.core.models import Orderable, Page
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList
+    InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from wagtail.search import index
@@ -15,7 +15,43 @@ from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
-from .streamfield import BlogStreamBlock
+from .streamfield import StoryStreamBlock
+
+class RelatedLink(models.Model):
+    title = models.CharField(max_length=255)
+    link_external = models.URLField("External link", blank=True)
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('link_external'),
+    ]
+
+    class Meta:
+        abstract = True
+
+class RelatedPage(models.Model):
+    related_page = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
+
+
+    panels = [
+        PageChooserPanel('related_page')
+    ]
+
+    class Meta:
+        abstract = True
+
+class StoryRelatedLinks(Orderable, RelatedLink):
+    page = ParentalKey('blacktail.Story', on_delete=models.CASCADE, related_name='related_links')
+
+class StoryRelatedPages(Orderable, RelatedPage):
+    page = ParentalKey('blacktail.Story', on_delete=models.CASCADE, related_name='related_pages')
+
 
 class Location(models.Model):
     name = models.CharField(max_length=255)
@@ -97,9 +133,9 @@ class StoriesIndex(Page):
         return context
 
 class Story(Page):
-    date = models.DateField("Post date")
     intro = models.CharField(max_length=1000, blank=True)
-    body = StreamField(BlogStreamBlock(), blank=True)
+    body = StreamField(StoryStreamBlock(), blank=True)
+    skip_home = models.BooleanField(default=None)
     # location = models.CharField(max_length=255, blank=True)
 
     dossier = models.CharField(max_length=50, blank=True)
@@ -151,18 +187,25 @@ class Story(Page):
         ImageChooserPanel('image'),
         # InlinePanel('page_authors'),
         MultiFieldPanel([
-            FieldPanel('authors'),
+            FieldPanel('authors', classname="multiple-authors"),
             FieldPanel('type'),
             FieldPanel('dossier'),
-            FieldPanel('date'),
+            FieldPanel('first_published_at'),
             FieldPanel('template'),
         ]),
         InlinePanel('locations', label="Locations"),
     ]
 
     promote_panels = Page.promote_panels + [
-        ImageChooserPanel('feed_image'),
-        FieldPanel('tags'),
+        MultiFieldPanel([
+            FieldPanel('tags'),
+            ImageChooserPanel('feed_image'),
+            FieldPanel('skip_home'),
+        ], heading="Extra"),
+        MultiFieldPanel([
+            InlinePanel('related_pages', label="Related Pages"),
+            InlinePanel('related_links', label="External links"),
+        ], heading="Related"),
     ]
 
     blocks_panels = [
@@ -179,7 +222,7 @@ class Story(Page):
     def serve(self, request):
 
         if self.template is None:
-            template = f'blacktail/story/blacktail.html'
+            template = 'blacktail/story/default.html'
         else:
             template = f'blacktail/story/{self.template}.html'
 

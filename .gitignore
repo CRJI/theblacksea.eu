@@ -29,3 +29,5 @@ static/compressed
 /blacktail/settings/local.py
 /static
 .idea
+.vscode
+theblacksea.sql

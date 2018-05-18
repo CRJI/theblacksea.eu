@@ -1,6 +1,4 @@
 from __future__ import absolute_import, unicode_literals
-from itertools import chain
-from operator import attrgetter
 
 from django.db import models
 
@@ -37,8 +35,8 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
 
         # Add extra variables and return the updated context
-        blogs = BlogPost.objects.live().order_by('date').reverse()[:8]
-        stories = Story.objects.live().order_by('date').reverse()[:8]
+        blogs = BlogPost.objects.live().order_by('-first_published_at')[:8]
+        stories = Story.objects.live().filter(skip_home__exact=False).order_by('-first_published_at')[:8]
 
         context['blogs'] = blogs
         context['stories'] = stories
