@@ -179,7 +179,7 @@ class Story(Page):
     def serve(self, request):
 
         if self.template is None:
-            template = f'blacktail/story/blacktail.html'
+            template = 'blacktail/story/default.html'
         else:
             template = f'blacktail/story/{self.template}.html'
 
