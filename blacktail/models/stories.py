@@ -17,6 +17,42 @@ from taggit.models import TaggedItemBase
 
 from .streamfield import BlogStreamBlock
 
+class RelatedLink(models.Model):
+    title = models.CharField(max_length=255)
+    link_external = models.URLField("External link", blank=True)
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('link_external'),
+    ]
+
+    class Meta:
+        abstract = True
+
+class RelatedPage(models.Model):
+    related_page = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
+
+
+    panels = [
+        PageChooserPanel('related_page')
+    ]
+
+    class Meta:
+        abstract = True
+
+class StoryRelatedLinks(Orderable, RelatedLink):
+    page = ParentalKey('blacktail.Story', on_delete=models.CASCADE, related_name='related_links')
+
+class StoryRelatedPages(Orderable, RelatedPage):
+    page = ParentalKey('blacktail.Story', on_delete=models.CASCADE, related_name='related_pages')
+
+
 class Location(models.Model):
     name = models.CharField(max_length=255)
 
@@ -151,18 +187,25 @@ class Story(Page):
         ImageChooserPanel('image'),
         # InlinePanel('page_authors'),
         MultiFieldPanel([
-            FieldPanel('authors'),
+            FieldPanel('authors', classname="multiple-authors"),
             FieldPanel('type'),
             FieldPanel('dossier'),
-            FieldPanel('date'),
+            FieldPanel('first_published_at'),
             FieldPanel('template'),
         ]),
         InlinePanel('locations', label="Locations"),
     ]
 
     promote_panels = Page.promote_panels + [
-        ImageChooserPanel('feed_image'),
-        FieldPanel('tags'),
+        MultiFieldPanel([
+            FieldPanel('tags'),
+            ImageChooserPanel('feed_image'),
+            FieldPanel('skip_home'),
+        ], heading="Extra"),
+        MultiFieldPanel([
+            InlinePanel('related_pages', label="Related Pages"),
+            InlinePanel('related_links', label="External links"),
+        ], heading="Related"),
     ]
 
     blocks_panels = [
