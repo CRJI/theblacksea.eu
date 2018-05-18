@@ -46,7 +46,6 @@ class BlogPostTag(TaggedItemBase):
     content_object = ParentalKey('blacktail.BlogPost', related_name='tagged_items')
 
 class BlogPost(Page):
-    date = models.DateField("Post date")
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=BlogPostTag, blank=True)
@@ -73,7 +72,7 @@ class BlogPost(Page):
         MultiFieldPanel([
             ImageChooserPanel('image'),
             FieldPanel('authors'),
-            FieldPanel('date'),
+            FieldPanel('first_published_at'),
             FieldPanel('category'),
         ]),
         FieldPanel('intro', classname='full'),

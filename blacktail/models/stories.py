@@ -97,9 +97,9 @@ class StoriesIndex(Page):
         return context
 
 class Story(Page):
-    date = models.DateField("Post date")
     intro = models.CharField(max_length=1000, blank=True)
     body = StreamField(BlogStreamBlock(), blank=True)
+    skip_home = models.BooleanField(default=None)
     # location = models.CharField(max_length=255, blank=True)
 
     dossier = models.CharField(max_length=50, blank=True)
