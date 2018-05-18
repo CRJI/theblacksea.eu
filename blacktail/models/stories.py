@@ -5,7 +5,7 @@ from django.db import models
 from wagtail.core.models import Orderable, Page
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList
+    InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from wagtail.search import index
@@ -15,7 +15,7 @@ from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
-from .streamfield import BlogStreamBlock
+from .streamfield import StoryStreamBlock
 
 class RelatedLink(models.Model):
     title = models.CharField(max_length=255)
@@ -134,7 +134,7 @@ class StoriesIndex(Page):
 
 class Story(Page):
     intro = models.CharField(max_length=1000, blank=True)
-    body = StreamField(BlogStreamBlock(), blank=True)
+    body = StreamField(StoryStreamBlock(), blank=True)
     skip_home = models.BooleanField(default=None)
     # location = models.CharField(max_length=255, blank=True)
 

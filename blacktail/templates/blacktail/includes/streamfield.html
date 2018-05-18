@@ -2,27 +2,158 @@
 
 <div class="stream-field">
     {% for child in content %}
-        {% if child.block_type == 'h2' %}
-            <h2>{{ child }}</h2>
+        {% if child.block_type == 'subheadline' %}
+          <section class="content-subheadline">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                  <h2>
+                    {{ child }}
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </section>
+        {% elif child.block_type == 'h2' %}
+          <section class="content-subheadline">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                  <h2>
+                    {{ child }}
+                  </h2>
+                </div>
+              </div>
+            </div>
+          </section>
         {% elif child.block_type == 'h3' %}
-            <h3>{{ child }}</h3>
+          <section class="content-subheadline">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                  <h3>
+                    {{ child }}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </section>
         {% elif child.block_type == 'h4' %}
-            <h4>{{ child }}</h4>
+          <section class="content-subheadline">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                  <h4>
+                    {{ child }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </section>
         {% elif child.block_type == 'intro' %}
-            <div class="intro">{{ child }}</div>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-md-12 col-lg-12">
+                <div class="intro">{{ child }}</div>
+              </div>
+            </div>
+          </div>
         {% elif child.block_type == 'aligned_html' %}
-            {% if child.value.alignment == 'normal' %}
-                {{ child.value.bound_blocks.html.render }}
-            {% else %}
-                {{ child.value.bound_blocks.html.render }}
-            {% endif %}
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-md-12 col-lg-12">
+                {% if child.value.alignment == 'normal' %}
+                  {{ child.value.bound_blocks.html.render }}
+                {% else %}
+                  {{ child.value.bound_blocks.html.render }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
         {% elif child.block_type == 'pullquote' %}
-            <blockquote>
-                {{ child.value.quote }}
-                {% if child.value.attribution %}<span>- {{ child.value.attribution }}</span>{% endif %}
-            </blockquote>
+          <div class="container">
+            <div class="row">
+              <div class="col-xs-12 col-md-12 col-lg-12">
+                <blockquote>
+                    {{ child.value.quote }}
+                    {% if child.value.attribution %}<span>- {{ child.value.attribution }}</span>{% endif %}
+                </blockquote>
+              </div>
+            </div>
+          </div>
         {% elif child.block_type == 'paragraph' %}
-            {{ child.value|richtext }}
+            <section class="content-text">
+              <div class="container">
+                <div class="row">
+                  <div class="col-xs-12 col-md-12 col-lg-12">
+                    {{ child.value|richtext }}
+                  </div>
+                </div>
+              </div>
+            </section>
+        {% elif child.block_type == 'embedded_image' %}
+            <section class="content-image-embed">
+              <div class="container">
+                <div class="row">
+                  <div class="col-xs-12 col-md-12 col-lg-12">
+                    <div class="image">
+                      {% image child.value.image original as theimage %}
+                      {% if child.value.clickable %}
+                        <a href="{{ theimage.url }}">
+                      {% endif %}
+                      <img src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
+                      {% if child.value.clickable %}
+                        </a>
+                      {% endif %}
+                    </div>
+                    {% if child.value.caption %}
+                    <div class="caption">
+                      <p>{{ child.value.caption }}</p>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </section>
+        {% elif child.block_type == 'full_image' %}
+          <section class="content-image-full">
+            {% image child.value.image original as theimage %}
+            <div class="image" style="background-image: url('{{ theimage.url }}');" data-aos="fade" data-aos-duration="800"></div>
+            <div class="text {{ chid.value.text_position }}" data-aos="fade" data-aos-duration="1200">
+              {% if child.value.h1 %}
+                <h1>{{ child.value.h1 }}</h1>
+              {% endif %}
+              {% if child.value.h2 %}
+                <h1>{{ child.value.h2 }}</h1>
+              {% endif %}
+              {% if child.value.h3 %}
+                <h1>{{ child.value.h3 }}</h1>
+              {% endif %}
+              {% if child.value.text %}
+                <p>{{ child.value.text | richtext }}</p>
+              {% endif %}
+            </div>
+          </section>
+        {% elif child.block_type == 'half_image' %}
+          <section class="content-image-half">
+            <div class="container">
+              {% image child.value.image original as theimage %}
+              <div class="image" data-aos="fade-right">
+                <img src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
+              </div>
+              <div class="text child.value.text_position }}" data-aos="fade-left">
+                {% if child.value.h1 %}
+                <h1>{{ child.value.h1 }}</h1>
+                {% endif %}
+                {% if child.value.h2 %}
+                <h1>{{ child.value.h2 }}</h1>
+                {% endif %}
+                {% if child.value.h3 %}
+                <h1>{{ child.value.h3 }}</h1>
+                {% endif %}
+              </div>
+            </div>
+          </section>
         {% elif child.block_type == 'aligned_image' %}
             <div class="img-wrapper {{ child.value.alignment }}">
                 {% if child.value.alignment == "left" or child.value.alignment == "right" %}
