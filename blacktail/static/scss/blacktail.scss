@@ -33,6 +33,7 @@ body {
   background-repeat: repeat;
   color: #000;
   font-weight: 400;
+  margin-top: 42px;
 }
 h1,
 h2,
@@ -50,33 +51,38 @@ nav {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-nav.theblacksea .name {
-  color: #fff;
-  font-size: 14px;
-  font-weight: 900;
-  text-transform: uppercase;
-  text-decoration: none;
-  margin-right: 10px;
-  letter-spacing: 1px;
-}
-nav.navbar .name:hover {
-  text-decoration: none;
-}
-#tagline{
-  color: #74c0e2;
-}
-.name a {
+.navbar-brand {
   font-size: 15px;
   font-weight: 600;
   font-family: open sans,futura-pt,Helvetica,sans-serif;
   text-transform: uppercase;
+  text-decoration: none;
+  padding: 0 0 0 0;
+  border-bottom: 0;
 }
-nav.navbar .tagline {
-  color: #74c0e2;
-  font-size: 14px;
-  font-weight: 900;
+.tagline {
+  font-size: 15px;
+  display: inline;
+  font-weight: 600;
+  font-family: "Open Sans", "futura-pt", Helvetica, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  float: left;
+  color: #74c0e2 !important;
+}
+.bg-dark {
+  background-color: #000 !important;
+}
+.navbar-toggler-icon {
+  width: 0.8em;
+  height: 0.8em;
+}
+input.form-control {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+}
+.btn {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
 }
 nav.navbar .links {
   text-align: right;
