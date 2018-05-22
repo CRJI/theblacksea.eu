@@ -97,11 +97,11 @@
                 <div class="row">
                   <div class="col-xs-12 col-md-12 col-lg-12">
                     <div class="image">
-                      {% image child.value.image original as theimage %}
+                      {% image child.value.image max-1000x500 as theimage %}
                       {% if child.value.clickable %}
                         <a href="{{ theimage.url }}">
                       {% endif %}
-                      <img src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
+                      <img src="{{ theimage.url }}" width="{{ theimage.width }}" alt="{{ theimage.alt }}" />
                       {% if child.value.clickable %}
                         </a>
                       {% endif %}
@@ -119,27 +119,29 @@
           <section class="content-image-full">
             {% image child.value.image original as theimage %}
             <div class="image" style="background-image: url('{{ theimage.url }}');" data-aos="fade" data-aos-duration="800"></div>
-            <div class="text {{ chid.value.text_position }}" data-aos="fade" data-aos-duration="1200">
-              {% if child.value.h1 %}
-                <h1>{{ child.value.h1 }}</h1>
-              {% endif %}
-              {% if child.value.h2 %}
-                <h1>{{ child.value.h2 }}</h1>
-              {% endif %}
-              {% if child.value.h3 %}
-                <h1>{{ child.value.h3 }}</h1>
-              {% endif %}
-              {% if child.value.text %}
-                <p>{{ child.value.text | richtext }}</p>
-              {% endif %}
-            </div>
+            {% if child.value.text %}
+              <div class="text {{ chid.value.text_position }}" data-aos="fade" data-aos-duration="1200">
+                {% if child.value.h1 %}
+                  <h1>{{ child.value.h1 }}</h1>
+                {% endif %}
+                {% if child.value.h2 %}
+                  <h1>{{ child.value.h2 }}</h1>
+                {% endif %}
+                {% if child.value.h3 %}
+                  <h1>{{ child.value.h3 }}</h1>
+                {% endif %}
+                {% if child.value.text %}
+                  <p>{{ child.value.text | richtext }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
           </section>
         {% elif child.block_type == 'half_image' %}
           <section class="content-image-half">
             <div class="container">
-              {% image child.value.image original as theimage %}
+              {% image child.value.image max-1000x500 as theimage %}
               <div class="image" data-aos="fade-right">
-                <img src="{{ theimage.url }}" width="{{ theimage.width }}" height="{{ theimage.height }}" alt="{{ theimage.alt }}" />
+                <img src="{{ theimage.url }}" width="{{ theimage.width }}" alt="{{ theimage.alt }}" />
               </div>
               <div class="text child.value.text_position }}" data-aos="fade-left">
                 {% if child.value.h1 %}
