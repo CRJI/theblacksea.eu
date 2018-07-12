@@ -1,11 +1,15 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {# Individual story item in a list - used on stories index #}
 {% image post.image original as img %}
 <article class='post_preview col-xs-12 col-sm-6 col-md-4 col-lg-3'>
   <div class='post_image'>
     <a href='{{ post.url }}' class='thumbnail'>
-      {% image post.image fill-225x149 %}
+      {% if post.image %}
+        {% image post.image fill-225x149 %}
+      {% else %}
+      <img alt="The Black Sea" src="{% static 'img/default_image.png' %}"/>
+      {% endif %}
     </a>
   </div>
   <div class='post_details'>
