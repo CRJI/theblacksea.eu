@@ -5,8 +5,9 @@
 {% block extra_css %}
   {% load compress %}
   {% compress css %}
-    <link href="{% static 'scss/story.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/story/main.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
     <link href="{% static 'scss/stories_folder.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/social.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
   {% endcompress %}
 {% endblock %}
 
@@ -14,6 +15,7 @@
 
 
 {% block content %}
+  {% include "blacktail/includes/social_widget.html" %}
 
   {% image page.image original as img %}
 

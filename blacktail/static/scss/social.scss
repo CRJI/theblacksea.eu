@@ -1,0 +1,37 @@
+.share-links {
+  text-align: center;
+  position: fixed;
+  right: 0;
+  top: 10vh;
+  width: auto;
+  background: #fff;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  z-index: 10;
+}
+.share-links a {
+  text-decoration: none;
+  display: block;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  margin-bottom: 5px;
+  -webkit-transition: border-color 0.4s linear;
+  /* Saf3.2+, Chrome */
+  -moz-transition: border-color 0.4s linear;
+  /* FF3.7+ */
+  -o-transition: border-color 0.4s linear;
+  /* Opera 10.5 */
+  transition: border-color 0.4s linear;
+}
+.share-links a:last-of-type {
+  margin-bottom: 0;
+}
+.share-links a:hover {
+  text-decoration: none;
+  border: 2px solid #74c0e2;
+}
+.share-links img {
+  height: 32px;
+}

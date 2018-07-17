@@ -4,7 +4,6 @@
     {% for child in content %}
         {% if child.block_type == 'subheadline' %}
           <section class="content-subheadline">
-            <div class="container">
               <div class="row">
                 <div class="col-xs-12 col-md-12 col-lg-12">
                   <h2>
@@ -12,11 +11,9 @@
                   </h2>
                 </div>
               </div>
-            </div>
           </section>
         {% elif child.block_type == 'h2' %}
           <section class="content-subheadline">
-            <div class="container">
               <div class="row">
                 <div class="col-xs-12 col-md-12 col-lg-12">
                   <h2>
@@ -24,7 +21,6 @@
                   </h2>
                 </div>
               </div>
-            </div>
           </section>
         {% elif child.block_type == 'h3' %}
           <section class="content-subheadline">
@@ -40,7 +36,6 @@
           </section>
         {% elif child.block_type == 'h4' %}
           <section class="content-subheadline">
-            <div class="container">
               <div class="row">
                 <div class="col-xs-12 col-md-12 col-lg-12">
                   <h4>
@@ -48,18 +43,14 @@
                   </h4>
                 </div>
               </div>
-            </div>
           </section>
         {% elif child.block_type == 'intro' %}
-          <div class="container">
             <div class="row">
               <div class="col-xs-12 col-md-12 col-lg-12">
                 <div class="intro">{{ child }}</div>
               </div>
             </div>
-          </div>
         {% elif child.block_type == 'aligned_html' %}
-          <div class="container">
             <div class="row">
               <div class="col-xs-12 col-md-12 col-lg-12">
                 {% if child.value.alignment == 'normal' %}
@@ -69,9 +60,7 @@
                 {% endif %}
               </div>
             </div>
-          </div>
         {% elif child.block_type == 'pullquote' %}
-          <div class="container">
             <div class="row">
               <div class="col-xs-12 col-md-12 col-lg-12">
                 <blockquote>
@@ -80,20 +69,16 @@
                 </blockquote>
               </div>
             </div>
-          </div>
         {% elif child.block_type == 'paragraph' %}
             <section class="content-text">
-              <div class="container">
                 <div class="row">
                   <div class="col-xs-12 col-md-12 col-lg-12">
                     {{ child.value|richtext }}
                   </div>
                 </div>
-              </div>
             </section>
         {% elif child.block_type == 'embedded_image' %}
             <section class="content-image-embed">
-              <div class="container">
                 <div class="row">
                   <div class="col-xs-12 col-md-12 col-lg-12">
                     <div class="image">
@@ -113,7 +98,6 @@
                     {% endif %}
                   </div>
                 </div>
-              </div>
             </section>
         {% elif child.block_type == 'full_image' %}
           <section class="content-image-full">
@@ -138,7 +122,6 @@
           </section>
         {% elif child.block_type == 'half_image' %}
           <section class="content-image-half">
-            <div class="container">
               {% image child.value.image max-1000x500 as theimage %}
               <div class="image" data-aos="fade-right">
                 <img src="{{ theimage.url }}" width="{{ theimage.width }}" alt="{{ theimage.alt }}" />
@@ -154,7 +137,6 @@
                 <h1>{{ child.value.h3 }}</h1>
                 {% endif %}
               </div>
-            </div>
           </section>
         {% elif child.block_type == 'aligned_image' %}
             <div class="img-wrapper {{ child.value.alignment }}">

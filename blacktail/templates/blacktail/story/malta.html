@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block extra_css %}
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/story/main.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/social.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700|Merriweather:400,700" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+
+{% block content %}
+
+  {% include "blacktail/includes/social_widget.html" %}
+
+  {% image page.image original as img %}
+
+  <header style="background-image: url('{{ img.url }}')">
+      <div class="main-info">
+          <h1><span>{{ page.title }}</span></h1>
+          <h2><span>{{ page.intro | striptags }}</span></h2>
+          <h3>
+            <span>by
+              {% for author in page.authors.all %}
+                <a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
+              {% endfor %}
+            </span>
+          </h3>
+          <h4><span>{{ page.date }}</span></h4>
+          <h4><span>
+            {% for location in page.locations.all %}
+              {{ location.name }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+          </span></h4>
+          <p>
+              <a href="#start-content">
+                  <img src="/static/img/icons/icons/arrow-down.svg" alt="Read" class="arrow" />
+              </a>
+          </p>
+      </div>
+  </header>
+
+  <section class="content-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="body-content" id="start-content">
+              {% include "blacktail/includes/streamfield.html" with content=page.body %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p style="text-align: center;"><a href="{{ page.get_parent.url }}">Return to stories</a></p>
+  <hr>
+
+{% endblock %}

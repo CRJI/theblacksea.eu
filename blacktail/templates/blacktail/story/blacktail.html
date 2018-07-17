@@ -7,7 +7,8 @@
 {% block extra_css %}
   {% load compress %}
   {% compress css %}
-    <link href="{% static 'scss/story.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/story/main.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/story/blacktail.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
   {% endcompress %}
     <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700|Merriweather:400,700" rel="stylesheet">
 {% endblock %}
@@ -20,35 +21,50 @@
 
   {% image page.image original as img %}
 
+  <div class="main-description">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1>{{ page.title }}</h1>
+          <br></br>
+          <h3>{{ page.intro }}</h3>
+          <br></br>
+          <svg height="20" width="500">
+            <line x1="0" x2="200" " style="stroke:rgb(116,192,226);stroke-width:3" />
+          </svg>
+          <br></br>
+          <h5>
+            By
+            {% for author in page.authors.all %}
+              <a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
+            {% endfor %}
+          </h5>
+          <h5>{{ page.first_published_at | date:"d M Y" }}</h5>
+        </div>
+      </div>
+      <section class="share-links">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+          <img src="{% static 'img/icons/icons/icon-fb.svg' %}" alt="Share on Facebook">
+        </a>
+        <a href="mailto:?subject={{page.title}}&amp;body={{page.intro}}%0D%0A%0D%0A{{request.build_absolute_uri}}">
+          <img src="{% static 'img/icons/icons/icon-email.svg' %}" alt="Share via E-mail">
+        </a>
+        <a href="https://twitter.com/intent/tweet?original_referer={{request.build_absolute_uri|escape}}&amp;ref_src=twsrc%5Etfw&amp;text={{page.title|escape}}&amp;tw_p=tweetbutton&amp;url={{request.build_absolute_uri|escape}}">
+          <img src="{% static 'img/icons/icons/icon-twitter.svg' %}" alt="Share via Twitter">
+        </a>
+      </section>
+    </div>
+  </div>
+
   <header style="background-image: url('{{ img.url }}')">
       <div class="main-info">
-          <h1><span>{{ page.title }}</span></h1>
-          <h2><span>{{ page.intro | striptags }}</span></h2>
-          <h3>
-            <span>by
-              {% for author in page.authors.all %}
-                <a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
-              {% endfor %}
-            </span>
-          </h3>
-          <h4><span>{{ page.date }}</span></h4>
-          <h4><span>
-            {% for location in page.locations.all %}
-              {{ location.name }}{% if not forloop.last %},{% endif %}
-            {% endfor %}
-          </span></h4>
-          <p>
-              <a href="#start-content">
-                  <img src="/static/img/icons/icons/arrow-down.svg" alt="Read" class="arrow" />
-              </a>
-          </p>
       </div>
   </header>
 
   <section class="content-text">
     <div class="container">
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-md-12">
           <div class="body-content" id="start-content">
               {% include "blacktail/includes/streamfield.html" with content=page.body %}
           </div>

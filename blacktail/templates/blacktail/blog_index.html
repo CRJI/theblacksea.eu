@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags wagtailimages_tags static compress %}
+{% load wagtailcore_tags wagtailimages_tags static compress static %}
 
 {% block extra_css %}
   {% compress css %}
     <link href="{% static 'scss/index_pages.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/social.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
   {% endcompress %}
 {% endblock %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
+  {% include "blacktail/includes/social_widget.html" %}
 
   <section class="index-page-header container">
     <div class="row">

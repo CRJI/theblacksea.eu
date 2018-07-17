@@ -8,10 +8,12 @@
   {% load compress %}
   {% compress css %}
     <link href="{% static 'scss/author.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/social.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
   {% endcompress %}
 {% endblock %}
 
 {% block content %}
+  {% include "blacktail/includes/social_widget.html" %}
 
   <div class="hspacer"></div>
   <section class="author_container container">
