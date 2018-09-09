@@ -39,8 +39,20 @@
       <div class="col-sm-8">
         {{ model.bio | richtext }}
         <br/>
+        <h5>Stories by {{model.name}}:</h5>
         <ul>
           {% for story in model.stories.live %}
+          <li>
+            <a href="{{ story.url }}"> {{ story.title }} </a>
+          </li>
+          {% endfor %}
+        </ul>
+
+        <hr>
+
+        <h5>Blog posts by {{model.name}}:</h5>
+        <ul>
+          {% for story in model.blogs.live %}
           <li>
             <a href="{{ story.url }}"> {{ story.title }} </a>
           </li>
