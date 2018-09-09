@@ -5,6 +5,7 @@
 {% block extra_css %}
   {% load compress %}
   {% compress css %}
+    <link href="{% static 'scss/index_pages.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
     <link href="{% static 'scss/social.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
   {% endcompress %}
 {% endblock %}
@@ -14,23 +15,48 @@
 {% block content %}
   {% include "blacktail/includes/social_widget.html" %}
 
-  <div class='block overflow'>
-    <div class='textColumnBig right '>
+  <section class="index-page-header container">
+    <div class="row">
+      <div class='col-xs-12 col-sm-12 col-md-3 col-lg-3'>
+        <h1 class="index-page-title">{{ page.title }}</h1>
+      </div>
+      <div class='col-xs-12 col-sm-12 col-md-9 col-lg-9'>
+        {{ page.intro | richtext }}
 
-      <div class='SING archiveDesc' id='archiveDesc_archive_en'>
-        <div class='EDtxa textDesc desc'>
-          We present in-depth investigations into stories relevant to the greater Black Sea region.
-          Narrow down by:
-          {% for tag in page.tags.all %}
-            <a href="{% pageurl page.stories_index %}?tag={{ tag }}">{{ tag }}</a>
-            {{ tag }}
-          {% endfor %}
-        </div>
+        <section class="container">
+          <div class="row justify-content-end">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <p>Narrow down by:</p>
+              <ul class="nav nav-tabs" id="filters_nav" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#dossier-tab" role="tab" aria-controls="dossier-tab" aria-selected="true">Dossier</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#tag-tab" role="tab" aria-controls="tag-tab" aria-selected="false">Tag</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="filters_tabs">
+                <div class="tab-pane fade show active" id="dossier-tab" role="tabpanel" aria-labelledby="dossier-tab">
+                  {% for dossier in dossiers %}
+                  <a href="/stories/?dossier={{dossier|urlencode}}" class="btn btn-link">{{ dossier }}</a>
+                  {% endfor %}
+                </div>
+                <div class="tab-pane fade" id="tag-tab" role="tabpanel" aria-labelledby="tag-tab">
+                  {% for tag in tags %}
+                    {{ tag }}
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
-    <div class='LeftColumnSmall blogsHead space'>{{ page.title }}</div>
-    <div class='clearfix'></div>
-  </div>
+  </section>
+
+
+  <hr>
 
   <section class="posts_container container">
     <div class="row">

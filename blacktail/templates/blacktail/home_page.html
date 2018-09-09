@@ -5,6 +5,7 @@
 {% block extra_css %}
   {% load compress %}
   {% compress css %}
+    <link href="{% static 'scss/social.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
     <link href="{% static 'scss/home_page.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
   {% endcompress %}
 {% endblock %}

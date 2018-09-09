@@ -123,12 +123,22 @@ class StoriesIndex(Page):
         # Update context to include only published posts, ordered by reverse-chron
         context = super(StoriesIndex, self).get_context(request)
         stories = self.get_children().live().order_by('-first_published_at')
-        context['stories'] = stories
+        tags = Story.tags.filter( blacktail_storytag_items__content_object__live=True )
+        dossiers = StoryDossier.objects.all()
 
         # Filter by tag
         tag = request.GET.get('tag')
         if tag:
             stories = stories.filter(tags__name=tag)
+
+        # Filter by dossier
+        dossier = request.GET.get('dossier')
+        if dossier:
+            stories = stories.filter(story__dossier__name=dossier)
+
+        context['stories'] = stories
+        context['tags'] = tags
+        context['dossiers'] = dossiers
 
         return context
 
@@ -141,18 +151,9 @@ class Story(Page):
     translation_language = models.CharField(max_length=2, blank=True)
     translation_for = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True, related_name='translations')
 
-    dossier = models.CharField(max_length=50, blank=True)
     format = models.CharField(max_length=50, blank=True)
     tags = ClusterTaggableManager(through=StoryTag, blank=True)
-    # authors = ChooserBlock(target_model=Author, blank=True)
-    # authors = models.ForeignKey(
-    #     'blacktail.Author',
-    #     null=True,
-    #     blank=True,
-    #     on_delete=models.SET_NULL,
-    #     related_name='stories'
-    # )
-    # authors = models.ManyToManyField(Author)
+
     authors = ParentalManyToManyField('Author', related_name='stories')
     type = models.ForeignKey(StoryType, on_delete=models.SET_NULL, blank=True, null=True)
     template = models.ForeignKey(StoryTemplate, on_delete=models.SET_NULL, blank=True, null=True)
@@ -172,8 +173,6 @@ class Story(Page):
         related_name='+'
     )
 
-    # template = models.ForeignKey('blacktail.BlogTemplate')
-
     @property
     def stories_index(self):
         # Find closest ancestor which is a blog index
@@ -181,14 +180,12 @@ class Story(Page):
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
-        # index.SearchField('location'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname='full'),
         ImageChooserPanel('image'),
-        # InlinePanel('page_authors'),
         MultiFieldPanel([
             FieldPanel('authors', classname="multiple-authors"),
             FieldPanel('type'),
