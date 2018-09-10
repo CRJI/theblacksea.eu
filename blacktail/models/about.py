@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.http.response import Http404
 
+
 from wagtail.core.url_routing import RouteResult
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
@@ -20,7 +21,7 @@ class AboutPage(Page):
     def get_context(self, request):
 
         context = super(AboutPage, self).get_context(request)
-        authors = Author.objects.all()
+        authors = Author.objects.all().order_by('?')
         context['authors'] = authors
 
         return context
