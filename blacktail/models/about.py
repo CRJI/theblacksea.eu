@@ -17,6 +17,15 @@ class AboutPage(Page):
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
 
+    def get_context(self, request):
+
+        context = super(AboutPage, self).get_context(request)
+        authors = Author.objects.all()
+        context['authors'] = authors
+
+        return context
+
+
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
         index.SearchField('body'),

@@ -5,7 +5,6 @@
 {% block extra_css %}
   {% load compress %}
   {% compress css %}
-    <link href="{% static 'scss/social.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
     <link href="{% static 'scss/home_page.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
   {% endcompress %}
 {% endblock %}
@@ -13,7 +12,6 @@
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-  {% include "blacktail/includes/social_widget.html" %}
 
   {% image page.image original class="home_image" %}
 
