@@ -2,7 +2,7 @@
 body {margin: 0;padding: 0; background-image: url("img/bg.gif"); background-repeat: repeat;}
 ul {display: block;list-style-type: none;margin:0; -webkit-padding-start: 0; padding-left: 0px; }
 a {border-bottom: 1px dotted #666;text-decoration: none; color:#333;}
-a:visited {color:white;}
+/*a:visited {color:white;}*/
 a:hover {border-bottom:none;text-decoration: none;color:#333;}
 .block {width:75%;margin:0 auto; clear:both;position:relative; color:#333;max-width:1100px;}
 .block-full {margin:0 auto; clear:both;position:relative; color:#333;max-width:1100px;}

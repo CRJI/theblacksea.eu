@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /*RESETS */
 /*p{ margin: 0.5em 0em; }*/
-body, textarea{line-height: initial; font-family: sans-serif, Arial, Verdana, "Trebuchet MS"; font-size: 9pt; }
+/*body, textarea{line-height: initial; font-family: sans-serif, Arial, Verdana, "Trebuchet MS"; font-size: 9pt; }*/
 form{margin: initial;}
 
 .ui-datepicker {font-size: 11px !important;}
