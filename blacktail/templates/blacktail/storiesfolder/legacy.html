@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block extra_css %}
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/story/main.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/stories_folder.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/social.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+{% endblock %}
+
+{% block body_class %}template-storyfolder{% endblock %}
+
+
+{% block content %}
+  {% include "blacktail/includes/social_widget.html" %}
+
+  {% image page.image original as img %}
+
+  <section class="container">
+    <div class="row">
+      <div class="col-lg-12 " id="pageHeader">
+        <div class="col-lg-12" id="pageTitle">
+          <img class="u-max-full-width" src="{{ img.url }}" alt="{{ page.title }}">
+        </div>
+        <h1>{{ page.intro | striptags }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <article class="col-lg-12">
+        {{ page.body | richtext }}
+      </article>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h4>
+          <br/> Explore the stories <br/>
+        </h4>
+      </div>
+    </div>
+  </section>
+
+  <section class="posts_container container">
+    <div class="row">
+      {% for post in self.get_children.specific %}
+          {% with post=post.specific %}
+            {% include "blacktail/includes/stories_list_item.html" %}
+          {% endwith %}
+      {% endfor %}
+    </div>
+  </section>
+
+{% endblock %}

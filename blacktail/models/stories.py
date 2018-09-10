@@ -110,6 +110,15 @@ class StoryTag(TaggedItemBase):
     content_object = ParentalKey('blacktail.Story', related_name='tagged_items')
 class StoriesFolderTag(TaggedItemBase):
     content_object = ParentalKey('blacktail.StoriesFolder', related_name='tagged_items')
+class StoriesFolderTemplate(models.Model):
+    name = models.CharField(max_length=100)
+
+    panels = [
+        FieldPanel('name'),
+    ]
+
+    def __str__(self):
+        return "%s" % (self.name)
 
 class StoriesIndex(Page):
     intro = RichTextField(blank=True)
@@ -240,6 +249,7 @@ class StoriesFolder(Page):
     intro = models.CharField(max_length=1000, blank=True)
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=StoriesFolderTag, blank=True)
+    template = models.ForeignKey(StoriesFolderTemplate, on_delete=models.SET_NULL, blank=True, null=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -265,9 +275,20 @@ class StoriesFolder(Page):
         ImageChooserPanel('image'),
         FieldPanel('date'),
         FieldPanel('body'),
+        FieldPanel('template'),
     ]
 
     promote_panels = Page.promote_panels + [
         ImageChooserPanel('feed_image'),
         FieldPanel('tags'),
     ]
+
+    def serve(self, request):
+        if self.template is None:
+            template = 'blacktail/storiesfolder/legacy.html'
+        else:
+            template = f'blacktail/storiesfolder/{self.template}.html'
+
+        return render(request, template, {
+            'page': self,
+        })
