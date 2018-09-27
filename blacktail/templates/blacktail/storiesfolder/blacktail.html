@@ -55,15 +55,4 @@
     </div>
   </section>
 
-
-  <section class="posts_container container">
-    <div class="row">
-      {% for post in self.get_children.specific %}
-          {% with post=post.specific %}
-            {% include "blacktail/includes/stories_list_item.html" %}
-          {% endwith %}
-      {% endfor %}
-    </div>
-  </section>
-
 {% endblock %}
