@@ -39,18 +39,21 @@
         </div>
       </div>
       <div class="row" style="clear: both;">
-          {% for _ in '123' %}
+        {% for story in page.get_children.specific %}
+          {% with story=story.specific %}
               <a href="article/en/no-way-out" class="col-lg-4 moreBit-a">
                   <div class="moreBit">
                       <div class="img-wrap">
-                          <img src="/media/images/32_9EK97HF.original.jpg" class="u-max-full-width">
+                          {% image story.image original as img %}
+                          <img src="{{ img.url }}" class="u-max-full-width">
                       </div>
-                      <h6>The European Union</h6>
-                      <p>Is funding military equipment used by Turkey to stop refugees from fleeing the Syrian Civil War and entering the EU</p>
-                      <p>| May 15 2018</p>
+                      <h6>{{ story.title | striptags }}</h6>
+                      <p>{{ story.intro | striptags | truncatewords:30 }}</p>
+                      <p>| {{ story.first_published_at | date:"d M Y" }}</p>
                   </div>
               </a>
-          {% endfor %}
+          {% endwith %}
+        {% endfor %}
       </div>
     </div>
   </section>
