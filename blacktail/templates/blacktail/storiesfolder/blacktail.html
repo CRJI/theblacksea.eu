@@ -19,31 +19,42 @@
 
   {% image page.image original as img %}
 
+
+  <header style="background-image: url('{{ img.url }}')">
+    <div class="full-bleed-title">
+      <h1>{{ page.title | striptags }}</h1>
+      <h2>{{ page.intro | striptags }}</h2>
+    </div>
+  </header>
+
   <section class="container">
-    <div class="row">
-      <div class="col-lg-12 " id="pageHeader">
-        <div class="col-lg-12" id="pageTitle">
-          <img class="u-max-full-width" src="{{ img.url }}" alt="{{ page.title }}">
-        </div>
-        <h1>{{ page.intro | striptags }}</h1>
-      </div>
-    </div>
-    <div class="row">
-      <article class="col-lg-12">
-        {{ page.body | richtext }}
-      </article>
-    </div>
+    {{ page.body | richtext }}
   </section>
 
   <section class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h4>
-          <br/> Explore the stories <br/>
-        </h4>
+    <div class="other-stories-container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h3 style="text-align: center;">Read the stories below:</h3>
+        </div>
+      </div>
+      <div class="row" style="clear: both;">
+          {% for _ in '123' %}
+              <a href="article/en/no-way-out" class="col-lg-4 moreBit-a">
+                  <div class="moreBit">
+                      <div class="img-wrap">
+                          <img src="/media/images/32_9EK97HF.original.jpg" class="u-max-full-width">
+                      </div>
+                      <h6>The European Union</h6>
+                      <p>Is funding military equipment used by Turkey to stop refugees from fleeing the Syrian Civil War and entering the EU</p>
+                      <p>| May 15 2018</p>
+                  </div>
+              </a>
+          {% endfor %}
       </div>
     </div>
   </section>
+
 
   <section class="posts_container container">
     <div class="row">

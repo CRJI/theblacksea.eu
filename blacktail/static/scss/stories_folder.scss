@@ -35,7 +35,7 @@ pre > code {
 }
 
 .u-max-full-width {
-  max-width: 100%;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -355,23 +355,37 @@ path {
   fill: #97989a;
 }
 
+.moreBit-a {
+  display: block;
+  &:hover {
+    border: none;
+  }
+}
+
 .moreBit {
   img {
     display: block;
-    margin: auto;
-    padding: .5em;
+    margin-bottom: 1rem;
   }
   h6 {
-    padding-right: .5em;
+    text-align: left;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    color: gray;
+    font-size: 1.2rem;
+    margin-top: 0;
+    font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  h6:hover {
+    color: white;
   }
   p {
-    text-align: center;
-    padding: 1em;
-    font-size: .6em;
-  }
-  h6 {
-    text-align: center;
+    text-align: left;
     margin-bottom: 0;
+    font-weight: 400;
+    color: gray;
+    font-size: .8rem;
+    margin-bottom: 1rem;
   }
 }
 
@@ -382,5 +396,62 @@ path {
   img {
     margin: 0 auto;
     display: block;
+  }
+}
+
+
+.container {
+  width: 75%;
+}
+
+
+section {
+  font-size: 120%;
+  margin-top: 4rem;
+}
+
+
+.other-stories-container {
+  background-color: black;
+  padding: 1% 6%;
+  margin-top: 4rem;
+}
+
+
+.other-stories-container h3 {
+  color: white;
+  margin: 0.8rem 0 2.5rem 0;
+  font-size: 2.2rem;
+}
+
+
+.photo-credits {
+  padding-top: 20px;
+  padding-bottom: 0;
+  margin: 0;
+  font-weight: 400;
+  color: gray;
+}
+
+
+.full-bleed-title {
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 20%;
+  color: white;
+  text-align: center;
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    font-family: "Open Sans","HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+
+  h2 {
+    font-weight: 300;
+    letter-spacing: -0.8px;
+    font-family: "Open Sans","HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
   }
 }
