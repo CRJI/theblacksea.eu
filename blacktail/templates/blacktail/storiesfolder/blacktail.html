@@ -41,7 +41,7 @@
       <div class="row" style="clear: both;">
         {% for story in page.get_children.specific %}
           {% with story=story.specific %}
-            <a href="article/en/no-way-out" class="col-lg-4 moreBit-a">
+            <a href="{{ story.url }}" class="col-lg-4 moreBit-a">
               <div class="moreBit">
                 <div class="img-wrap">
                   {% image story.image original as img %}
