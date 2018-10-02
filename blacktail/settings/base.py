@@ -69,6 +69,8 @@ MIDDLEWARE = [
 
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+
+    'blacktail.middleware.redirect',
 ]
 
 ROOT_URLCONF = 'blacktail.urls'
