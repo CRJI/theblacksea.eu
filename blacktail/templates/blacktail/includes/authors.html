@@ -1,0 +1,3 @@
+{% for author in authors %}
+<a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
+{% endfor %}
