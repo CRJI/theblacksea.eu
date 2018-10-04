@@ -48,7 +48,7 @@
                   <img src="{{ img.url }}" class="u-max-full-width">
                 </div>
                 <h6>{{ story.title | striptags }}</h6>
-                <p>{{ story.intro | striptags | truncatewords:30 }}</p>
+                <p>{{ story.summary_or_intro | striptags | truncatewords:30 }}</p>
                 <p>| {{ story.first_published_at | date:"d M Y" }}</p>
               </div>
             </a>

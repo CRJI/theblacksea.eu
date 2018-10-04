@@ -152,6 +152,7 @@ class StoriesIndex(Page):
         return context
 
 class Story(Page):
+    summary = models.CharField(max_length=1000, blank=True)
     intro = models.CharField(max_length=1000, blank=True)
     body = StreamField(StoryStreamBlock(), blank=True)
     skip_home = models.BooleanField(default=None)
@@ -187,12 +188,18 @@ class Story(Page):
         # Find closest ancestor which is a blog index
         return self.get_ancestors().type(StoriesIndex).last()
 
+    @property
+    def summary_or_intro(self):
+        return self.summary or self.intro
+
     search_fields = Page.search_fields + [
+        index.SearchField('summary'),
         index.SearchField('intro'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('summary', classname='full'),
         FieldPanel('intro', classname='full'),
         ImageChooserPanel('image'),
         MultiFieldPanel([
