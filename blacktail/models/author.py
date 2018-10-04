@@ -43,3 +43,11 @@ class Author(models.Model):
     ]
     def __str__(self):
         return "%s" % (self.name)
+
+    def story_url(self):
+        if self.image:
+            return f"/about/author/{self.id}"
+        elif self.url:
+            return self.url
+        else:
+            return "#"

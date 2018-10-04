@@ -21,7 +21,7 @@ class AboutPage(Page):
     def get_context(self, request):
 
         context = super(AboutPage, self).get_context(request)
-        authors = Author.objects.all().order_by('?')
+        authors = Author.objects.filter(image__isnull=False).order_by('?')
         context['authors'] = authors
 
         return context

@@ -29,9 +29,7 @@
           <h2><span>{{ page.intro | striptags }}</span></h2>
           <h3>
             <span>by
-              {% for author in page.authors.all %}
-                <a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
-              {% endfor %}
+              {% include "blacktail/includes/authors.html" with authors=page.authors.all %}
             </span>
           </h3>
           <h4><span>{{ page.date }}</span></h4>

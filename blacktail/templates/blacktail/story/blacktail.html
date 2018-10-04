@@ -35,9 +35,7 @@
           <br></br>
           <h5>
             By
-            {% for author in page.authors.all %}
-              <a href="/about/author/{{author.id}}">{{ author.name }}</a>{% if not forloop.last %},{% endif %}
-            {% endfor %}
+            {% include "blacktail/includes/authors.html" with authors=page.authors.all %}
           </h5>
           <h5>{{ page.first_published_at | date:"d M Y" }}</h5>
         </div>
