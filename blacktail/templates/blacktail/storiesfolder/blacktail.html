@@ -19,39 +19,42 @@
 
   {% image page.image original as img %}
 
+
+  <header style="background-image: url('{{ img.url }}')">
+    <div class="full-bleed-title">
+      <h1>{{ page.title | striptags }}</h1>
+      <h2>{{ page.intro | striptags }}</h2>
+    </div>
+  </header>
+
   <section class="container">
-    <div class="row">
-      <div class="col-lg-12 " id="pageHeader">
-        <div class="col-lg-12" id="pageTitle">
-          <img class="u-max-full-width" src="{{ img.url }}" alt="{{ page.title }}">
+    {{ page.body | richtext }}
+  </section>
+
+  <section class="container">
+    <div class="other-stories-container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h3 style="text-align: center;">Read the stories below</h3>
         </div>
-        <h1>{{ page.intro | striptags }}</h1>
       </div>
-    </div>
-    <div class="row">
-      <article class="col-lg-12">
-        {{ page.body | richtext }}
-      </article>
-    </div>
-  </section>
-
-  <section class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
-        <h4>
-          <br/> Explore the stories <br/>
-        </h4>
-      </div>
-    </div>
-  </section>
-
-  <section class="posts_container container">
-    <div class="row">
-      {% for post in self.get_children.specific %}
-          {% with post=post.specific %}
-            {% include "blacktail/includes/stories_list_item.html" %}
+      <div class="row" style="clear: both;">
+        {% for story in page.get_children.specific %}
+          {% with story=story.specific %}
+            <a href="{{ story.url }}" class="col-lg-4 moreBit-a">
+              <div class="moreBit">
+                <div class="img-wrap">
+                  {% image story.image original as img %}
+                  <img src="{{ img.url }}" class="u-max-full-width">
+                </div>
+                <h6>{{ story.title | striptags }}</h6>
+                <p>{{ story.intro | striptags | truncatewords:30 }}</p>
+                <p>| {{ story.first_published_at | date:"d M Y" }}</p>
+              </div>
+            </a>
           {% endwith %}
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
   </section>
 

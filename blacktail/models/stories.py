@@ -285,7 +285,7 @@ class StoriesFolder(Page):
 
     def serve(self, request):
         if self.template is None:
-            template = 'blacktail/storiesfolder/legacy.html'
+            template = 'blacktail/storiesfolder/blacktail.html'
         else:
             template = f'blacktail/storiesfolder/{self.template}.html'
 
