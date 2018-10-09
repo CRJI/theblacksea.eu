@@ -42,8 +42,10 @@
             <a href="{{ story.url }}" class="col-lg-4 moreBit-a">
               <div class="moreBit">
                 <div class="img-wrap">
-                  {% image story.image fill-320x200 as img %}
-                  <img src="{{ img.url }}" class="u-max-full-width">
+                  {% if story.image %}
+                    {% image story.image fill-320x200 as story_img %}
+                    <img src="{{ story_img.url }}" class="u-max-full-width">
+                  {% endif %}
                 </div>
                 <h6>{{ story.title | striptags }}</h6>
                 <p>{{ story.summary_or_intro | striptags | truncatewords:30 }}</p>
