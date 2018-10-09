@@ -42,7 +42,7 @@
             <a href="{{ story.url }}" class="col-lg-4 moreBit-a">
               <div class="moreBit">
                 <div class="img-wrap">
-                  {% image story.image original as img %}
+                  {% image story.image fill-320x200 as img %}
                   <img src="{{ img.url }}" class="u-max-full-width">
                 </div>
                 <h6>{{ story.title | striptags }}</h6>
