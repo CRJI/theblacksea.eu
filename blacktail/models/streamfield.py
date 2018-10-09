@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from django import forms
 
 from wagtail.core.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, \
-    CharBlock, RichTextBlock, RawHTMLBlock, BooleanBlock
+    CharBlock, RichTextBlock, RawHTMLBlock, BooleanBlock, ListBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
@@ -64,6 +64,10 @@ class AlignedHTMLBlock(StructBlock):
     class Meta:
         icon = "code"
 
+class ImageGalleryBlock(ListBlock):
+
+    class Meta:
+        template = 'blacktail/image_gallery.html'
 
 class StoryStreamBlock(StreamBlock):
     subheadline = CharBlock(icon="title", classname="title")
@@ -79,3 +83,4 @@ class StoryStreamBlock(StreamBlock):
     aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
     embed = EmbedBlock(help_text="URL for media to embed")
     document = DocumentChooserBlock(icon="doc-full-inverse")
+    image_gallery = ImageGalleryBlock(ImageChooserBlock(label='Image'))
