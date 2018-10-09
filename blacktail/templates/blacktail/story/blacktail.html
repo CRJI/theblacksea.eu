@@ -40,17 +40,6 @@
           <h5>{{ page.first_published_at | date:"d M Y" }}</h5>
         </div>
       </div>
-      <section class="share-links">
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
-          <img src="{% static 'img/icons/icons/icon-fb.svg' %}" alt="Share on Facebook">
-        </a>
-        <a href="mailto:?subject={{page.title}}&amp;body={{page.intro}}%0D%0A%0D%0A{{request.build_absolute_uri}}">
-          <img src="{% static 'img/icons/icons/icon-email.svg' %}" alt="Share via E-mail">
-        </a>
-        <a href="https://twitter.com/intent/tweet?original_referer={{request.build_absolute_uri|escape}}&amp;ref_src=twsrc%5Etfw&amp;text={{page.title|escape}}&amp;tw_p=tweetbutton&amp;url={{request.build_absolute_uri|escape}}">
-          <img src="{% static 'img/icons/icons/icon-twitter.svg' %}" alt="Share via Twitter">
-        </a>
-      </section>
     </div>
   </div>
 
