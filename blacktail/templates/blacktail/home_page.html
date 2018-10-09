@@ -51,15 +51,8 @@
 <hr/>
 
 <section class="follow">
-  <p class="text-center">
-    Follow us
-  </p>
-  <div class="social-buttons text-center">
-    <a href=""> <i class="fab fa-lg fa-facebook-square"></i> </a>
-    <a href=""> <i class="fab fa-lg fa-twitter-square"></i> </a>
-    <a href=""> <i class="fas fa-lg fa-envelope"></i> </a>
-    <a href=""> <i class="fas fa-lg fa-rss-square"></i> </a>
-  </div>
+  <p>Follow us</p>
+  {% include "blacktail/includes/social_media_links.html" with title=page.title url=request.build_absolute_uri %}
 </section>
 
 {% endblock %}
