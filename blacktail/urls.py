@@ -13,7 +13,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 from .admin import pages
 
 urlpatterns = [
-    url(r'^django-admin/', include(admin.site.urls)),
+    url(r'^django-admin/', admin.site.urls),
 
     url(r'^admin/pages/$', pages.index, name='wagtailadmin_explore_root'),
     url(r'^admin/pages/(\d+)/$', pages.index, name='wagtailadmin_explore'),
