@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dc441479826e9afda325dd10d6343d5730d864fb721d28f29e60064fa11d1760"
+            "sha256": "e94fc13350ed30ba27216a5befb6c477f389fcc4b18c8ed77e1a85429f860527"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -63,11 +63,11 @@
         },
         "dj-database-url": {
             "hashes": [
-                "sha256:ca01768fdecde134301f3170743226f60edff5c3935f12437378ebd911506353",
-                "sha256:f2e273ed34acbb560962d5cf12917936d8df02297df09bd3089b8546d4584138"
+                "sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163",
+                "sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9"
             ],
             "index": "pypi",
-            "version": "==0.3.0"
+            "version": "==0.5.0"
         },
         "django": {
             "hashes": [
@@ -102,17 +102,18 @@
         },
         "django-modelcluster": {
             "hashes": [
-                "sha256:2a6c0638ba295d44fc316c42b6da20509b186fe3500c674539441d451de5abfe"
+                "sha256:42bd7fa91af9996d7dfd34e6b027445acbece188d371d63abd19dde4c7ac8fc8"
             ],
             "index": "pypi",
-            "version": "==4.1"
+            "version": "==4.2"
         },
         "django-redis": {
             "hashes": [
-                "sha256:fb75e8eecd4b75dd3a2a595a932f3b410e2bfc88643ec9d3a2b80593094562a3"
+                "sha256:15b47faef6aefaa3f47135a2aeb67372da300e4a4cf06809c66ab392686a2155",
+                "sha256:a90343c33a816073b735f0bed878eaeec4f83b75fcc0dce2432189b8ea130424"
             ],
             "index": "pypi",
-            "version": "==3.8.2"
+            "version": "==4.9.0"
         },
         "django-taggit": {
             "hashes": [
@@ -129,11 +130,11 @@
         },
         "djangorestframework": {
             "hashes": [
-                "sha256:03182f37d9975d00ba7c97f4fd8969d1dfa70f8efcad3d1718afacb073b9cb63",
-                "sha256:8056370cc36e67ddbc0a8258b853ef1f696c58fcd2e4e2caf370a5d2fb39aabc"
+                "sha256:b6714c3e4b0f8d524f193c91ecf5f5450092c2145439ac2769711f7eba89a9d9",
+                "sha256:c375e4f95a3a64fccac412e36fb42ba36881e52313ec021ef410b40f67cddca4"
             ],
             "index": "pypi",
-            "version": "==3.7.4"
+            "version": "==3.8.2"
         },
         "draftjs-exporter": {
             "hashes": [
