@@ -1,3 +1,6 @@
+$tbs-blue: #74c0e2;
+$tbs-blue-faded: #4a7183;
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -9,9 +12,21 @@ body {
   line-height: 1.6;
   font-weight: 400;
   font-family: "Open Sans","HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
-  color: #606062;
+  color: #9b9595;
+  background: black;
 }
 
+footer {
+  color: #9b9595;
+  background: black !important;
+}
+
+a {
+  color: $tbs-blue-faded;
+  &:hover {
+    color: white;
+  }
+}
 
 code {
   padding: .2rem .5rem;
@@ -108,7 +123,7 @@ hr {
 
 
 .blue {
-  color: #74c0e2;
+  color: $tbs-blue;
 }
 
 #pageTitle {
@@ -371,19 +386,19 @@ path {
     text-align: left;
     margin-bottom: 1.5rem;
     font-weight: 400;
-    color: gray;
+    color: $tbs-blue;
     font-size: 1.2rem;
     margin-top: 0;
     font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
-  h6:hover {
+  &:hover h6 {
     color: white;
   }
   p {
     text-align: left;
     margin-bottom: 0;
     font-weight: 400;
-    color: gray;
+    color: #9b9595;
     font-size: .8rem;
     margin-bottom: 1rem;
   }
@@ -418,7 +433,7 @@ section {
 
 
 .other-stories-container h3 {
-  color: white;
+  color: #9b9595;
   margin: 0.8rem 0 2.5rem 0;
   font-size: 2.2rem;
 }
@@ -438,7 +453,7 @@ section {
   width: 100%;
   margin: 0 auto;
   position: absolute;
-  bottom: 20%;
+  bottom: 5%;
   color: white;
   text-align: center;
 
