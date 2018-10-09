@@ -6,7 +6,7 @@
   <div class='post_image'>
     <a href='{{ post.url }}' class='thumbnail'>
       {% if post.image %}
-        {% image post.image fill-225x149 %}
+        {% image post.image fill-320x200 %}
       {% else %}
       <img alt="The Black Sea" src="{% static 'img/default_image.png' %}"/>
       {% endif %}
