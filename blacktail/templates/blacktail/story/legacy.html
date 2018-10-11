@@ -29,26 +29,32 @@
 {% block content %}
 
 <div class="container-fluid">
-  <div class="row">
-    <div class='SING block space SGrecord-archive SGrecord' id='SGrecord' style="margin-top: 100px;">
-      <div class='block-full'>
+  <div class="">
+    <div style="margin-top: 100px;">
+      <div class="row">
 
-        <div class='textColumnBig right'>
-          <div class='EDtxt Name blue title'>
+        <div class="col-md-8 order-md-3">
+          <div class="Name blue title">
             {{ page.title }}
           </div>
-          <div class='imageColumnHead orange space authName'>
+          <div class="imageColumnHead orange space authName">
             {% include "blacktail/includes/authors.html" with authors=page.authors.all %}
             {% if page.date %}
               <span class='ib'>/ {{ page.date }}</span>
             {% endif %}
           </div>
-          <div class='EDeditor lead'>
+          <div class="lead">
             {{ page.intro }}
+          </div>
+          <div class="">
+            {% include "blacktail/includes/streamfield.html" with content=page.body %}
           </div>
         </div>
 
-        <div class='LeftColumnSmall greyleftborder'>
+        <div class="col-md-1 order-md-2"></div>
+
+        <div class="col-md-3 order-md-1">
+          <div class="greyleftborder">
           <div class='imageColumnHead orange space'>
             DOSSIER: {{ page.dossier }}
           </div>
@@ -76,53 +82,14 @@
               <a href='index.php?idT=88&idC=88&idRec=1145&recType=story'>German Karate teacher recruits Romanian village kids into global child porn ring</a>
             </li>
           </ul>
+          </div>
         </div>
 
-      </div>
-      <div class='space overflow'>
-      </div>
-      <div class='block-full'>
-
-        <div class='clearfix'></div>
-        <div class='EDeditor pull-left  pulledQuotes'>
-        </div>
-        <div class='EDeditor pull-right content' data-iedit-cketoolbar="embedVideo">
-
-          {% include "blacktail/includes/streamfield.html" with content=page.body %}
-        </div>
       </div>
     </div>
     </div>
+    <div class="clearfix"></div>
   </div>
 </div>
-
-<script>
-  var fn = function() {
-    var jqCont = ivyMods.blogArticle($('div.SING'));
-    /* jqCont.galleria.set_containerPics(); */
-    ivyMods.blog.galleries_article(jqCont)
-    /* ivyMods.blogArticle($('div.SING')).galleria.set_thumbPics(); */
-
-    imgs = document.getElementById('SGrecord').getElementsByTagName('img');
-    len = imgs.length;
-    counter = 0;
-
-    function incrementCounter() {
-      counter++;
-      if ( counter === len ) {
-        console.log( 'All images loaded!' );
-        jqCont.resizeContentPics();
-      }
-    };
-
-    [].forEach.call( imgs, function( img ) {
-      img.addEventListener( 'load', incrementCounter, false );
-    } );
-  };
-
-
-  document.addEventListener("DOMContentLoaded", fn, false);
-</script>
-
 
 {% endblock %}
