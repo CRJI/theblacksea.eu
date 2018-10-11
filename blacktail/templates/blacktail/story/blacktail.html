@@ -26,19 +26,20 @@
       <div class="row">
         <div class="col-12">
           <h1>{{ page.title }}</h1>
-          <br></br>
+          </br>
           <h3>{{ page.intro }}</h3>
-          <br></br>
+          </br>
           <svg height="20" width="500">
             <line x1="0" x2="200" style="stroke:rgb(116,192,226);stroke-width:3" />
           </svg>
-          <br></br>
+          </br>
           <h5>
             By
             {% include "blacktail/includes/authors.html" with authors=page.authors.all %}
           </h5>
           {% include "blacktail/includes/social_media_links.html" with title=page.title url=request.build_absolute_uri body=page.intro %}
           <h5>{{ page.first_published_at | date:"d M Y" }}</h5>
+          <br>
         </div>
       </div>
     </div>
