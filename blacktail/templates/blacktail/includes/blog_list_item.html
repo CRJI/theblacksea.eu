@@ -4,7 +4,7 @@
 {% image post.image original as img %}
 <article class='blog_item_preview container'>
   <div class='row'>
-    <div class='col-xs-12 col-sm-12 col-md-3 col-lg-3' style="border-left: 10px solid {{post.category.color}}">
+    <div class="col-12 col-md-3" style="border-left: 10px solid {{post.category.color}}">
       <a class='post_title' href='{{ post.url }}' style="color: {{post.category.color}}"> {{ post.title }} </a>
       <br/>
       {% for author in post.authors.all %}
@@ -18,7 +18,7 @@
         {% endfor %}
       {% endif %}
     </div>
-    <div class='col-xs-12 col-sm-12 col-md-9 col-lg-9'>
+    <div class="col-12 col-md-9">
       <h5 class='post_intro'> {{ post.intro | richtext }} </h5>
     </div>
   </div>

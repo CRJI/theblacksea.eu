@@ -10,7 +10,7 @@
 
   <div class="container">
     <section class="row">
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+      <div class="col-12 col-sm-6 col-lg-4">
         <h1> <b>{{page.title}}</b> </h1>
         <hr>
         <p>
@@ -18,14 +18,14 @@
           CONTACT@THEBLACKSEA.EU
         </p>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-8 col-lg-8">
+      <div class="col-12 col-sm-6 col-lg-8">
         {{ page.intro|richtext }}
       </div>
     </section>
 
     <section class="row">
       {% for author in authors %}
-      <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
         <a href="/about/author/{{author.id}}">
           {% if author.image %}
             {% image author.image fill-250x140 %}
@@ -42,7 +42,7 @@
     </section>
 
     <section class="row justify-content-end">
-      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <div class="col-12 col-sm-12 col-lg-8">
         {{ page.body|richtext }}
       </div>
     </section>
