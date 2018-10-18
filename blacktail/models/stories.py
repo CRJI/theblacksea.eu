@@ -253,6 +253,7 @@ class Story(Page):
 
 class StoriesFolder(Page):
     date = models.DateField("Post date")
+    summary = models.CharField(max_length=1000, blank=True)
     intro = models.CharField(max_length=1000, blank=True)
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=StoriesFolderTag, blank=True)
@@ -273,11 +274,13 @@ class StoriesFolder(Page):
     )
 
     search_fields = Page.search_fields + [
+        index.SearchField('summary'),
         index.SearchField('intro'),
         index.SearchField('body'),
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('summary', classname='full'),
         FieldPanel('intro', classname='full'),
         ImageChooserPanel('image'),
         FieldPanel('date'),
@@ -289,6 +292,10 @@ class StoriesFolder(Page):
         ImageChooserPanel('feed_image'),
         FieldPanel('tags'),
     ]
+
+    @property
+    def summary_or_intro(self):
+        return self.summary or self.intro
 
     def serve(self, request):
         if self.template is None:
