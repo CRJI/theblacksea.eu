@@ -57,6 +57,9 @@ nav {
   text-decoration: none;
   padding: 0 0 0 0;
   border-bottom: 0;
+  &:hover {
+    border-bottom: 0;
+  }
 }
 .tagline {
   font-size: 15px;
