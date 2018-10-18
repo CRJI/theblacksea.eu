@@ -18,21 +18,24 @@
 <section class="recent-posts">
   <div class="container">
     <div class="row text-center">
+      {% for p1, p2 in blog_pairs %}
       <div class="col-md-3">
-      {% for post in blogs %}
-        {% if forloop.counter|divisibleby:2 %}
-          </div>
-          <div class="col-md-3">
-        {% endif %}
-        {% with post=post.specific %}
+        {% with post=p1.specific %}
           <article>
             <a href="{{ post.url }}">
               {{ post.title }}
             </a>
           </article>
         {% endwith %}
-      {% endfor %}
+        {% with post=p2.specific %}
+          <article>
+            <a href="{{ post.url }}">
+              {{ post.title }}
+            </a>
+          </article>
+        {% endwith %}
       </div>
+      {% endfor %}
     </div>
   </div>
 </section>

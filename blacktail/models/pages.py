@@ -36,9 +36,10 @@ class HomePage(Page):
 
         # Add extra variables and return the updated context
         blogs = BlogPost.objects.live().order_by('-first_published_at')[:8]
+        blog_pairs = [blogs[0:2], blogs[2:4], blogs[4:6], blogs[6:8]]
         stories = Story.objects.live().filter(skip_home__exact=False).filter(translation_for__exact=None).order_by('-first_published_at')[:8]
 
-        context['blogs'] = blogs
+        context['blog_pairs'] = blog_pairs
         context['stories'] = stories
         return context
 
