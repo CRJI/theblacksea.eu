@@ -32,12 +32,14 @@ section.posts_container {
       }
     }
     div.post_details {
+      line-height: 1em;
+      margin-top: 5px;
       * {
         padding-top: .5em;
       }
       a.post_title {
-        font-size: .8em;
-        line-height: 90%;
+        font-size: .85em;
+        text-transform: uppercase;
       }
       h5.post_intro {
         font-size: .8em;
