@@ -207,7 +207,6 @@ class Story(Page):
             FieldPanel('type'),
             FieldPanel('dossier'),
             FieldPanel('first_published_at'),
-            FieldPanel('template'),
         ]),
         InlinePanel('locations', label="Locations"),
     ]
@@ -229,7 +228,8 @@ class Story(Page):
     ]
 
     settings_panels = Page.settings_panels + [
-        PageChooserPanel('translation_for')
+        PageChooserPanel('translation_for'),
+        FieldPanel('template'),
     ]
 
     edit_handler = TabbedInterface([
@@ -272,6 +272,7 @@ class StoriesFolder(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    hide_title = models.BooleanField(default=False)
 
     search_fields = Page.search_fields + [
         index.SearchField('summary'),
@@ -285,12 +286,18 @@ class StoriesFolder(Page):
         ImageChooserPanel('image'),
         FieldPanel('date'),
         FieldPanel('body'),
-        FieldPanel('template'),
     ]
 
     promote_panels = Page.promote_panels + [
         ImageChooserPanel('feed_image'),
         FieldPanel('tags'),
+    ]
+
+    settings_panels = Page.settings_panels + [
+        MultiFieldPanel([
+            FieldPanel('template'),
+            FieldPanel('hide_title'),
+        ], heading="layout"),
     ]
 
     @property

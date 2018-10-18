@@ -20,8 +20,10 @@
 
   <header style="background-image: url('{{ img.url }}')">
     <div class="full-bleed-title">
-      <h1>{{ page.title | striptags }}</h1>
-      <h2>{{ page.intro | striptags }}</h2>
+      <div class="{% if page.hide_title %}sr-only{% endif %}">
+        <h1>{{ page.title | striptags }}</h1>
+        <h2>{{ page.intro | striptags }}</h2>
+      </div>
     </div>
   </header>
 
