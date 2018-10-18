@@ -1,12 +1,10 @@
-{% load wagtailcore_tags wagtailimages_tags static %}
 {% with carousel_id="carousel-test" %}
 <div id="{{ carousel_id }}" class="carousel slide" data-ride="carousel" data-interval="false">
   <div class="carousel-inner">
-    {% for item in value %}
+    {% for image, rendition in images %}
     <div class="carousel-item{% if forloop.first %} active{% endif %}">
-      {% image item fill-1110x832 as image %}
-      <img class="d-block w-100" src="{{ image.url }}" alt="{{ item.title }}">
-      <p>{{ item.title }}</p>
+      <img class="d-block w-100" src="{{ rendition.url }}" alt="{{ image.title }}">
+      <p>{{ image.title }}</p>
     </div>
     {% endfor %}
   </div>

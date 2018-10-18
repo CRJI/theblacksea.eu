@@ -5,6 +5,8 @@ from django import forms
 from wagtail.core.blocks import TextBlock, StructBlock, StreamBlock, FieldBlock, \
     CharBlock, RichTextBlock, RawHTMLBlock, BooleanBlock, ListBlock
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.models import Filter
+from wagtail.images.shortcuts import get_rendition_or_not_found
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 
@@ -65,6 +67,21 @@ class AlignedHTMLBlock(StructBlock):
         icon = "code"
 
 class ImageGalleryBlock(ListBlock):
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+
+        if value:
+            width = 1110
+            ratio = value[0].width / value[0].height
+            filter = Filter(spec=f'fill-{width}x{int(width/ratio)}')
+
+            context['images'] = [
+                (image, get_rendition_or_not_found(image, filter))
+                for image in value
+            ]
+
+        return context
 
     class Meta:
         template = 'blacktail/image_gallery.html'
