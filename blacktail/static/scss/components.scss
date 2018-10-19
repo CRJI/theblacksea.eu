@@ -23,6 +23,7 @@ section.posts_container {
   }
 
   article.post_preview {
+    margin-bottom: 2em;
     div.post_image {
       a {
         img {
@@ -33,16 +34,17 @@ section.posts_container {
     }
     div.post_details {
       line-height: 1em;
-      margin-top: 5px;
+      margin-top: 1em;
       * {
         padding-top: .5em;
       }
       a.post_title {
-        font-size: .85em;
+        font-size: 1em;
         text-transform: uppercase;
+        font-weight: bold;
       }
       h5.post_intro {
-        font-size: .8em;
+        font-size: 1em;
         color: #666;
       }
       h5.post_location {

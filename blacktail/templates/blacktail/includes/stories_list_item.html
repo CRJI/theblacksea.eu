@@ -2,11 +2,11 @@
 
 {# Individual story item in a list - used on stories index #}
 {% image post.image original as img %}
-<article class='post_preview col-12 col-sm-6 col-md-4 col-lg-3'>
+<article class='post_preview col-12 col-sm-6 col-md-4'>
   <div class='post_image'>
     <a href='{{ post.url }}' class='thumbnail'>
       {% if post.image %}
-        {% image post.image fill-320x200 %}
+        {% image post.image fill-700x440 %}
       {% else %}
       <img alt="The Black Sea" src="{% static 'img/default_image.png' %}"/>
       {% endif %}
