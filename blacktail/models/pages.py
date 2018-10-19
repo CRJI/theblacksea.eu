@@ -10,7 +10,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 
 from .stories import Story
-from .blog import BlogPost
+from .blog import BlogCategory
 
 
 class HomePage(Page):
@@ -35,8 +35,6 @@ class HomePage(Page):
         context = super(HomePage, self).get_context(request)
 
         # Add extra variables and return the updated context
-        blogs = BlogPost.objects.live().order_by('-first_published_at')[:8]
-        blog_pairs = [blogs[0:2], blogs[2:4], blogs[4:6], blogs[6:8]]
         stories = (
             Story.objects.live()
             .filter(skip_home__exact=False)
@@ -45,7 +43,10 @@ class HomePage(Page):
             [:9]
         )
 
-        context['blog_pairs'] = blog_pairs
+        context['blog_categories'] = [
+            (cat, cat.blogpost_set.live().order_by('-first_published_at')[:2])
+            for cat in BlogCategory.objects.all()
+        ]
         context['stories'] = stories
         return context
 
