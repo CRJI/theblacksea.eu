@@ -1,7 +1,9 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
+from django.conf import settings
 
+from wagtail.core import hooks
 from wagtail.core.models import Orderable, Page
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, \
@@ -313,3 +315,20 @@ class StoriesFolder(Page):
         return render(request, template, {
             'page': self,
         })
+
+@hooks.register('insert_editor_js')
+def editor_js():
+    return '''
+        <script>
+        $(function() {
+            $('select').on('select2:select', function (evt) {
+              var element = evt.params.data.element;
+              if (evt.target.id == 'id_authors') {
+                  $(element).detach();
+                  $(this).append(element);
+                  $(this).trigger('change');
+              }
+            });
+        });
+        </script>
+    '''
