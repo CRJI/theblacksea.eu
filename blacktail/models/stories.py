@@ -2,6 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 from django.conf import settings
+from django.contrib.postgres.fields import JSONField
 
 from wagtail.core import hooks
 from wagtail.core.models import Orderable, Page
@@ -166,7 +167,7 @@ class Story(Page):
     format = models.CharField(max_length=50, blank=True)
     tags = ClusterTaggableManager(through=StoryTag, blank=True)
 
-    authors = ParentalManyToManyField('Author', related_name='stories')
+    author_ids = JSONField(default=list)
     type = models.ForeignKey(StoryType, on_delete=models.SET_NULL, blank=True, null=True)
     template = models.ForeignKey(StoryTemplate, on_delete=models.SET_NULL, blank=True, null=True)
     dossier = models.ForeignKey(StoryDossier, on_delete=models.SET_NULL, blank=True, null=True)
@@ -205,7 +206,7 @@ class Story(Page):
         FieldPanel('intro', classname='full'),
         ImageChooserPanel('image'),
         MultiFieldPanel([
-            FieldPanel('authors', classname="multiple-authors"),
+            FieldPanel('author_ids'),
             FieldPanel('type'),
             FieldPanel('dossier'),
             FieldPanel('first_published_at'),
