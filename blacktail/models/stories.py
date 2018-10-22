@@ -1,24 +1,25 @@
 from __future__ import absolute_import, unicode_literals
-
 from django.db import models
-from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 
 from wagtail.core import hooks
 from wagtail.core.models import Orderable, Page
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList, PageChooserPanel
+    InlinePanel, StreamFieldPanel, TabbedInterface, ObjectList, \
+    PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from wagtail.search import index
 from django.shortcuts import render
 
-from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 from .streamfield import StoryStreamBlock
+from .author import Author
+from ..widgets import AuthorsWidget
 
 class RelatedLink(models.Model):
     title = models.CharField(max_length=255)
@@ -41,7 +42,6 @@ class RelatedPage(models.Model):
         related_name='+',
     )
 
-
     panels = [
         PageChooserPanel('related_page')
     ]
@@ -50,10 +50,12 @@ class RelatedPage(models.Model):
         abstract = True
 
 class StoryRelatedLinks(Orderable, RelatedLink):
-    page = ParentalKey('blacktail.Story', on_delete=models.CASCADE, related_name='related_links')
+    page = ParentalKey('blacktail.Story', on_delete=models.CASCADE,
+                       related_name='related_links')
 
 class StoryRelatedPages(Orderable, RelatedPage):
-    page = ParentalKey('blacktail.Story', on_delete=models.CASCADE, related_name='related_pages')
+    page = ParentalKey('blacktail.Story', on_delete=models.CASCADE,
+                       related_name='related_pages')
 
 
 class Location(models.Model):
@@ -109,10 +111,17 @@ class StoryDossier(models.Model):
     def __str__(self):
         return "%s" % (self.name)
 
+
 class StoryTag(TaggedItemBase):
-    content_object = ParentalKey('blacktail.Story', related_name='tagged_items')
+    content_object = ParentalKey('blacktail.Story',
+                                 related_name='tagged_items')
+
+
 class StoriesFolderTag(TaggedItemBase):
-    content_object = ParentalKey('blacktail.StoriesFolder', related_name='tagged_items')
+    content_object = ParentalKey('blacktail.StoriesFolder',
+                                 related_name='tagged_items')
+
+
 class StoriesFolderTemplate(models.Model):
     name = models.CharField(max_length=100)
 
@@ -132,10 +141,11 @@ class StoriesIndex(Page):
 
     def get_context(self, request):
 
-        # Update context to include only published posts, ordered by reverse-chron
+        # Update context to include only published posts, reverse-chron order
         context = super(StoriesIndex, self).get_context(request)
         stories = self.get_children().live().order_by('-first_published_at')
-        tags = Story.tags.filter( blacktail_storytag_items__content_object__live=True )
+        tags = Story.tags.filter(
+            blacktail_storytag_items__content_object__live=True)
         dossiers = StoryDossier.objects.all()
 
         # Filter by tag
@@ -154,6 +164,7 @@ class StoriesIndex(Page):
 
         return context
 
+
 class Story(Page):
     summary = models.CharField(max_length=1000, blank=True)
     intro = models.CharField(max_length=1000, blank=True)
@@ -162,15 +173,20 @@ class Story(Page):
     # location = models.CharField(max_length=255, blank=True)
 
     translation_language = models.CharField(max_length=2, blank=True)
-    translation_for = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True, related_name='translations')
+    translation_for = models.ForeignKey('self', on_delete=models.SET_NULL,
+                                        blank=True, null=True,
+                                        related_name='translations')
 
     format = models.CharField(max_length=50, blank=True)
     tags = ClusterTaggableManager(through=StoryTag, blank=True)
 
     author_ids = JSONField(default=list)
-    type = models.ForeignKey(StoryType, on_delete=models.SET_NULL, blank=True, null=True)
-    template = models.ForeignKey(StoryTemplate, on_delete=models.SET_NULL, blank=True, null=True)
-    dossier = models.ForeignKey(StoryDossier, on_delete=models.SET_NULL, blank=True, null=True)
+    type = models.ForeignKey(StoryType, on_delete=models.SET_NULL, blank=True,
+                             null=True)
+    template = models.ForeignKey(StoryTemplate, on_delete=models.SET_NULL,
+                                 blank=True, null=True)
+    dossier = models.ForeignKey(StoryDossier, on_delete=models.SET_NULL,
+                                blank=True, null=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -185,6 +201,10 @@ class Story(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+
+    @property
+    def authors(self):
+        return [Author.objects.get(pk=pk) for pk in self.author_ids]
 
     @property
     def stories_index(self):
@@ -206,7 +226,7 @@ class Story(Page):
         FieldPanel('intro', classname='full'),
         ImageChooserPanel('image'),
         MultiFieldPanel([
-            FieldPanel('author_ids'),
+            FieldPanel('author_ids', widget=AuthorsWidget),
             FieldPanel('type'),
             FieldPanel('dossier'),
             FieldPanel('first_published_at'),
@@ -260,7 +280,9 @@ class StoriesFolder(Page):
     intro = models.CharField(max_length=1000, blank=True)
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=StoriesFolderTag, blank=True)
-    template = models.ForeignKey(StoriesFolderTemplate, on_delete=models.SET_NULL, blank=True, null=True)
+    template = models.ForeignKey(StoriesFolderTemplate,
+                                 on_delete=models.SET_NULL,
+                                 blank=True, null=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -324,12 +346,13 @@ def editor_js():
         $(function() {
             $('select').on('select2:select', function (evt) {
               var element = evt.params.data.element;
-              if (evt.target.id == 'id_authors') {
+              if (evt.target.id == 'id_author_ids') {
                   $(element).detach();
                   $(this).append(element);
                   $(this).trigger('change');
               }
             });
+            $('#id_author_ids').select2();
         });
         </script>
     '''

@@ -1,17 +1,20 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, \
     TabbedInterface, ObjectList
 from wagtail.images.edit_handlers import ImageChooserPanel
-
 from wagtail.search import index
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase
+
+from .author import Author
+from ..widgets import AuthorsWidget
 
 
 class BlogIndex(Page):
@@ -22,7 +25,7 @@ class BlogIndex(Page):
     ]
 
     def get_context(self, request):
-        # Update context to include only published posts, ordered by reverse-chron
+        # Update context to include only published posts, reverse-chron order
         context = super(BlogIndex, self).get_context(request)
         blogpages = self.get_children().live().order_by('-first_published_at')
         context['posts'] = blogpages
@@ -43,13 +46,15 @@ class BlogCategory(models.Model):
         return "%s" % (self.name)
 
 class BlogPostTag(TaggedItemBase):
-    content_object = ParentalKey('blacktail.BlogPost', related_name='tagged_items')
+    content_object = ParentalKey('blacktail.BlogPost',
+                                 related_name='tagged_items')
 
 class BlogPost(Page):
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=BlogPostTag, blank=True)
-    category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, blank=True, null=True)
+    category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL,
+                                 blank=True, null=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -57,7 +62,7 @@ class BlogPost(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    authors = ParentalManyToManyField('Author', related_name='blogs')
+    author_ids = JSONField(default=list)
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -71,7 +76,7 @@ class BlogPost(Page):
     content_panels = Page.content_panels + [
         MultiFieldPanel([
             ImageChooserPanel('image'),
-            FieldPanel('authors'),
+            FieldPanel('author_ids', widget=AuthorsWidget),
             FieldPanel('first_published_at'),
             FieldPanel('category'),
         ]),
@@ -82,5 +87,10 @@ class BlogPost(Page):
     edit_handler = TabbedInterface([
         ObjectList(content_panels, heading='Content'),
         ObjectList(promote_panels, heading='Promote'),
-        ObjectList(Page.settings_panels, heading='Settings', classname="settings"),
+        ObjectList(Page.settings_panels, heading='Settings',
+                   classname="settings"),
     ])
+
+    @property
+    def authors(self):
+        return [Author.objects.get(pk=pk) for pk in self.author_ids]
