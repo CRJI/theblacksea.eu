@@ -1,5 +1,6 @@
 from django.utils.html import format_html
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 from wagtail.core import hooks
 
@@ -10,6 +11,7 @@ from .models import StoryType
 from .models import StoryDossier
 from .models import BlogCategory
 from wagtail.core.models import Orderable, Page
+from wagtail.images import formats
 
 @hooks.register('insert_editor_css')
 def editor_css():
@@ -76,6 +78,15 @@ def show_more_properties(parent_page, pages, request):
     #     pages = pages.filter(owner=request.user)
 
     return pages
+
+@hooks.register('register_rich_text_features')
+def register_image_feature(features):
+    formats.unregister_image_format('fullwidth')
+    formats.unregister_image_format('left')
+    formats.unregister_image_format('right')
+    formats.register_image_format(formats.Format('fullwidth', _('Full width'), 'richtext-image full-width', 'max-1600x800'))
+    formats.register_image_format(formats.Format('left', _('Left-aligned'), 'richtext-image left', 'max-1000x500'))
+    formats.register_image_format(formats.Format('right', _('Right-aligned'), 'richtext-image right', 'max-1000x500'))
 
 # Now you just need to register your customised ModelAdmin class with Wagtail
 modeladmin_register(AuthorModelAdmin)
