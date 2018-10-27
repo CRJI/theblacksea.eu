@@ -754,18 +754,14 @@ body.fb_hidden {
   }
 }
 
-.content-text .stream-field {
-  :first-child {
-    .rich-text p:first-child:first-letter {
-
-      float: left;
-      font-family: Merriweather;
-      font-size: 2.9em;
-      line-height: 2.9em;
-      padding-top: .15em;
-      padding-right: .2em;
-      padding-left: .0em;
-
-    }
+.content-text .stream-field > :first-child {
+  .rich-text p:first-child:first-letter {
+    float: left;
+    font-family: Merriweather;
+    font-size: 2.9em;
+    line-height: 2.9em;
+    padding-top: .15em;
+    padding-right: .2em;
+    padding-left: .0em;
   }
 }
