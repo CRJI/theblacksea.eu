@@ -182,7 +182,7 @@ header .main-info p .arrow {
   -webkit-animation-iteration-count: infinite;
 }
 .content-text p {
-  font-size: 16px;
+  font-size: 18px;
   margin-bottom: 16px;
   line-height: 28px;
 }
@@ -202,13 +202,6 @@ header .main-info p .arrow {
 }
 .content-text p:last-of-type {
   margin-bottom: 0;
-}
-.content-text .container,
-.content-image-embed .container,
-footer .container,
-.comments .container,
-.container-subheadline .container {
-  width: 50%;
 }
 .content-subheadline {
   margin-top: 50px;
