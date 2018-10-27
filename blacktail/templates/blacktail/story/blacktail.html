@@ -40,7 +40,7 @@
             {% include "blacktail/includes/authors.html" with authors=page.authors %}
           </h5>
           {% include "blacktail/includes/social_media_links.html" with title=page.title url=request.build_absolute_uri body=page.intro %}
-          <h5>{{ page.first_published_at | date:"d M Y" }}</h5>
+          <h5>{{ page.first_published_at | date:"d F Y" }}</h5>
           <br>
         </div>
       </div>
@@ -55,7 +55,7 @@
   <section class="content-text">
     <div class="container">
       <div class="row">
-        <div class="col-8 offset-2">
+        <div class="col-md-8 offset-md-2">
           <div class="body-content" id="start-content">
               {% include "blacktail/includes/streamfield.html" with content=page.body %}
           </div>

@@ -16,6 +16,7 @@
     <a class='post_title' href='{{ post.url }}'> {{ post.title }} </a>
     <h5 class='post_intro'> {{ post.summary_or_intro | truncatewords:30 }} </h5>
     <h5 class='post_location'>
+      {{ post.first_published_at | date:"d F Y" }} |
       {% for location in post.locations.all %}
         {{ location.name }}{% if not forloop.last %},{% endif %}
       {% endfor %}
