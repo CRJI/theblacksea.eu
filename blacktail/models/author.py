@@ -6,7 +6,6 @@ from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
-
 from wagtail.search import index
 
 
@@ -51,3 +50,19 @@ class Author(models.Model):
             return self.url
         else:
             return "#"
+
+    def stories(self):
+        from .stories import Story
+        return (
+            Story.objects
+            .filter(author_ids__contains=self.pk)
+            .order_by('-first_published_at')
+        )
+
+    def blogs(self):
+        from .blog import BlogPost
+        return (
+            BlogPost.objects
+            .filter(author_ids__contains=self.pk)
+            .order_by('-first_published_at')
+        )
