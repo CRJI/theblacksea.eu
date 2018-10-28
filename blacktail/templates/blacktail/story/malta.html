@@ -7,7 +7,9 @@
 {% block extra_css %}
   {% load compress %}
   {% compress css %}
+    <link href="{% static 'scss/fonts.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
     <link href="{% static 'scss/story/main.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/story/malta.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
   {% endcompress %}
     <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700|Merriweather:400,700" rel="stylesheet">
 {% endblock %}
@@ -35,18 +37,16 @@
               {{ location.name }}{% if not forloop.last %},{% endif %}
             {% endfor %}
           </span></h4>
-          <p>
-              <a href="#start-content">
-                  <img src="/static/img/icons/icons/arrow-down.svg" alt="Read" class="arrow" />
-              </a>
-          </p>
+          <div class="social-media-links-box">
+            {% include "blacktail/includes/social_media_links.html" with title=page.title url=request.build_absolute_uri body=page.intro %}
+          </div>
       </div>
   </header>
 
   <section class="content-text">
     <div class="container">
       <div class="row">
-        <div class="col-12">
+        <div class="col-md-8 offset-md-2">
           <div class="body-content" id="start-content">
               {% include "blacktail/includes/streamfield.html" with content=page.body %}
           </div>

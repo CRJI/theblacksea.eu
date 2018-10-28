@@ -99,6 +99,25 @@ header .main-info p .arrow {
   animation-iteration-count: infinite;
   -webkit-animation-iteration-count: infinite;
 }
+header .main-info {
+  * {
+    font-family: 'Merriweather';
+  }
+
+  .social-media-links-box {
+    text-align: center;
+    .social-media-links {
+      display: inline-block;
+      background: white;
+      box-shadow: 15px 0 0 #ffffff, -15px 0 0 #ffffff;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      a {
+        padding: 3px;
+      }
+    }
+  }
+}
 @media (max-width: 767px) {
   header .main-info {
     top: 50px;
