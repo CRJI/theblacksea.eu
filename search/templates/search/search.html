@@ -57,13 +57,13 @@
         </div>
 
         {% if search_results.has_previous %}
-          <div class="float-left">
+          <div class="search-prev">
             <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
           </div>
         {% endif %}
 
         {% if search_results.has_next %}
-          <div class="float-right">
+          <div class="search-next">
             <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
           </div>
         {% endif %}

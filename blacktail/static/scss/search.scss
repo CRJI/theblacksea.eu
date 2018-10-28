@@ -35,3 +35,23 @@ h1 {
     }
   }
 }
+
+.search-prev {
+  float: left;
+    &::before {
+      display: inline-block;
+      content: '<<\00a0';
+      color: #74c0e2;
+      font-size: 9pt;
+    }
+}
+
+.search-next {
+  float: right;
+    &::after {
+      display: inline-block;
+      content: '\00a0>>';
+      color: #74c0e2;
+      font-size: 9pt;
+    }
+}
