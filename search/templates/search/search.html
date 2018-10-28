@@ -1,38 +1,76 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags %}
-
-{% block body_class %}template-searchresults{% endblock %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block title %}Search{% endblock %}
 
-{% block content %}
-    <h1>Search</h1>
+{% block extra_css %}
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/fonts.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/search.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+{% endblock %}
 
-    <form action="{% url 'search' %}" method="get">
+{% block body_class %}template-searchresults{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1>Search results</h1>
+
+      <form action="{% url 'search' %}" method="get">
         <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
         <input type="submit" value="Search" class="button">
-    </form>
+      </form>
 
-    {% if search_results %}
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-                    {% if result.search_description %}
-                        {{ result.search_description }}
+      <div class="search-results">
+      {% if search_results %}
+        {% for result in search_results %}
+          {% with page=result.specific %}
+            <article class="search-results-item">
+              <a class="search-results-link row" href="{% pageurl page %}">
+                <div class="col-md-8">
+                  <h2>{{ page }}</h2>
+                  <p class="summary">{{ page.summary_or_intro | truncatewords:30 }}</p>
+                  <p class="location">
+                    {{ page.first_published_at | date:"d F Y" }}
+                    {% if page.locations.all %}
+                      |
+                      {% for location in page.locations.all %}
+                        {{ location.name }}{% if not forloop.last %},{% endif %}
+                      {% endfor %}
                     {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+                  </p>
+                </div>
+                <div class="col-md-4 image">
+                  {% if page.image %}
+                    {% image page.image fill-700x440 %}
+                  {% else %}
+                    <img alt="The Black Sea" src="{% static 'img/default_image.png' %}"/>
+                  {% endif %}
+                </div>
+              </a>
+            </article>
+          {% endwith %}
+        {% endfor %}
+        </div>
 
         {% if search_results.has_previous %}
+          <div class="float-left">
             <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
+          </div>
         {% endif %}
 
         {% if search_results.has_next %}
+          <div class="float-right">
             <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
+          </div>
         {% endif %}
-    {% elif search_query %}
-        No results found
-    {% endif %}
+      {% elif search_query %}
+        <p>No results found</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
 {% endblock %}
