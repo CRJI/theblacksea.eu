@@ -16,14 +16,9 @@
       font-style: italic;
       text-transform: none !important;
       display: inline-block;
-
-      &::after {
-        display: inline-block;
-        content: '\00a0>>';
-        color: #c33;
-        font-size: .8em;
-      }
     }
+    margin-bottom: .5em;
+    min-height: 2.8em;
   }
 }
 
