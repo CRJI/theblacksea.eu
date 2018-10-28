@@ -28,7 +28,11 @@
   </header>
 
   <section class="container">
-    {{ page.body | richtext }}
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        {{ page.body | richtext }}
+      </div>
+    </div>
   </section>
 
   <section class="container">
@@ -53,7 +57,15 @@
                 </div>
                 <h6>{{ story.title | striptags }}</h6>
                 <p>{{ story.summary_or_intro | striptags | truncatewords:30 }}</p>
-                <p>| {{ story.first_published_at | date:"d M Y" }}</p>
+                <p class="date-and-location">
+                  {{ story.first_published_at | date:"d F Y" }}
+                  {% if story.locations.all %}
+                    |
+                    {% for location in story.locations.all %}
+                      {{ location.name }}{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </p>
               </div>
             </a>
           {% endwith %}

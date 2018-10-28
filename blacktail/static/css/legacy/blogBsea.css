@@ -126,3 +126,7 @@ div#discovery {
 .share-links img {
   height: 32px;
 }
+
+.template-blogpage .headline * {
+  font-family: 'Merriweather';
+}

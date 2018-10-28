@@ -372,6 +372,7 @@ path {
 
 .moreBit-a {
   display: block;
+  border-bottom: none;
   &:hover {
     border: none;
   }
@@ -390,13 +391,14 @@ path {
     text-align: left;
     margin-bottom: 1.5rem;
     font-weight: 400;
-    color: $tbs-blue;
-    font-size: 1.2rem;
+    color: white;
+    font-size: 1rem;
     margin-top: 0;
     font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
   }
   &:hover h6 {
-    color: white;
+    color: $tbs-blue;
   }
   p {
     text-align: left;
@@ -405,6 +407,11 @@ path {
     color: #9b9595;
     font-size: .8rem;
     margin-bottom: 1rem;
+  }
+  .date-and-location {
+    color: $tbs-blue;
+    text-transform: uppercase;
+    font-family: 'Merriweather';
   }
 }
 
@@ -425,7 +432,7 @@ path {
 
 
 section {
-  font-size: 120%;
+  font-size: 110%;
   margin-bottom: 3rem;
 }
 

@@ -12,6 +12,10 @@
   <link href="{% static 'css/legacy/site_light.css' %}" media="screen" rel="stylesheet" type="text/css">
   <link href="{% static 'css/legacy/blogSite.css' %}" media="screen" rel="stylesheet" type="text/css">
   <link href="{% static 'css/legacy/blogBsea.css' %}" media="screen" rel="stylesheet" type="text/css">
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/fonts.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
 {% endblock %}
 
 {% block extra_js %}
@@ -33,17 +37,18 @@
     <div style="margin-top: 100px;">
       <div class="row">
 
-        <div class="col-md-8 order-md-3">
-          <div class="Name blue title">
-            {{ page.title }}
+        <div class="col-md-6 order-md-2">
+          <div class="headline">
+            <h1>{{ page.title }}</h1>
+
+            <div class="imageColumnHead orange space authName">
+              {% include "blacktail/includes/authors.html" with authors=page.authors %}
+              /
+              {{ page.first_published_at | date:"d F Y" }}</span>
+            </div>
           </div>
-          <div class="imageColumnHead orange space authName">
-            {% include "blacktail/includes/authors.html" with authors=page.authors %}
-            {% if page.date %}
-              <span class='ib'>/ {{ page.date }}</span>
-            {% endif %}
-          </div>
-          <div class="lead">
+
+          <div class="">
             {{ page.intro }}
           </div>
           <div class="">
@@ -51,37 +56,32 @@
           </div>
         </div>
 
-        <div class="col-md-1 order-md-2"></div>
-
         <div class="col-md-3 order-md-1">
           <div class="greyleftborder">
-          <div class='imageColumnHead orange space'>
-            DOSSIER: {{ page.dossier }}
-          </div>
-          <div class='fullwidth thumbRecordPics' id='recordThumbs_1143'>
-          </div>
-          <div class='imageColumnHead'>
-            Related Stories
-          </div>
-          <ul>
-            <li class="relatedContent ATmpl">
-              <span class='ATmpl it'>Editor's pic</span>
-              <a href='#' class='EDtxtauto relatedStory' data-iedit-path="MODELS/blog/ADMIN/getRecords.php" data-iedit-minln="2" data-iedit-select="key">
-              </a>
-            </li>
-            <li class="relatedContent">
-              <a href='index.php?idT=88&idC=88&idRec=1277&recType=story'>Football Leaks: The Dirty Tricks of Doyen Sports</a>
-            </li>
-            <li class="relatedContent">
-              <a href='index.php?idT=88&idC=88&idRec=1142&recType=story'>Krokodil sinks teeth into persecuted Georgian drug community</a>
-            </li>
-            <li class="relatedContent">
-              <a href='index.php?idT=88&idC=88&idRec=1262&recType=story'>Georgia&rsquo;s blitz of reuniting abandoned children with their families comes at a cost</a>
-            </li>
-            <li class="relatedContent">
-              <a href='index.php?idT=88&idC=88&idRec=1145&recType=story'>German Karate teacher recruits Romanian village kids into global child porn ring</a>
-            </li>
-          </ul>
+            {% if page.dossier %}
+              <div class='imageColumnHead orange space'>
+                DOSSIER:
+                <a href="/stories/?dossier={{ page.dossier | urlencode }}">{{ page.dossier }}</a>
+              </div>
+            {% endif %}
+            <div class='fullwidth thumbRecordPics' id='recordThumbs_1143'>
+            </div>
+
+            {% if page.related_pages.all %}
+              <div class='imageColumnHead'>
+                Related Stories
+              </div>
+              <ul>
+                {% for related_page in page.related_pages.all %}
+                  {% with related_page=related_page.related_page.specific %}
+                    <li class="relatedContent">
+                      <a href="{{ related_page.url }}">{{ related_page.title }}</a>
+                    </li>
+                  {% endwith %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+
           </div>
         </div>
 
