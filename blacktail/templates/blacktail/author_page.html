@@ -27,9 +27,13 @@
               <br/>
               {{ model.occupation }}
               <br/>
-              {{ model.url }}
-              <br/>
-              {{ model.email }}
+              {% if model.url %}
+                <a href="{{ model.url }}">{{ model.url }}</a>
+                <br/>
+              {% endif %}
+              {% if model.email %}
+                <a href="mailto:{{ model.email }}">{{ model.email }}</a>
+              {% endif %}
             </div>
           </div>
         </div>
