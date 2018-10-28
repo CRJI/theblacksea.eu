@@ -104,6 +104,12 @@ header .main-info {
     font-family: 'Merriweather';
   }
 
+  a {
+    text-decoration: none;
+    border-bottom: none;
+    color: inherit;
+  }
+
   .social-media-links-box {
     text-align: center;
     .social-media-links {
@@ -137,5 +143,11 @@ header .main-info {
     h4 {
       font-size: 10px;
     }
+  }
+}
+
+.stream-field {
+  h2, h3, h4 {
+    font-family: 'Merriweather';
   }
 }

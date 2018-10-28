@@ -19,13 +19,14 @@ body {
   margin-top: 42px;
 }
 a {
-  color: #333;
+  color: #74c0e2;
   text-decoration: none;
-  border-bottom: 1px solid rgba(150,150,150,0);
+  border-bottom: 1px solid rgba(116, 192, 226,.2);
 
   &:hover {
-    text-decoration: none;
     color: #74c0e2;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(116, 192, 226,1);
   }
 }
 nav {

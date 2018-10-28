@@ -2,7 +2,14 @@
 
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block extra_css %}
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/about.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+{% endblock %}
+
+{% block body_class %}template-about{% endblock %}
 
 {% block content %}
 
@@ -23,21 +30,17 @@
       </div>
     </section>
 
-    <section class="row">
+    <section class="row authors-list">
       {% for author in authors %}
-      <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-        <a href="/about/author/{{author.id}}">
-          {% if author.image %}
-            {% image author.image fill-250x140 %}
-          {% else %}
-            <img alt="The Black Sea" src="{% static 'img/default_image.png' %}" style="width: 250px;"/>
-          {% endif %}
-          {{ author.name }}
-        </a><br>
-        <span class="btn btn-link">
-          {{author.occupation}}
-        </span>
-      </div>
+      <a class="col-12 col-sm-6 col-lg-4 col-xl-3 authors-item" href="/about/author/{{author.id}}">
+        {% if author.image %}
+          {% image author.image fill-510x286 %}
+        {% else %}
+          <img alt="The Black Sea" src="{% static 'img/default_image.png' %}" style="width: 250px;"/>
+        {% endif %}
+        <span class="name">{{ author.name }}</span><br>
+        <span class="occupation">{{author.occupation}}</span>
+      </a>
       {% endfor %}
     </section>
 

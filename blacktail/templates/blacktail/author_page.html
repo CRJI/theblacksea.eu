@@ -41,25 +41,29 @@
       <div class="col-sm-8">
         {{ model.bio | richtext }}
         <br/>
-        <h5>Stories by {{model.name}}:</h5>
-        <ul>
-          {% for story in model.stories.live %}
-          <li>
-            <a href="{{ story.url }}"> {{ story.title }} </a>
-          </li>
-          {% endfor %}
-        </ul>
 
-        <hr>
+        {% if model.stories.live %}
+          <h5>Stories by {{model.name}}:</h5>
+          <ul>
+            {% for story in model.stories.live %}
+            <li>
+              <a href="{{ story.url }}"> {{ story.title }} </a>
+            </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
 
-        <h5>Blog posts by {{model.name}}:</h5>
-        <ul>
-          {% for story in model.blogs.live %}
-          <li>
-            <a href="{{ story.url }}"> {{ story.title }} </a>
-          </li>
-          {% endfor %}
-        </ul>
+        {% if model.stories.live %}
+          <hr>
+          <h5>Blog posts by {{model.name}}:</h5>
+          <ul>
+            {% for story in model.blogs.live %}
+            <li>
+              <a href="{{ story.url }}"> {{ story.title }} </a>
+            </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       </div>
     </div>
   </section>

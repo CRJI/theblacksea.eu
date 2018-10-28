@@ -26,6 +26,9 @@ section.posts_container {
     margin-bottom: 2em;
     div.post_image {
       a {
+        text-decoration: none;
+        color: #333;
+        border-bottom: none;
         img {
           width: 100%;
           height: auto;
@@ -42,6 +45,9 @@ section.posts_container {
         font-size: 1em;
         text-transform: uppercase;
         font-weight: bold;
+        text-decoration: none;
+        color: #333;
+        border-bottom: none;
       }
       h5.post_intro {
         font-size: .85em;
