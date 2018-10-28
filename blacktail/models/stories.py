@@ -340,8 +340,11 @@ class StoriesFolder(Page):
         else:
             template = f'blacktail/storiesfolder/{self.template}.html'
 
+        stories = self.get_children().live().order_by('-first_published_at')
+
         return render(request, template, {
             'page': self,
+            'stories': stories,
         })
 
 @hooks.register('insert_editor_js')

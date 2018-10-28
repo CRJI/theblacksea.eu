@@ -378,8 +378,12 @@ path {
 }
 
 .moreBit {
-  img {
+  .img-wrap {
     display: block;
+    img {
+      width: 100%;
+      height: auto;
+    }
     margin-bottom: 1rem;
   }
   h6 {

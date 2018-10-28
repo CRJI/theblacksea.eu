@@ -39,14 +39,16 @@
         </div>
       </div>
       <div class="row" style="clear: both;">
-        {% for story in page.get_children.specific %}
+        {% for story in stories %}
           {% with story=story.specific %}
             <a href="{{ story.url }}" class="col-lg-4 moreBit-a">
               <div class="moreBit">
                 <div class="img-wrap">
                   {% if story.image %}
-                    {% image story.image fill-320x200 as story_img %}
+                    {% image story.image fill-611x350 as story_img %}
                     <img src="{{ story_img.url }}" class="u-max-full-width">
+                  {% else %}
+                    <img alt="The Black Sea" src="{% static 'img/default_image.png' %}"/>
                   {% endif %}
                 </div>
                 <h6>{{ story.title | striptags }}</h6>
