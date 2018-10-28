@@ -19,8 +19,6 @@
 
 {% block content %}
 
-  {% image page.image original as img %}
-
   <div class="main-description">
     <div class="container">
       <div class="row">
@@ -47,10 +45,8 @@
     </div>
   </div>
 
-  <header style="background-image: url('{{ img.url }}')">
-      <div class="main-info">
-      </div>
-  </header>
+  {% image page.image original as img %}
+  <img class="headline-image" src="{{ img.url }}">
 
   <div class="container">
     <div class="row">
