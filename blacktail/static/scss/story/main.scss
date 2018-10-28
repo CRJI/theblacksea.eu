@@ -25,3 +25,86 @@ span.author_name {
     width: 100%;
     height: 100%;
 }
+
+header .main-info {
+  position: absolute;
+  left: 10%;
+  bottom: 2vh;
+  width: 80%;
+  padding-top: 15px;
+}
+header .main-info h1,
+header .main-info h2,
+header .main-info h3,
+header .main-info h4 {
+  text-align: center;
+}
+header .main-info h1 span,
+header .main-info h2 span,
+header .main-info h3 span,
+header .main-info h4 span {
+  display: inline;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background: #fff;
+  color: #000;
+  box-shadow: 15px 0 0 #ffffff, -15px 0 0 #ffffff;
+}
+header .main-info h1 {
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+header .main-info h1 span {
+  line-height: 75px;
+}
+header .main-info h2 {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+header .main-info h2 span {
+  line-height: 42px;
+}
+header .main-info h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  font-family: 'Oxygen', sans-serif;
+}
+header .main-info h3 span {
+  line-height: 34px;
+}
+header .main-info h4 {
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-family: 'Oxygen', sans-serif;
+}
+header .main-info h4 span {
+  line-height: 28px;
+}
+header .main-info p {
+  text-align: center;
+}
+header .main-info p .arrow {
+  height: 24px;
+  -webkit-animation-name: bounce;
+  animation-name: bounce;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+@media (max-width: 767px) {
+  header .main-info {
+    top: 50px;
+    bottom: auto;
+    width: 90%;
+    left: 5%;
+    position: relative;
+  }
+}
