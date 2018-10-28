@@ -15,39 +15,22 @@
 
   <section class="index-page-header container">
     <div class="row">
-      <div class="col-12 col-md-3">
+      <div class="col-md-3">
         <h1 class="index-page-title">{{ page.title }}</h1>
       </div>
-      <div class="col-12 col-md-9">
-        {{ page.intro | richtext }}
 
-        <section class="container">
-          <div class="row justify-content-end">
-            <div class="col-12">
-              <p>Narrow down by:</p>
-              <ul class="nav nav-tabs" id="filters_nav" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#dossier-tab" role="tab" aria-controls="dossier-tab" aria-selected="true">Dossier</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#tag-tab" role="tab" aria-controls="tag-tab" aria-selected="false">Tag</a>
-                </li>
-              </ul>
-              <div class="tab-content" id="filters_tabs">
-                <div class="tab-pane fade show active" id="dossier-tab" role="tabpanel" aria-labelledby="dossier-tab">
-                  {% for dossier in dossiers %}
-                  <a href="/stories/?dossier={{dossier|urlencode}}" class="btn btn-link">{{ dossier }}</a>
-                  {% endfor %}
-                </div>
-                <div class="tab-pane fade" id="tag-tab" role="tabpanel" aria-labelledby="tag-tab">
-                  {% for tag in tags %}
-                    {{ tag }}
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+      <div class="col-md-9">
+        <ul class="nav nav-pills">
+          {% for dossier in dossiers %}
+            <li class="nav-item">
+              {% if dossier == selected_dossier %}
+                <a class="nav-link active" href="./">{{ dossier }}</a>
+              {% else %}
+                <a class="nav-link" href="/stories/?dossier={{ dossier | urlencode }}">{{ dossier }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
 
       </div>
     </div>

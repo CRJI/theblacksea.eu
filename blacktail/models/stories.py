@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.shortcuts import get_object_or_404
 
 from wagtail.core import hooks
 from wagtail.core.models import Orderable, Page
@@ -154,13 +155,17 @@ class StoriesIndex(Page):
             stories = stories.filter(tags__name=tag)
 
         # Filter by dossier
-        dossier = request.GET.get('dossier')
-        if dossier:
-            stories = stories.filter(story__dossier__name=dossier)
+        dossier_name = request.GET.get('dossier')
+        if dossier_name:
+            dossier = get_object_or_404(StoryDossier.objects, name=dossier_name)
+            stories = stories.filter(story__dossier=dossier)
+        else:
+            dossier = None
 
         context['stories'] = stories
         context['tags'] = tags
         context['dossiers'] = dossiers
+        context['selected_dossier'] = dossier
 
         return context
 

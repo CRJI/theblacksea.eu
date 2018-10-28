@@ -5,4 +5,13 @@
     font-weight: 800;
     font-family: 'sans';
   }
+
+  .nav {
+    a {
+      border-bottom: none;
+    }
+    .nav-link.active {
+      background-color: #74c0e2;
+    }
+  }
 }
