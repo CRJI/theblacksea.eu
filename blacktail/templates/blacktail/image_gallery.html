@@ -1,10 +1,10 @@
 {% with carousel_id="carousel-test" %}
 <div id="{{ carousel_id }}" class="carousel slide" data-ride="carousel" data-interval="false">
   <div class="carousel-inner">
-    {% for image, rendition in images %}
+    {% for item, rendition in images %}
     <div class="carousel-item{% if forloop.first %} active{% endif %}">
-      <img class="d-block w-100" src="{{ rendition.url }}" alt="{{ image.title }}">
-      <p>{{ image.title }}</p>
+      <img class="d-block w-100" src="{{ rendition.url }}" alt="{{ item.caption }}">
+      <p>{{ item.caption }}</p>
     </div>
     {% endfor %}
   </div>

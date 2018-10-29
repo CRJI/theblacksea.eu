@@ -66,6 +66,10 @@ class AlignedHTMLBlock(StructBlock):
     class Meta:
         icon = "code"
 
+class ImageGalleryItemBlock(StructBlock):
+    image = ImageChooserBlock()
+    caption = TextBlock(required=False)
+
 class ImageGalleryBlock(ListBlock):
 
     def get_context(self, value, parent_context=None):
@@ -73,12 +77,13 @@ class ImageGalleryBlock(ListBlock):
 
         if value:
             width = 1110
-            ratio = value[0].width / value[0].height
+            img0 = value[0]['image']
+            ratio = img0.width / img0.height
             filter = Filter(spec=f'fill-{width}x{int(width/ratio)}')
 
             context['images'] = [
-                (image, get_rendition_or_not_found(image, filter))
-                for image in value
+                (item, get_rendition_or_not_found(item['image'], filter))
+                for item in value
             ]
 
         return context
@@ -100,4 +105,4 @@ class StoryStreamBlock(StreamBlock):
     aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
     embed = EmbedBlock(help_text="URL for media to embed")
     document = DocumentChooserBlock(icon="doc-full-inverse")
-    image_gallery = ImageGalleryBlock(ImageChooserBlock(label='Image'))
+    image_gallery = ImageGalleryBlock(ImageGalleryItemBlock)
