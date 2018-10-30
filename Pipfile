@@ -37,6 +37,7 @@ ipdb = "*"
 dateparser = "*"
 python-slugify = "*"
 "psycopg2-binary" = "*"
+waitress = "*"
 
 [dev-packages]
 pylint = "*"
