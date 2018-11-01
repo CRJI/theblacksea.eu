@@ -53,13 +53,13 @@
           </ul>
         {% endif %}
 
-        {% if model.stories.live %}
+        {% if model.blogs.live %}
           <hr>
           <h5>Blog posts by {{model.name}}:</h5>
           <ul>
-            {% for story in model.blogs.live %}
+            {% for post in model.blogs.live %}
             <li>
-              <a href="{{ story.url }}"> {{ story.title }} </a>
+              <a href="{{ post.url }}"> {{ post.title }} </a>
             </li>
             {% endfor %}
           </ul>
