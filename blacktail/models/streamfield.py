@@ -85,6 +85,7 @@ class ImageGalleryBlock(ListBlock):
                 (item, get_rendition_or_not_found(item['image'], filter))
                 for item in value
             ]
+            context['carousel_id'] = f'carousel-{img0.pk}'
 
         return context
 
