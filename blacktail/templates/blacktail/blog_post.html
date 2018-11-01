@@ -12,6 +12,15 @@
   <link href="{% static 'css/legacy/jquery.fancybox-thumbs.css' %}" media="screen" rel="stylesheet" type="text/css">
 {% endblock %}
 
+{% block head %}
+{{ block.super }}
+  <meta property="og:url"         content="{{ request.build_absolute_uri }}" />
+  <meta property="og:type"        content="article" />
+  <meta property="og:title"       content="{{ page.title }}" />
+  <meta property="og:description" content="{{ page.intro|striptags }}" />
+  <meta property="fb:app_id"      content="257931904915558" />
+{% endblock %}
+
 {% block extra_js %}
 <script src="{% static 'js/legacy/jquery-1.8.3.min.js' %}"></script>
 <script src="{% static 'js/legacy/onvisible.js' %}"></script>
