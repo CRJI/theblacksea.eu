@@ -14,6 +14,17 @@
     <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700|Merriweather:400,700" rel="stylesheet">
 {% endblock %}
 
+{% block head %}
+{{ block.super }}
+  {% image page.image original as headline_image %}
+  <meta property="og:url"         content="{{ request.build_absolute_uri }}" />
+  <meta property="og:type"        content="article" />
+  <meta property="og:title"       content="{{ page.title }}" />
+  <meta property="og:description" content="{{ page.intro }}" />
+  <meta property="og:image"       content="{{ page.get_site.root_url }}{{ headline_image.url }}" />
+  <meta property="fb:app_id"      content="257931904915558" />
+{% endblock %}
+
 {% block extra_js %}
 
 {% endblock %}
