@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% block title %}Page not found{% endblock %}
+
+{% block before_matomo %}
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['setDocumentTitle',  '404/URL = ' +  encodeURIComponent(document.location.pathname+document.location.search) + '/From = ' + encodeURIComponent(document.referrer)]);
+</script>
+{% endblock %}
+
 {% block body_class %}template-404{% endblock %}
 
 {% block content %}
