@@ -1,0 +1,12 @@
+.legacy-content {
+  margin-top: 100px;
+  @media (min-width: 720px) {
+    position: relative;
+    .legacy-sidebar-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+  }
+}

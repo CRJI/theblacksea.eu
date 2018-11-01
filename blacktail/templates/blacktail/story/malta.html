@@ -54,14 +54,8 @@
       </div>
   </header>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 offset-md-2">
-        <div class="body-content" id="start-content">
-            {% include "blacktail/includes/streamfield.html" with content=page.body %}
-        </div>
-      </div>
-    </div>
+  <div class="body-content" id="start-content">
+    {% include "blacktail/includes/streamfield.html" with content=page.body %}
   </div>
 
   <p style="text-align: center;"><a href="{{ page.get_parent.url }}">Return to stories</a></p>

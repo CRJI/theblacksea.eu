@@ -15,6 +15,7 @@
   {% load compress %}
   {% compress css %}
     <link href="{% static 'scss/fonts.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/story/legacy.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
   {% endcompress %}
 {% endblock %}
 
@@ -41,64 +42,62 @@
 
 {% block content %}
 
-<div class="container-fluid">
-  <div class="">
-    <div style="margin-top: 100px;">
-      <div class="row">
+<div class="container">
+  <div class="legacy-content">
 
-        <div class="col-md-6 order-md-2">
-          <div class="headline">
-            <h1>{{ page.title }}</h1>
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <div class="headline">
+          <h1>{{ page.title }}</h1>
 
-            <div class="imageColumnHead orange space authName">
-              {% include "blacktail/includes/authors.html" with authors=page.authors %}
-              /
-              {{ page.first_published_at | date:"d F Y" }}</span>
-            </div>
-          </div>
-
-          <div class="">
-            {{ page.intro }}
-          </div>
-          <div class="">
-            {% include "blacktail/includes/streamfield.html" with content=page.body %}
+          <div class="imageColumnHead orange space authName">
+            {% include "blacktail/includes/authors.html" with authors=page.authors %}
+            /
+            {{ page.first_published_at | date:"d F Y" }}</span>
           </div>
         </div>
 
-        <div class="col-md-3 order-md-1">
-          <div class="greyleftborder">
-            {% if page.dossier %}
-              <div class='imageColumnHead orange space'>
-                DOSSIER:
-                <a href="/stories/?dossier={{ page.dossier | urlencode }}">{{ page.dossier }}</a>
-              </div>
-            {% endif %}
-            <div class='fullwidth thumbRecordPics' id='recordThumbs_1143'>
-            </div>
-
-            {% if page.related_pages.all %}
-              <div class='imageColumnHead'>
-                Related Stories
-              </div>
-              <ul>
-                {% for related_page in page.related_pages.all %}
-                  {% with related_page=related_page.related_page.specific %}
-                    <li class="relatedContent">
-                      <a href="{{ related_page.url }}">{{ related_page.title }}</a>
-                    </li>
-                  {% endwith %}
-                {% endfor %}
-              </ul>
-            {% endif %}
-
-          </div>
+        <div class="">
+          {{ page.intro }}
         </div>
-
       </div>
     </div>
+
+    {% include "blacktail/includes/streamfield.html" with content=page.body %}
+
+    <div class="row legacy-sidebar-box">
+      <div class="col-md-2">
+        <div class="greyleftborder">
+          {% if page.dossier %}
+            <div class='imageColumnHead orange space'>
+              DOSSIER:
+              <a href="/stories/?dossier={{ page.dossier | urlencode }}">{{ page.dossier }}</a>
+            </div>
+          {% endif %}
+          <div class='fullwidth thumbRecordPics' id='recordThumbs_1143'>
+          </div>
+
+          {% if page.related_pages.all %}
+            <div class='imageColumnHead'>
+              Related Stories
+            </div>
+            <ul>
+              {% for related_page in page.related_pages.all %}
+                {% with related_page=related_page.related_page.specific %}
+                  <li class="relatedContent">
+                    <a href="{{ related_page.url }}">{{ related_page.title }}</a>
+                  </li>
+                {% endwith %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+        </div>
+      </div>
     </div>
-    <div class="clearfix"></div>
   </div>
+  </div>
+  <div class="clearfix"></div>
 </div>
 
 {% endblock %}
