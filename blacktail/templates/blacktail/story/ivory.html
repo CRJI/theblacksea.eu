@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-ivory{% endblock %}
+
+{% block extra_css %}
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/fonts.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/story/main.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/story/ivory.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+{% endblock %}
+
+{% block head %}
+{{ block.super }}
+  {% image page.image max-2048x1024 as headline_image %}
+  <meta property="og:url"         content="{{ request.build_absolute_uri }}" />
+  <meta property="og:type"        content="article" />
+  <meta property="og:title"       content="{{ page.title }}" />
+  <meta property="og:description" content="{{ page.intro }}" />
+  <meta property="og:image"       content="{{ page.get_site.root_url }}{{ headline_image.url }}" />
+  <meta property="fb:app_id"      content="257931904915558" />
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="headline col-md-8 offset-md-2">
+      <h1>{{ page.title }}</h1>
+
+      {% image page.image max-2048x1024 as img %}
+      <img src="{{ img.url }}">
+
+      <p class="intro">{{ page.intro }}</p>
+      <h5>By {% include "blacktail/includes/authors.html" with authors=page.authors %}</h5>
+      <h5>{{ page.first_published_at | date:"d F Y" }}</h5>
+      {% include "blacktail/includes/social_media_links.html" with title=page.title url=request.build_absolute_uri body=page.intro %}
+    </div>
+  </div>
+</div>
+
+<div class="body-content" id="start-content">
+  {% include "blacktail/includes/streamfield.html" with content=page.body %}
+</div>
+
+<div class="container">
+  <p style="text-align: center;"><a href="{{ page.get_parent.url }}">Return to stories</a></p>
+  <hr>
+</div>
+
+{% endblock %}

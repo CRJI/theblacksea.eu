@@ -1,0 +1,29 @@
+.headline {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  h1 {
+    font-family: 'Merriweather';
+    font-weight: bold;
+  }
+  img {
+    width: 100%;
+  }
+  .intro {
+    font-size: 1.2em;
+    font-style: italic;
+  }
+  h5 {
+    font-size: 1em;
+  }
+}
+
+.stream-field > :first-child {
+  .rich-text p:first-child:first-letter {
+    float: left;
+    line-height: .75;
+    font-family: Merriweather;
+    font-size: 2.9em;
+    margin-top: 8px;
+    margin-right: 10px;
+  }
+}

@@ -188,8 +188,7 @@ class Story(Page):
     author_ids = JSONField(default=list)
     type = models.ForeignKey(StoryType, on_delete=models.SET_NULL, blank=True,
                              null=True)
-    template = models.ForeignKey(StoryTemplate, on_delete=models.SET_NULL,
-                                 blank=True, null=True)
+    template = models.ForeignKey(StoryTemplate, on_delete=models.PROTECT)
     dossier = models.ForeignKey(StoryDossier, on_delete=models.SET_NULL,
                                 blank=True, null=True)
     image = models.ForeignKey(
@@ -268,12 +267,7 @@ class Story(Page):
     ])
 
     def serve(self, request):
-
-        if self.template is None:
-            template = 'blacktail/story/default.html'
-        else:
-            template = f'blacktail/story/{self.template}.html'
-
+        template = f'blacktail/story/{self.template}.html'
         return render(request, template, {
             'page': self,
         })
@@ -286,8 +280,7 @@ class StoriesFolder(Page):
     body = RichTextField(blank=True)
     tags = ClusterTaggableManager(through=StoriesFolderTag, blank=True)
     template = models.ForeignKey(StoriesFolderTemplate,
-                                 on_delete=models.SET_NULL,
-                                 blank=True, null=True)
+                                 on_delete=models.PROTECT)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -335,11 +328,7 @@ class StoriesFolder(Page):
         return self.summary or self.intro
 
     def serve(self, request):
-        if self.template is None:
-            template = 'blacktail/storiesfolder/blacktail.html'
-        else:
-            template = f'blacktail/storiesfolder/{self.template}.html'
-
+        template = f'blacktail/storiesfolder/{self.template}.html'
         stories = self.get_children().live().order_by('-first_published_at')
 
         return render(request, template, {
