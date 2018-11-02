@@ -21,9 +21,10 @@ class PullQuoteBlock(StructBlock):
         icon = "openquote"
 
 class ImageFormatChoiceBlock(FieldBlock):
-    field = forms.ChoiceField(choices=(
-        ('left', 'Wrap left'), ('right', 'Wrap right'), ('mid', 'Mid width'), ('full', 'Full width')
-    ))
+    field = forms.ChoiceField(choices=[
+        ('embed', 'Embed'),
+        ('medium', 'Medium'),
+    ])
 
 class HTMLAlignmentChoiceBlock(FieldBlock):
     field = forms.ChoiceField(choices=(
@@ -32,32 +33,13 @@ class HTMLAlignmentChoiceBlock(FieldBlock):
 
 class ImageBlock(StructBlock):
     image = ImageChooserBlock()
-    caption = RichTextBlock(required=False)
+    caption = TextBlock(required=False)
     alignment = ImageFormatChoiceBlock()
 
 class EmbeddedImageBlock(StructBlock):
     image = ImageChooserBlock()
     clickable = BooleanBlock(required=False)
     caption = CharBlock(required=False)
-
-class HalfImageBlock(StructBlock):
-    image = ImageChooserBlock()
-    h1 = CharBlock(required=False)
-    h2 = CharBlock(required=False)
-    h3 = CharBlock(required=False)
-    text_position = forms.ChoiceField(choices=(
-        ('left', 'Left'), ('right', 'Right')
-    ), required=False)
-
-class FullImageBlock(StructBlock):
-    image = ImageChooserBlock()
-    h1 = CharBlock(required=False)
-    h2 = CharBlock(required=False)
-    h3 = CharBlock(required=False)
-    text = RichTextBlock(required=False)
-    text_position = forms.ChoiceField(choices=(
-        ('left', 'Left'), ('right', 'Right')
-    ), required=False)
 
 class AlignedHTMLBlock(StructBlock):
     html = RawHTMLBlock()
@@ -95,14 +77,12 @@ class ImageGalleryBlock(ListBlock):
 class StoryStreamBlock(StreamBlock):
     subheadline = CharBlock(icon="title", classname="title")
     embedded_image = EmbeddedImageBlock()
-    half_image = HalfImageBlock()
-    full_image = FullImageBlock()
     h2 = CharBlock(icon="title", classname="title")
     h3 = CharBlock(icon="title", classname="title")
     h4 = CharBlock(icon="title", classname="title")
     intro = RichTextBlock(icon="pilcrow")
     paragraph = RichTextBlock(icon="pilcrow")
-    aligned_image = ImageBlock(label="Aligned image", icon="image")
+    image = ImageBlock(label="Image", icon="image")
     aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
     embed = EmbedBlock(help_text="URL for media to embed")
     document = DocumentChooserBlock(icon="doc-full-inverse")
