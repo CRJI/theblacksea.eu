@@ -1,19 +1,30 @@
 .headline {
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   h1 {
     font-family: 'Merriweather';
     font-weight: bold;
+    font-style: italic;
+    font-size: 1.8em;
+    margin-bottom: .8em;
   }
   img {
     width: 100%;
   }
   .intro {
-    font-size: 1.2em;
+    font-family: 'Open Sans';
+    font-size: 1.1em;
     font-style: italic;
+    margin-top: 1.2em;
   }
   h5 {
-    font-size: 1em;
+    font-family: 'Merriweather';
+    font-size: .9em;
+  }
+  .social-media-links {
+    a {
+      border-bottom: none;
+    }
   }
 }
 

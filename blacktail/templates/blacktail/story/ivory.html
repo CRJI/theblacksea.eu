@@ -25,14 +25,18 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container headline">
   <div class="row">
-    <div class="headline col-md-8 offset-md-2">
+    <div class="col-md-8 offset-md-2">
       <h1>{{ page.title }}</h1>
+    </div>
 
+    <div class="col-md-10 offset-md-1">
       {% image page.image max-2048x1024 as img %}
       <img src="{{ img.url }}">
+    </div>
 
+    <div class="col-md-8 offset-md-2">
       <p class="intro">{{ page.intro }}</p>
       <h5>By {% include "blacktail/includes/authors.html" with authors=page.authors %}</h5>
       <h5>{{ page.first_published_at | date:"d F Y" }}</h5>
