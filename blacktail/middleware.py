@@ -12,7 +12,11 @@ def redirect(get_response):
 
     def middleware(request):
         raw_uri = request.get_raw_uri()
-        path = re.sub(r'^http[s]?://[^/]+', '', raw_uri).rstrip('/')
+        path = (
+            re.sub(r'^http[s]?://[^/]+', '', raw_uri)
+            .split('?fbclid=')[0]
+            .rstrip('/')
+        )
         url = urlmap.get(path) or urlmap.get(path + '/')
         if url:
             return HttpResponseRedirect(url)
