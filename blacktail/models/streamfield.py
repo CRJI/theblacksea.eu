@@ -74,6 +74,16 @@ class ImageGalleryBlock(ListBlock):
     class Meta:
         template = 'blacktail/image_gallery.html'
 
+class ClassyParagraphClassBlock(FieldBlock):
+    field = forms.MultipleChoiceField(choices=[
+        ('center', "Center"),
+        ('infobox', "InfoBox"),
+    ])
+
+class ClassyParagraph(StructBlock):
+    text = RichTextBlock()
+    cls = ClassyParagraphClassBlock(label="class")
+
 class StoryStreamBlock(StreamBlock):
     subheadline = CharBlock(icon="title", classname="title")
     embedded_image = EmbeddedImageBlock()
@@ -82,6 +92,7 @@ class StoryStreamBlock(StreamBlock):
     h4 = CharBlock(icon="title", classname="title")
     intro = RichTextBlock(icon="pilcrow")
     paragraph = RichTextBlock(icon="pilcrow")
+    classy_paragraph = ClassyParagraph(icon="pilcrow")
     image = ImageBlock(label="Image", icon="image")
     aligned_html = AlignedHTMLBlock(icon="code", label='Raw HTML')
     embed = EmbedBlock(help_text="URL for media to embed")

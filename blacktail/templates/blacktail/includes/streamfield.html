@@ -78,6 +78,14 @@
                 </div>
               </div>
           </section>
+      {% elif child.block_type == 'classy_paragraph' %}
+          <section class="content-text classy-paragraph{% for cls in child.value.cls %} {{ cls }}{% endfor %}">
+              <div class="row">
+                <div class="col-md-8 offset-md-2">
+                  {{ child.value.text|richtext }}
+                </div>
+              </div>
+          </section>
       {% elif child.block_type == 'embedded_image' %}
           <section class="content-image-embed">
               <div class="row">

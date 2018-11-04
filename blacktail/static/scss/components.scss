@@ -68,3 +68,14 @@ section.posts_container {
 .carousel-control-next {
   opacity: 0;
 }
+
+.classy-paragraph {
+  &.center {
+    text-align: center;
+  }
+  &.infobox {
+    .rich-text {
+      background: rgb(226, 238, 243);
+    }
+  }
+}
