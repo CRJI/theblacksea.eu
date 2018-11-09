@@ -481,3 +481,17 @@ footer {
     text-decoration: underline;
   }
 }
+
+.follow {
+  text-align: center;
+  .social-media-follow {
+    font-size: 28px;
+    color: #444;
+
+    a {
+      text-decoration: none;
+      border-bottom: none;
+      color: inherit;
+    }
+  }
+}

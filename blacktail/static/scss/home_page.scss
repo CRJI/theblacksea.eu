@@ -26,16 +26,3 @@
 section.recent-stories {
   @extend .posts_container;
 }
-
-.follow {
-  text-align: center;
-  .social-media-links {
-    font-size: 24px;
-
-    a {
-      text-decoration: none;
-      border-bottom: none;
-      color: inherit;
-    }
-  }
-}
