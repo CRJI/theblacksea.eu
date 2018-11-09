@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'wagtail.admin',
     'wagtail.core',
 
+    'raven.contrib.django.raven_compat',
+
     'blacktail',
 ]
 

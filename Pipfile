@@ -38,6 +38,7 @@ dateparser = "*"
 python-slugify = "*"
 "psycopg2-binary" = "*"
 waitress = "*"
+raven = "*"
 
 [dev-packages]
 pylint = "*"
