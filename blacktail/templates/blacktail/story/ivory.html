@@ -43,7 +43,7 @@
       <p class="intro">{{ page.intro }}</p>
       <h5>By {% include "blacktail/includes/authors.html" with authors=page.authors %}</h5>
       <h5>{{ page.first_published_at | date:"d F Y" }}</h5>
-      {% include "blacktail/includes/social_media_links.html" with title=page.title url=request.build_absolute_uri body=page.intro %}
+      {% include "blacktail/includes/social_media_share.html" with title=page.title url=request.build_absolute_uri body=page.intro %}
     </div>
   </div>
 </div>
