@@ -93,4 +93,12 @@ class BlogPost(Page):
 
     @property
     def authors(self):
-        return [Author.objects.get(pk=pk) for pk in self.author_ids]
+        rv = []
+        for pk in self.author_ids:
+            try:
+                author = Author.objects.get(pk=pk)
+            except Author.DoesNotExist:
+                continue
+            else:
+                rv.append(author)
+        return rv
