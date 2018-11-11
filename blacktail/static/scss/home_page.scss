@@ -23,6 +23,18 @@
   }
 }
 
+@media (max-width: 767.98px) {
+  body.template-homepage {
+    .home_image,
+    .recent-posts {
+      display: none;
+    }
+  }
+  section.recent-stories {
+    margin-top: 30px;
+  }
+}
+
 section.recent-stories {
   @extend .posts_container;
 }
