@@ -144,7 +144,7 @@ class StoriesIndex(Page):
 
         # Update context to include only published posts, reverse-chron order
         context = super(StoriesIndex, self).get_context(request)
-        stories = self.get_children().live().order_by('-first_published_at')
+        stories = Story.objects.live().order_by('-first_published_at')
         tags = Story.tags.filter(
             blacktail_storytag_items__content_object__live=True)
         dossiers = StoryDossier.objects.all()
@@ -158,7 +158,7 @@ class StoriesIndex(Page):
         dossier_name = request.GET.get('dossier')
         if dossier_name:
             dossier = get_object_or_404(StoryDossier.objects, name=dossier_name)
-            stories = stories.filter(story__dossier=dossier)
+            stories = stories.filter(dossier=dossier)
         else:
             dossier = None
 
