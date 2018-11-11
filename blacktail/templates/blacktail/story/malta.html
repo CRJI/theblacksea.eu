@@ -16,7 +16,7 @@
 
 {% block head %}
 {{ block.super }}
-  {% image page.image original as headline_image %}
+  {% image page.image max-2048x1024 as headline_image %}
   <meta property="og:url"         content="{{ request.build_absolute_uri }}" />
   <meta property="og:type"        content="article" />
   <meta property="og:title"       content="{{ page.title }}" />
@@ -34,7 +34,7 @@
 
 {% block content %}
 
-  {% image page.image original as img %}
+  {% image page.image max-2048x1024 as img %}
 
   <header style="background-image: url('{{ img.url }}')">
       <div class="main-info">
