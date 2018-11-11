@@ -67,6 +67,7 @@ class BlogPost(Page):
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
         index.SearchField('body'),
+        index.SearchField('authors'),
     ]
 
     promote_panels = Page.promote_panels + [

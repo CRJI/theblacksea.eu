@@ -231,6 +231,7 @@ class Story(Page):
         index.SearchField('summary'),
         index.SearchField('intro'),
         index.SearchField('body'),
+        index.SearchField('authors'),
     ]
 
     content_panels = Page.content_panels + [
