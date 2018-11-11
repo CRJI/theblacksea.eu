@@ -47,11 +47,21 @@
   </div>
 </section>
 
-<hr/>
-
-<section class="follow">
-  <p>Follow us</p>
-  {% include "blacktail/includes/social_media_follow.html" %}
+<section class="follow container">
+  <p class="readmore">
+    <a href="/stories">Read more stories</a>
+  </p>
+  <div class="row">
+    <div class="col-md-4 offset-md-2">
+      <div class="socialmedia">
+        Follow us
+        {% include "blacktail/includes/social_media_follow.html" %}
+      </div>
+    </div>
+    <div class="col-md-4">
+      {% include "blacktail/includes/mailing_list.html" %}
+    </div>
+  </div>
 </section>
 
 {% endblock %}

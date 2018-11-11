@@ -79,3 +79,12 @@ section.posts_container {
     }
   }
 }
+
+.follow #mc_embed_signup {
+  form {
+    padding: 0;
+    input.email {
+      width: 200px;
+    }
+  }
+}
