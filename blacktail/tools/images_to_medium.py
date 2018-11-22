@@ -23,9 +23,11 @@ def handle(user, pk, out):
         new_body.append((block_type, new_value))
 
     if changed:
-        print(f"Saving {story.url}", file=out)
+        print(f"Saving new revision for {story.url}", file=out)
         story.body = new_body
         story.save_revision(user=user)
+        print(f"Go to https://theblacksea.eu/admin/pages/{pk}/revisions/ "
+              "to view the revision.")
 
     else:
         print(f"Nothing to change for {story.url}", file=out)
