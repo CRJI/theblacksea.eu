@@ -1,10 +1,9 @@
+from io import StringIO
 from django.shortcuts import render
-from django.http import Http404, HttpResponseRedirect
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
 from wagtail.core.models import Page
 from wagtail.search.models import Query
-
 from . import models
 
 
@@ -51,3 +50,14 @@ def index_php(request):
         return HttpResponseRedirect(url)
 
     raise Http404
+
+
+def admin_tool(request, pk, tool):
+    if request.method == 'POST':
+        from .tools import images_to_medium
+        out = StringIO()
+        images_to_medium.handle(request.user, pk, out)
+        return HttpResponse(out.getvalue(), content_type='text/plain')
+
+    else:
+        return render(request, 'blacktail/tools/confirm.html')

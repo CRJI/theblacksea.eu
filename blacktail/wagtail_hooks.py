@@ -1,15 +1,18 @@
-from django.utils.html import format_html
 from django.conf import settings
+from django.urls import path
+from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 from wagtail.core import hooks
 from wagtail.core.models import Orderable, Page
 from wagtail.images import formats
+from wagtail.admin import widgets as wagtailadmin_widgets
 from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
 
 from .models import Author
 from .models import StoryType
 from .models import StoryDossier
 from .models import BlogCategory
+from . import views
 
 
 @hooks.register('insert_editor_css')
@@ -49,6 +52,20 @@ def register_image_feature(features):
     formats.register_image_format(formats.Format('fullwidth', _('Full width'), 'richtext-image full-width', 'max-1600x800'))
     formats.register_image_format(formats.Format('left', _('Left-aligned'), 'richtext-image left', 'max-1000x500'))
     formats.register_image_format(formats.Format('right', _('Right-aligned'), 'richtext-image right', 'max-1000x500'))
+
+
+@hooks.register('register_page_listing_more_buttons')
+def page_listing_more_buttons(page, page_perms, is_parent=False):
+    yield wagtailadmin_widgets.Button(
+        '[TBS] Convert images to "medium"',
+        f'/admin/pages/{page.pk}/tools/images_to_medium/',
+        priority=60,
+    )
+
+
+@hooks.register('register_admin_urls')
+def admin_urls():
+    yield path('pages/<int:pk>/tools/<str:tool>/', views.admin_tool)
 
 
 class AuthorModelAdmin(ModelAdmin):
