@@ -19,7 +19,8 @@ from django.views.generic import View
 
 from wagtail.utils.pagination import paginate
 from wagtail.admin import messages, signals
-from wagtail.admin.forms import CopyForm, SearchForm
+from wagtail.admin.forms import CopyForm
+from wagtail.admin.forms.search import SearchForm
 from wagtail.admin.utils import (
     send_notification, user_has_any_page_permission, user_passes_test)
 from wagtail.core import hooks
