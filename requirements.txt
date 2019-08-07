@@ -23,7 +23,7 @@ ipdb==0.11
 ipython-genutils==0.2.0
 ipython==6.4.0
 jedi==0.12.1
-l18n==2016.6.4
+l18n==2018.5
 libsass==0.8.2
 olefile==0.44
 parso==0.3.1
