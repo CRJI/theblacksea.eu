@@ -37,7 +37,7 @@ def global_admin_js():
 
 @hooks.register('construct_explorer_page_queryset')
 def show_more_properties(parent_page, pages, request):
-    print(pages[0])
+    # print(pages[0])
     # if parent_page.slug == 'user-profiles':
     #     pages = pages.filter(owner=request.user)
 
