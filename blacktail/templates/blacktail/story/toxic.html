@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags static %}
+
+{% block body_class %}template-blogpage{% endblock %}
+
+{% block extra_css %}
+  {% load compress %}
+  {% compress css %}
+    <link href="{% static 'scss/fonts.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/story/main.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+    <link href="{% static 'scss/story/toxic.scss' %}" media="screen" rel="stylesheet" type="text/x-scss">
+  {% endcompress %}
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700|Merriweather:400,700" rel="stylesheet">
+{% endblock %}
+
+{% block head %}
+{{ block.super }}
+  {% image page.image max-2048x1024 as headline_image %}
+  <meta property="og:url"         content="{{ request.build_absolute_uri }}" />
+  <meta property="og:type"        content="article" />
+  <meta property="og:title"       content="{{ page.title }}" />
+  <meta property="og:description" content="{{ page.intro }}" />
+  <meta property="og:image"       content="{{ page.get_site.root_url }}{{ headline_image.url }}" />
+  <meta property="fb:app_id"      content="257931904915558" />
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:site"       content="@TheBlackSeaEU">
+  <meta name="twitter:image"      content="{{ page.get_site.root_url }}{{ headline_image.url }}">
+{% endblock %}
+
+{% block extra_js %}
+
+{% endblock %}
+
+{% block content %}
+
+  {% image page.image max-2048x1024 as img %}
+
+  <header style="background-image: url('{{ img.url }}')">
+      <div class="main-info">
+          <h1><span>[toxic] {{ page.title }}</span></h1>
+          <h2><span>{{ page.intro | striptags }}</span></h2>
+          <h3>
+            <span>by
+              {% include "blacktail/includes/authors.html" with authors=page.authors %}
+            </span>
+          </h3>
+          <h4><span>{{ page.first_published_at | date:"d F Y" }}</span></h4>
+          <h4><span>
+            {% for location in page.locations.all %}
+              {{ location.name }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+          </span></h4>
+          <div class="social-media-links-box">
+            {% include "blacktail/includes/social_media_share.html" with title=page.title url=request.build_absolute_uri body=page.intro %}
+          </div>
+      </div>
+  </header>
+
+  <div class="body-content" id="start-content">
+    {% include "blacktail/includes/streamfield.html" with content=page.body %}
+  </div>
+
+  <p style="text-align: center;"><a href="{{ page.get_parent.url }}">Return to stories</a></p>
+  <hr>
+
+  <section class="follow">
+    <p>Follow us</p>
+    {% include "blacktail/includes/social_media_follow.html" %}
+  </section>
+
+{% endblock %}
