@@ -1,5 +1,12 @@
 @import "./malta";
 
+header {
+  video {
+    width: 100%;
+  }
+  overflow: hidden;
+}
+
 .content-image .parallax {
   @media (max-width: 719px) {
     background-image: none;

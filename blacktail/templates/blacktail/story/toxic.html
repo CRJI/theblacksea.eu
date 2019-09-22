@@ -37,6 +37,9 @@
   {% image page.image max-2048x1024 as img %}
 
   <header style="background-image: url('{{ img.url }}')">
+      <video muted autoplay>
+        <source src="https://dev.theblacksea.eu/documents/19/Dilovasi_lowest_quality.mp4" type="video/mp4">
+      </video>
       <div class="main-info">
           <h1><span>{{ page.title }}</span></h1>
           <h2><span>{{ page.intro | striptags }}</span></h2>
