@@ -36,10 +36,24 @@
 
   {% image page.image max-2048x1024 as img %}
 
-  <header style="background-image: url('{{ img.url }}')">
+  <header data-background-image="{{ img.url }}">
       <video muted autoplay>
         <source src="https://dev.theblacksea.eu/documents/19/Dilovasi_lowest_quality.mp4" type="video/mp4">
       </video>
+      <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+      <script>
+        $(function() {
+          setTimeout(function() {
+            var video = document.querySelector('header video');
+            if (video.readyState > 0) return;
+            video.remove();
+            var header = document.querySelector('header');
+            var url = header.dataset.backgroundImage;
+            console.log('swapping background image for header:', url);
+            header.setAttribute('style', "background-image: url('" + url + "')");
+          }, 200);
+        });
+      </script>
       <div class="main-info">
           <h1><span>{{ page.title }}</span></h1>
           <h2><span>{{ page.intro | striptags }}</span></h2>
