@@ -169,7 +169,9 @@
           <section class="content-image">
             <div class="row">
               <div class="col-12">
-                <div class="parallax" style="background-image: url('{{ theimage.url }}')"></div>
+                <div class="parallax" style="background-image: url('{{ theimage.url }}')">
+                  <img src="{{ theimage.url }}" width="{{ theimage.width }}" alt="{{ theimage.alt }}" />
+                </div>
                 {% if child.value.caption %}
                   <p class="caption">{{ child.value.caption }}</p>
                 {% endif %}
