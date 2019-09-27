@@ -24,6 +24,7 @@ class ImageFormatChoiceBlock(FieldBlock):
     field = forms.ChoiceField(choices=[
         ('embed', 'Embed'),
         ('medium', 'Medium'),
+        ('parallax', 'Parallax'),
     ])
 
 class HTMLAlignmentChoiceBlock(FieldBlock):

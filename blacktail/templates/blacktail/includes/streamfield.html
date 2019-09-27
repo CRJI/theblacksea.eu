@@ -164,11 +164,12 @@
           {% endif %}
         </div>
       {% elif child.block_type == 'image' %}
-        <section class="content-image">
+        {% image child.value.image max-2048x1024 as theimage %}
+        {% if child.value.alignment == 'parallax' %}
+          <section class="content-image">
             <div class="row">
-              <div class="{% if child.value.alignment == "medium" %}col-12{% else %}col-md-8 offset-md-2{% endif %}">
-                <div class="image">
-                  {% image child.value.image max-2048x1024 as theimage %}
+              <div class="col-12">
+                <div class="parallax" style="background-image: url('{{ theimage.url }}')">
                   <img src="{{ theimage.url }}" width="{{ theimage.width }}" alt="{{ theimage.alt }}" />
                 </div>
                 {% if child.value.caption %}
@@ -176,7 +177,21 @@
                 {% endif %}
               </div>
             </div>
-        </section>
+          </section>
+        {% else %}
+          <section class="content-image">
+            <div class="row">
+              <div class="{% if child.value.alignment == "medium" %}col-12{% else %}col-md-8 offset-md-2{% endif %}">
+                <div class="image">
+                  <img src="{{ theimage.url }}" width="{{ theimage.width }}" alt="{{ theimage.alt }}" />
+                </div>
+                {% if child.value.caption %}
+                  <p class="caption">{{ child.value.caption }}</p>
+                {% endif %}
+              </div>
+            </div>
+          </section>
+        {% endif %}
       {% else %}
           {{ child }}
       {% endif %}

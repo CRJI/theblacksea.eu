@@ -1,0 +1,30 @@
+@import "./malta";
+
+header {
+  video {
+    width: 100%;
+  }
+  overflow: hidden;
+  .main-info {
+    top: 10vh;
+  }
+}
+
+.content-image .parallax {
+  @media (max-width: 719px) {
+    background-image: none;
+    img {
+      width: 100%;
+    }
+  }
+  @media (min-width: 720px) {
+    height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    img {
+      display: none;
+    }
+  }
+}
