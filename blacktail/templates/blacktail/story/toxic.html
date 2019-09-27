@@ -58,22 +58,18 @@
       <div class="main-info">
           <h1><span>{{ page.title }}</span></h1>
           <h2><span>{{ page.intro | striptags }}</span></h2>
-          <h3>
-            <span>by
-              {% include "blacktail/includes/authors.html" with authors=page.authors %}
-            </span>
-          </h3>
-          <h4><span>{{ page.first_published_at | date:"d F Y" }}</span></h4>
-          <h4><span>
-            {% for location in page.locations.all %}
-              {{ location.name }}{% if not forloop.last %},{% endif %}
-            {% endfor %}
-          </span></h4>
-          <div class="social-media-links-box">
-            {% include "blacktail/includes/social_media_share.html" with title=page.title url=request.build_absolute_uri body=page.intro %}
-          </div>
       </div>
   </header>
+
+  <div id="toxic-after-header" class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h5>By {% include "blacktail/includes/authors.html" with authors=page.authors %}</h5>
+        <h5>{{ page.first_published_at | date:"d F Y" }}</h5>
+        {% include "blacktail/includes/social_media_share.html" with title=page.title url=request.build_absolute_uri body=page.intro %}
+      </div>
+    </div>
+  </div>
 
   <div class="body-content" id="start-content">
     {% include "blacktail/includes/streamfield.html" with content=page.body %}
