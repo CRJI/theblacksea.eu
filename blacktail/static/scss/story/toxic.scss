@@ -5,8 +5,21 @@ header {
     width: 100%;
   }
   overflow: hidden;
-  .main-info {
-    top: 10vh;
+}
+
+#toxic-after-header {
+  font-family: 'Merriweather';
+  font-size: 1.1em;
+  font-style: italic;
+  margin-top: 1.2em;
+  margin-bottom: 2em;
+  h5 {
+    font-size: .9em;
+  }
+  .social-media-share {
+    a {
+      border-bottom: none;
+    }
   }
 }
 
@@ -27,4 +40,8 @@ header {
       display: none;
     }
   }
+}
+
+.content-text p {
+  font-size: 16px;
 }
