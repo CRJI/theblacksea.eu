@@ -45,13 +45,25 @@
       <script>
         $(function() {
           setTimeout(function() {
-            var video = document.querySelector('header video');
-            if (video.readyState > 0) return;
-            video.remove();
             var header = document.querySelector('header');
             var url = header.dataset.backgroundImage;
-            console.log('swapping background image for header:', url);
+            var video = document.querySelector('header video');
             header.setAttribute('style', "background-image: url('" + url + "')");
+            var n = 0;
+            var interval = setInterval(function() {
+              console.log(video.readyState);
+              if (video.readyState > 0) {
+                console.log('video works! removing image');
+                clearInterval(interval);
+                header.setAttribute('style', '');
+              }
+              n += 1;
+              if (n > 50) {
+                console.log('video failed; removing');
+                clearInterval(interval);
+                video.remove();
+              }
+            }, 100);
           }, 200);
         });
       </script>
